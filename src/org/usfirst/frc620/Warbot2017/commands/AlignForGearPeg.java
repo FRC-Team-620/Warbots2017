@@ -33,7 +33,6 @@ public class AlignForGearPeg extends Command {
     protected void initialize() 
     {
     	Robot.switchToCamera(0);
-//    	System.out.println("init");
     }
 
     int cnt = 0;
