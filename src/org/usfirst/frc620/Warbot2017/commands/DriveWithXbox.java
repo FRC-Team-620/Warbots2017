@@ -32,6 +32,7 @@ public class DriveWithXbox extends Command {
 	LowerGearArm lowergeararm;
 	RaiseGearArm raisegeararm;
 	DepositGear depgear;
+	ActuateBallMech ballmech;
 	Turn turn;
 	double x;
 	double y;
@@ -75,19 +76,15 @@ public class DriveWithXbox extends Command {
 			Scheduler.getInstance().add(climb);
 		}
 		if(xbox.getRawButton(4)){
-			System.out.println("lower");
-			lowergeararm=new LowerGearArm();
-			Scheduler.getInstance().add(lowergeararm);
+			ballmech=new ActuateBallMech(xbox);
+			Scheduler.getInstance().add(ballmech);
 		}
 		if(xbox.getRawButton(3)){
-			System.out.println("raise");
-			raisegeararm= new RaiseGearArm();
-			Scheduler.getInstance().add(raisegeararm);
+			depgear=new DepositGear();
+			Scheduler.getInstance().add(depgear);
 		}
 		if(xbox.getRawButton(2)){
 			Robot.nextCamera();
-			//depgear=new DepositGear();
-			//Scheduler.getInstance().add(depgear);
 		}
 		//SWITCHING THE "FRONT"
 		if(xbox.getRawButton(1))front=!front;//A
