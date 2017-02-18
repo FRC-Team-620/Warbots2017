@@ -11,6 +11,7 @@
 
 package org.usfirst.frc620.Warbot2017.subsystems;
 
+import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.RobotMap;
 import org.usfirst.frc620.Warbot2017.commands.*;
 import edu.wpi.first.wpilibj.Spark;
@@ -45,6 +46,10 @@ public class Climber extends Subsystem {
 
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+    }
+    public void climb(double x){
+    	climbMotor.set(x);
+    	//Robot.driveTrain.mecanumDrive(0, 0, x/10, 0);
     }
 }
 

@@ -39,14 +39,29 @@ public class Turn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.navX.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
+		System.out.println("NavX:"+Robot.navX.getYaw());
+    	if(m_angle<0)
+    		Robot.driveTrain.mecanumDrive(-.25, 0, 0, 0);
+    	else if(m_angle>0)
+    		Robot.driveTrain.mecanumDrive(.25, 0, 0, 0);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    // Make this return true when this Command no longer needs to rune execute()
     protected boolean isFinished() {
+    	if(m_angle<0){
+    		if(Robot.navX.getYaw()<=m_angle)
+    			return true;
+    	}
+    	else if(m_angle>0){
+    		if(Robot.navX.getYaw()>=m_angle)
+    			return true;
+    	}
         return false;
     }
 
