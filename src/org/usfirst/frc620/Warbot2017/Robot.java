@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
     public static Vision vision;
     public static DriveWithXbox DriveWithXbox;
     
-    public static final int NUMBER_OF_CAMERAS = 2;
+    public static final int NUMBER_OF_CAMERAS = 0;
 	private static UsbCamera[] cameras;
 	private static CvSink[] cvs;
 	private CvSource outputStream;
@@ -118,6 +118,20 @@ public class Robot extends IterativeRobot {
 	public static void switchToCamera(int cam)
 	{
 		camera = cam;
+	}
+	
+	public static void darkenCamera(int cam)
+	{
+		UsbCamera camera = cameras[cam];
+		camera.setWhiteBalanceManual(0);
+		camera.setExposureManual(0);
+	}
+	
+	public static void brightenCamera(int cam)
+	{
+		UsbCamera camera = cameras[cam];
+		camera.setWhiteBalanceAuto();
+		camera.setExposureAuto();
 	}
     
     /**
