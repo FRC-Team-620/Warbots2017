@@ -85,8 +85,9 @@ public class DriveWithXbox extends Command {
 			Scheduler.getInstance().add(raisegeararm);
 		}
 		if(xbox.getRawButton(2)){
-			depgear=new DepositGear();
-			Scheduler.getInstance().add(depgear);
+			Robot.nextCamera();
+			//depgear=new DepositGear();
+			//Scheduler.getInstance().add(depgear);
 		}
 		//SWITCHING THE "FRONT"
 		if(xbox.getRawButton(1))front=!front;//A
