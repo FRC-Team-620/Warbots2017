@@ -47,7 +47,6 @@ public class AlignForGearPeg extends Command {
 		double center;
 		double dist;
 		
-		//TODO Determine planer offset by robot movement
 		//TODO Better contour filtering
 		
 		if(centers.length == 2) //Two detected segments of reflective tape
