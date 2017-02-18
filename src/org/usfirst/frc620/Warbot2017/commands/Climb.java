@@ -44,6 +44,7 @@ public class Climb extends Command {
  // Called repeatedly when this Command is scheduled to run
  protected void execute() {
 	 m_power= xbox.getRawAxis(3);
+	 System.out.println(xbox.getRawButton(6));
 if(RobotMap.limit.get()){
 	Robot.climber.climb(m_power);
 }
@@ -54,11 +55,9 @@ else if(RobotMap.limit.get()&&xbox.getRawButton(5)){
 
  // Make this return true when this Command no longer needs to run execute()
  protected boolean isFinished() {
-	 if(xbox.getRawButton(6)){
-		 Robot.climber.climb(0);
-		 return true;
-	 }
-	 return false;
+	 System.out.println(xbox.getRawButton(5));
+	 return xbox.getRawButton(5);
+	 //return false;
  }
 
  // Called once after isFinished returns true

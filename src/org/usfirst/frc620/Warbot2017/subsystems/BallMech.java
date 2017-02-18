@@ -46,5 +46,13 @@ public class BallMech extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+    public void actuate(double x){
+    	ballMotor.set(x);
+    	//Robot.driveTrain.mecanumDrive(0, 0, x/10, 0);
+    }
+    public void kill(){
+    	ballMotor.set(0);
+    	ballMotor.disable();
+    }
 }
 

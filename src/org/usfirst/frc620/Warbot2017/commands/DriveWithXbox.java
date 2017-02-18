@@ -32,6 +32,7 @@ public class DriveWithXbox extends Command {
 	LowerGearArm lowergeararm;
 	RaiseGearArm raisegeararm;
 	DepositGear depgear;
+	ActuateBallMech ballmech;
 	Turn turn;
 	double x;
 	double y;
@@ -63,7 +64,8 @@ public class DriveWithXbox extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		System.out.println(Robot.navX.getYaw());
+		//System.out.println("Lidar"+Robot.lidar.getDistance());
+		//System.out.println(Robot.navX.getYaw());
 		LTrigger = xbox.getRawAxis(2);
 		Lbumper = xbox.getRawButton(5);
 		//System.out.println("NavX:"+Robot.navX.getYaw());
@@ -75,18 +77,15 @@ public class DriveWithXbox extends Command {
 			Scheduler.getInstance().add(climb);
 		}
 		if(xbox.getRawButton(4)){
-			System.out.println("lower");
-			lowergeararm=new LowerGearArm();
-			Scheduler.getInstance().add(lowergeararm);
+			ballmech=new ActuateBallMech(xbox);
+			Scheduler.getInstance().add(ballmech);
 		}
 		if(xbox.getRawButton(3)){
-			System.out.println("raise");
-			raisegeararm= new RaiseGearArm();
-			Scheduler.getInstance().add(raisegeararm);
-		}
-		if(xbox.getRawButton(2)){
 			depgear=new DepositGear();
 			Scheduler.getInstance().add(depgear);
+		}
+		if(xbox.getRawButton(2)){
+			Robot.nextCamera();
 		}
 		//SWITCHING THE "FRONT"
 		if(xbox.getRawButton(1))front=!front;//A
