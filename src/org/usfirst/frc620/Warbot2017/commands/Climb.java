@@ -55,7 +55,8 @@ else if(RobotMap.limit.get()&&xbox.getRawButton(5)){
 
  // Make this return true when this Command no longer needs to run execute()
  protected boolean isFinished() {
-	 return xbox.getRawButton(6);
+	 System.out.println(xbox.getRawButton(5));
+	 return xbox.getRawButton(5);
 	 //return false;
  }
 

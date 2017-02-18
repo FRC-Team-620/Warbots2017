@@ -64,7 +64,8 @@ public class DriveWithXbox extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		System.out.println(Robot.navX.getYaw());
+		//System.out.println("Lidar"+Robot.lidar.getDistance());
+		//System.out.println(Robot.navX.getYaw());
 		LTrigger = xbox.getRawAxis(2);
 		Lbumper = xbox.getRawButton(5);
 		//System.out.println("NavX:"+Robot.navX.getYaw());
