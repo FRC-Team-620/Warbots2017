@@ -21,8 +21,9 @@ import org.usfirst.frc620.Warbot2017.subsystems.*;
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
     	addSequential(new DriveDistance(150, .85));
-    	addSequential(new DriveUntilDist(20, .3));
+    	addSequential(new DriveUntilDist(40, .3));
     	addSequential(new AlignForGearPeg());
+    	addSequential(new DriveUntilDist(10,.3));
     	addSequential(new DepositGear());
     } 
 }

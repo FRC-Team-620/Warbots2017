@@ -28,6 +28,7 @@ public class DriveWithXbox extends Command {
 	//UsbCamera test = new UsbCamera("test",0 );
 	XboxController xbox;
 	DriveDistance driveDist;
+	CorrectStrafeDrift correctStrafe;
 	Climb climb;
 	LowerGearArm lowergeararm;
 	RaiseGearArm raisegeararm;
@@ -65,11 +66,9 @@ public class DriveWithXbox extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		//System.out.println("Lidar"+Robot.lidar.getDistance());
-		//System.out.println(Robot.navX.getYaw());
+		//System.out.println("NavX"+Robot.navX.getYaw());
 		LTrigger = xbox.getRawAxis(2);
 		Lbumper = xbox.getRawButton(5);
-		//System.out.println("NavX:"+Robot.navX.getYaw());
-		//System.out.println("Lidar:"+Robot.lidar.getDistance());
 		
 		//Robot.climber.climb(xbox.getRawAxis(3));
 		if(xbox.getRawButton(6)){
@@ -77,12 +76,14 @@ public class DriveWithXbox extends Command {
 			Scheduler.getInstance().add(climb);
 		}
 		if(xbox.getRawButton(4)){
-			ballmech=new ActuateBallMech(xbox);
-			Scheduler.getInstance().add(ballmech);
+			//ballmech=new ActuateBallMech(xbox);
+			raisegeararm=new RaiseGearArm();
+			Scheduler.getInstance().add(raisegeararm);
 		}
 		if(xbox.getRawButton(3)){
-			depgear=new DepositGear();
-			Scheduler.getInstance().add(depgear);
+			//depgear=new DepositGear();
+			lowergeararm=new LowerGearArm();
+			Scheduler.getInstance().add(lowergeararm);
 		}
 		if(xbox.getRawButton(2)){
 			Robot.nextCamera();
@@ -99,40 +100,23 @@ public class DriveWithXbox extends Command {
 			y = -xbox.getRawAxis(1);
 			x/*z if test bot*/ = xbox.getRawAxis(4);//negative if test bot
 		}
-		/*if(x==0&&y==0&&z==0){
-			Robot.navX.reset();
-			startingAngle = Robot.navX.getYaw();
-		}
-		if(!(z==0)||!(y==0)){
-			System.out.println("y"+y);
-			System.out.println("Anti-drift test");
-			double strafe = x;
-	    	float dTheta = Robot.navX.getYaw() - startingAngle;
-	    	double rotate = 0.0;
-	    	
-	    	if(dTheta > 5) {
-	    		// pos turn counterclockwise
-	    		rotate = 0.5;
-	    	} else if(dTheta < 5) {
-	    		rotate = -0.5;
-	    	}
-	    	
-	    	Robot.driveTrain.mecanumDrive(rotate, 0, strafe, 0);
-		}
-		else{*/
+		
 		//CONTROLLER SCALING
 		if (!Lbumper) {//LEFT TRIGGER SCALING
-			x = (Math.abs(x) < 0.3) ? 0 : x*(1-(LTrigger*.75));// X Dead Zone
+			x = (Math.abs(x) < 0.3) ? 0 : x*(1-(LTrigger*.6));// X Dead Zone
 			y = (Math.abs(y) < 0.3) ? 0 : y*(1-(LTrigger*.75));// Y Dead Zone
-			z = (Math.abs(z) < 0.3) ? 0 : z*(1-(LTrigger*.6));// Z Dead Zone
+			z = (Math.abs(z) < 0.3) ? 0 : z*(1-(LTrigger*.75));// Z Dead Zone
 		} else if (Lbumper) {//L BUMPER SCALING
 			x = (Math.abs(x) < 0.3) ? 0 : x * .5;// X Dead Zone and scaling
 			y = (Math.abs(y) < 0.3) ? 0 : y * .5;// Y Dead Zone and scaling
 			z = (Math.abs(z) < 0.3) ? 0 : z * .7;// Z Dead Zone and scaling
 		}
-		
+		if(y==0&&z==0){
+			correctStrafe=new CorrectStrafeDrift();
+			Scheduler.getInstance().add(correctStrafe);
+		}
 		Robot.driveTrain.mecanumDrive(-x, -y, -z, 0);
-		//}
+		
 	}
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {

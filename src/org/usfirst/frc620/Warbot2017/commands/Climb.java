@@ -48,7 +48,7 @@ public class Climb extends Command {
 if(RobotMap.limit.get()){
 	Robot.climber.climb(m_power);
 }
-else if(RobotMap.limit.get()&&xbox.getRawButton(5)){
+else if(!RobotMap.limit.get()&&xbox.getRawButton(1)){
 	Robot.climber.climb(m_power);
 }
  }
