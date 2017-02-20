@@ -45,11 +45,10 @@ public class Climb extends Command
 		else if(!climber.isUp())
 		{
 			climber.climb(0.5);
-			//TODO: fix this
-//			if(++moveTime < 3)
-//				Robot.driveTrain.mecanumDrive(0, 0, .4, 0);
-//			else
-//				Robot.driveTrain.mecanumDrive(0, 0, 0.2, 0);
+			if(++moveTime < 3)
+				Robot.driveTrain.mecanumDrive(0, 0, .4, 0);
+			else
+				Robot.driveTrain.mecanumDrive(0, 0, 0.2, 0);
 		}
 		else if(!climber.isInContact())
 			climber.climb(0.8);

@@ -24,8 +24,8 @@ public class CorrectStrafeDrift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double strafe = Robot.oi.xbox.getRawAxis(4);
-    	strafe = (Math.abs(strafe) < 0.3) ? 0 : strafe*(1-(Robot.oi.xbox.getRawAxis(5)*.6));
+    	double strafe = Robot.oi.getXbox().getRawAxis(4);
+    	strafe = (Math.abs(strafe) < 0.3) ? 0 : strafe*(1-(Robot.oi.getXbox().getRawAxis(5)*.6));
     	float dTheta = Robot.navX.getYaw() - startingAngle;
     	double rotate = 0.0;
     	
@@ -41,7 +41,7 @@ public class CorrectStrafeDrift extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.oi.xbox.getRawAxis(0) != 0.0 || Robot.oi.xbox.getRawAxis(1) != 0.0;
+        return Robot.oi.getXbox().getRawAxis(0) != 0.0 || Robot.oi.getXbox().getRawAxis(1) != 0.0;
     }
 
     // Called once after isFinished returns true
