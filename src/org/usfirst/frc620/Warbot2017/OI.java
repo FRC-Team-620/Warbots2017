@@ -68,11 +68,31 @@ public class OI {
     	return xbox.getRawButton(5);
     }
     
+    public boolean getRBumper() {
+    	return xbox.getRawButton(6);
+    }
+    
     public double getLTrigger() {
     	return xbox.getRawAxis(2);
     }
     
     public double getRTrigger() {
     	return xbox.getRawAxis(3);
+    }
+    
+    public double getLeftXAxis() {
+    	return xbox.getRawAxis(0);
+    }
+    
+    public double getLeftYAxis() {
+    	return xbox.getRawAxis(1);
+    }
+    
+    public double getRightXAxis() {
+    	return xbox.getRawAxis(4);
+    }
+    
+    public double getRightYAxis() {
+    	return xbox.getRawAxis(5);
     }
 }

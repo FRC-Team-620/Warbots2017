@@ -22,13 +22,13 @@ public class Climb extends Command
 	{
 		requires(Robot.driveTrain);
 		setInterruptible(false);
-		xbox = Robot.oi.getXbox();
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
 		Robot.cameras.switchToCamera(2);
+		xbox = Robot.oi.getXbox();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
