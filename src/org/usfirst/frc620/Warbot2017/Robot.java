@@ -119,11 +119,11 @@ public class Robot extends IterativeRobot {
 	 */
 	public void testPeriodic() {
 		LiveWindow.run();
-		test.update(Robot.oi.getXbox());
-		if (test.pressed()) {
-			testPhase++;
+		test.update(Robot.oi.getXbox()); //Tracks when the A button is pressed
+		if (test.pressed()) { //Happens once every time the A button is pressed
+			testPhase++; //Move to the next phase
 
-			switch (testPhase) {
+			switch (testPhase) { //The 'initializers' for every phase of the test
 			case 0:
 				System.out.println("This is the basic drive test. The robot should be moving back and forth.");
 				break;
@@ -146,10 +146,10 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 		}
-		if ( System.currentTimeMillis() - timer >= 500) {
-			toggle = !toggle;
-			timer = System.currentTimeMillis();
-			switch (testPhase) {
+		if ( System.currentTimeMillis() - timer >= 500) { //Happens twice every second
+			toggle = !toggle; //Toggles every execution
+			timer = System.currentTimeMillis(); //Makes sure this stuff won't happen again for another half second
+			switch (testPhase) { //The 'execution loops' for every phase of the test
 			case 0:
 				Robot.driveTrain.mecanumDrive(toggle ? .5 : -.5, 0, 0, 0);
 				break;
