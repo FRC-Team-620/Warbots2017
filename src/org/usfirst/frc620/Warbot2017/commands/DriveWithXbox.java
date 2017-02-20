@@ -24,7 +24,7 @@ public class DriveWithXbox extends Command {
 	protected void execute() {
 		XboxController xbox = Robot.oi.getXbox();
 		double lTrigger = Robot.oi.getLTrigger();
-		
+		System.out.println("Navx"+Robot.navX.getYaw());
 		double z = -xbox.getRawAxis(0);
 		double y = xbox.getRawAxis(1);
 		double x = -xbox.getRawAxis(4);
