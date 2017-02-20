@@ -55,5 +55,17 @@ public class Climber extends Subsystem {
     	climbMotor.set(0);
     	climbMotor.disable();
     }
+    public boolean isUp()
+    {
+    	return !RobotMap.climberUpLimit.get();
+    }
+    public boolean isDown()
+    {
+    	return !RobotMap.climberDownLimit.get();
+    }
+    public boolean isInContact()
+    {
+    	return !RobotMap.climberContactLimit.get();
+    }
 }
 
