@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CorrectStrafeDrift extends Command {
 	private float startingAngle;
+	
     public CorrectStrafeDrift() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -24,8 +25,8 @@ public class CorrectStrafeDrift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double strafe = Robot.oi.getXbox().getRawAxis(4);
-    	strafe = (Math.abs(strafe) < 0.3) ? 0 : strafe*(1-(Robot.oi.getXbox().getRawAxis(5)*.6));
+    	double strafe = Robot.oi.getRightXAxis();
+    	strafe = (Math.abs(strafe) < 0.3) ? 0 : strafe * (1 - (Robot.oi.getRightYAxis() * .6));
     	float dTheta = Robot.navX.getYaw() - startingAngle;
     	double rotate = 0.0;
     	
