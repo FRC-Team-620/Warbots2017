@@ -1,7 +1,10 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
+import org.usfirst.frc620.Warbot2017.RobotMap;
 import org.usfirst.frc620.Warbot2017.subsystems.ButtonReader;
+
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +17,7 @@ public class DriveWithXbox extends Command {
 	}
 
 	protected void initialize() {
+		//RobotMap.visionlightSpike.set(Relay.Value.kForward);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
