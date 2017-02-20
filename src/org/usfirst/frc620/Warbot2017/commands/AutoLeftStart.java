@@ -14,9 +14,6 @@ package org.usfirst.frc620.Warbot2017.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc620.Warbot2017.subsystems.*;
 
-/**
- *
- */
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
     	addSequential(new DriveDistance(160, .85));
