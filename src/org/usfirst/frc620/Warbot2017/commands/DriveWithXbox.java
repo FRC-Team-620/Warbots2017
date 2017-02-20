@@ -65,8 +65,8 @@ public class DriveWithXbox extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		//System.out.println("Lidar"+Robot.lidar.getDistance());
-		//System.out.println("NavX"+Robot.navX.getYaw());
+		System.out.println("Lidar"+Robot.lidar.getDistance());
+		System.out.println("NavX"+Robot.navX.getYaw());
 		LTrigger = xbox.getRawAxis(2);
 		Lbumper = xbox.getRawButton(5);
 		
@@ -84,9 +84,6 @@ public class DriveWithXbox extends Command {
 			//depgear=new DepositGear();
 			lowergeararm=new LowerGearArm();
 			Scheduler.getInstance().add(lowergeararm);
-		}
-		if(xbox.getRawButton(2)){
-			Robot.nextCamera();
 		}
 		//SWITCHING THE "FRONT"
 		buttonForward.update(xbox);
@@ -115,10 +112,10 @@ public class DriveWithXbox extends Command {
 			y = (Math.abs(y) < 0.3) ? 0 : y * .5;// Y Dead Zone and scaling
 			z = (Math.abs(z) < 0.3) ? 0 : z * .5;// Z Dead Zone and scaling
 		}
-		if(y==0&&z==0){
+		/*if(y==0&&z==0&&x!=0){
 			correctStrafe=new CorrectStrafeDrift();
 			Scheduler.getInstance().add(correctStrafe);
-		}
+		}*/
 		Robot.driveTrain.mecanumDrive(-x, -y, -z, 0);
 		
 	}

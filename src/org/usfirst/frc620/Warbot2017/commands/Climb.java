@@ -50,11 +50,11 @@ public class Climb extends Command
 	{
 		m_power = xbox.getRawAxis(3);
 		System.out.println(xbox.getRawButton(6));
-		if (RobotMap.limit.get())
+		if (RobotMap.climberContactLimit.get())
 		{
 			Robot.climber.climb(m_power);
 		}
-		else if (!RobotMap.limit.get() && xbox.getRawButton(1))
+		else if (!RobotMap.climberContactLimit.get() && xbox.getRawButton(1))
 		{
 			Robot.climber.climb(m_power);
 		}

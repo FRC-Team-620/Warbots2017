@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
     public static Vision vision;
     public static DriveWithXbox DriveWithXbox;
     
-    public static final int NUMBER_OF_CAMERAS = 0;
+    public static int NUMBER_OF_CAMERAS = 1;
 	private static UsbCamera[] cameras;
 	private static CvSink[] cvs;
 	private CvSource outputStream;
@@ -84,13 +84,19 @@ public class Robot extends IterativeRobot {
         
         cameras = new UsbCamera[NUMBER_OF_CAMERAS];
 		cvs = new CvSink[NUMBER_OF_CAMERAS];
+		int backTake = 0;
 		for(int i = 0; i < NUMBER_OF_CAMERAS; i++)
 		{
-			cameras[i] = CameraServer.getInstance().startAutomaticCapture();
+			cameras[i - backTake] = CameraServer.getInstance().startAutomaticCapture();
+//			if(cameras[i - backTake].isConnected())
+//			{
+//				backTake ++;
+//				NUMBER_OF_CAMERAS --;
+//			}
 			CameraServer.getInstance().removeServer("USB Camera " + i);
-			cameras[i].setResolution(320, 240);
-			cvs[i] = CameraServer.getInstance().getVideo(cameras[i]);
-			cvs[i].setEnabled(false);
+			cameras[i - backTake].setResolution(320, 240);
+			cvs[i - backTake] = CameraServer.getInstance().getVideo(cameras[i]);
+			cvs[i - backTake].setEnabled(false);
 		}
 		outputStream = CameraServer.getInstance().putVideo("Camera Stream", 320, 240);
 		frame = new Mat();

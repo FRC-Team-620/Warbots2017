@@ -11,6 +11,8 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
+import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.subsystems.*;
 
 /**
@@ -20,10 +22,13 @@ import org.usfirst.frc620.Warbot2017.subsystems.*;
  */
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
-    	addSequential(new DriveDistance(150, .85));
-    	addSequential(new DriveUntilDist(40, .3));
-    	addSequential(new AlignForGearPeg());
-    	addSequential(new DriveUntilDist(10,.3));
+    	//addSequential(new DriveDistance(150, .5));
+    	addSequential(new DriveUntilDist(30, .3));
+    	//addSequential(new AlignForGearPeg());
+    	addSequential(new DriveUntilDist(29,.3));
+    	addSequential(new DriveUntilDist(25,.3));
+    	System.out.println("DepositGear"+Robot.lidar.getDistance());
     	addSequential(new DepositGear());
+    	addSequential(new DriveDistance(-100,.3));
     } 
 }
