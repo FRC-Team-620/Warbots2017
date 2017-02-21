@@ -1,6 +1,5 @@
 package org.usfirst.frc620.Warbot2017;
 
-import org.usfirst.frc620.Warbot2017.commands.ActuateBallMech;
 import org.usfirst.frc620.Warbot2017.commands.AlignForGearPeg;
 import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
@@ -9,6 +8,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.Climb;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
+import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.commands.SwitchSides;
@@ -49,7 +49,7 @@ public class OI {
         x.whenPressed(new LowerGearArm());
         
         a = new JoystickButton(xbox, 1);
-        a.whenPressed(new ActuateBallMech());
+        a.whenPressed(new LowerBallMech());
         
         b = new JoystickButton(xbox, 2);
         b.whenPressed(new DepositGear());
