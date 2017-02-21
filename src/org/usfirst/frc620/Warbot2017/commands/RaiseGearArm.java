@@ -45,7 +45,7 @@ public class RaiseGearArm extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return timeSinceInitialized()>2500;
+    	return timeSinceInitialized()>2.8;
     }
 
     // Called once after isFinished returns true

@@ -25,7 +25,7 @@ public class SwitchSides extends InstantCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.oi.gyro=(Robot.oi.gyro+90)%270;
-    	Robot.cameras.nextCamera();
+    	Robot.cameras.switchToCamera(Robot.oi.gyro/90);
     }
     
 //    protected double switchX(){
