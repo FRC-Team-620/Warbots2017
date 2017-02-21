@@ -10,6 +10,7 @@ import org.usfirst.frc620.Warbot2017.commands.DepositGear;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
 import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
+import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.commands.SwitchSides;
 import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
@@ -52,7 +53,7 @@ public class OI {
         a.whenPressed(new LowerBallMech());
         
         b = new JoystickButton(xbox, 2);
-        b.whenPressed(new DepositGear());
+        b.whenPressed(new RaiseBallMech());//DepositGear());
        
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());

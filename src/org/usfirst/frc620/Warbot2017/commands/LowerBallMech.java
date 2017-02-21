@@ -17,12 +17,12 @@ public class LowerBallMech extends Command {
 
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() {
-	    	Robot.ballMech.actuate(.25);
+	    	Robot.ballMech.actuate(1);
 	    }
 	    
 	    // Make this return true when this Command no longer needs to run execute()
 	    protected boolean isFinished() {
-	    	return timeSinceInitialized()>2.8;
+	    	return timeSinceInitialized()>12;
 	    }
 
 	    // Called once after isFinished returns true
