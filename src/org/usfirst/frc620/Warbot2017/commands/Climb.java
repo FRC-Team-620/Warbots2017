@@ -5,6 +5,7 @@ import org.usfirst.frc620.Warbot2017.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
 *
@@ -20,13 +21,16 @@ public class Climb extends Command
 	
 	public Climb()
 	{
-		requires(Robot.driveTrain);
+		//requires(Robot.driveTrain);
 		setInterruptible(false);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
+		//TODO lower ball mech fully
+		buttonTimer=0;
+		System.out.println("initialize");
 		Robot.cameras.switchToCamera(2);
 		xbox = Robot.oi.getXbox();
 	}
@@ -36,9 +40,10 @@ public class Climb extends Command
 	{
 		if(climber.isDown())
 		{
+			System.out.println("Down");
 			//TODO: add drive controls
 			
-			climber.climb(0.3);
+			climber.climb(0.3325);
 			if(xbox.getRawButton(2))
 				exit = true;
 		}
@@ -73,6 +78,7 @@ public class Climb extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
+		System.out.println("END");
 		climber.kill();
 		Robot.cameras.switchToCamera(0);
 	}

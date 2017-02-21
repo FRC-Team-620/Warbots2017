@@ -24,11 +24,9 @@ public class DriveWithXbox extends Command {
 	protected void execute() {
 		XboxController xbox = Robot.oi.getXbox();
 		double lTrigger = Robot.oi.getLTrigger();
-		System.out.println("Navx"+Robot.navX.getYaw());
 		double z = -xbox.getRawAxis(0);
 		double y = xbox.getRawAxis(1);
 		double x = -xbox.getRawAxis(4);
-
 		if (Robot.oi.getLBumper()) {
 			x = (Math.abs(x) < 0.3) ? 0 : x * .7; // X Dead Zone and scaling
 			y = (Math.abs(y) < 0.3) ? 0 : y * .5; // Y Dead Zone and scaling
@@ -39,7 +37,8 @@ public class DriveWithXbox extends Command {
 			z = (Math.abs(z) < 0.3) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
 		}
 
-		Robot.driveTrain.mecanumDrive(-x, -y, -z, 0);
+		Robot.driveTrain.mecanumDrive(-x, -y, -z, Robot.oi.gyro);
+		System.out.println("Gyro"+ Robot.oi.gyro);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

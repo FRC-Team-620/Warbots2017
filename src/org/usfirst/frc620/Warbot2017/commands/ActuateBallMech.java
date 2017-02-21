@@ -1,6 +1,7 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
+import org.usfirst.frc620.Warbot2017.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +18,15 @@ public class ActuateBallMech extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		m_power = Robot.oi.getRTrigger() != 0 ? Robot.oi.getRTrigger() : -Robot.oi.getLTrigger();
+		if(!RobotMap.ballDownLimit.get()){
+			m_power=.5;
+		}
+		else if (RobotMap.ballDownLimit.get()&&RobotMap.ballUpLimit.get()){
+			m_power=.75;
+		}
+		else{
+			m_power=0;
+		}
 		Robot.ballMech.actuate(m_power);
 	}
 

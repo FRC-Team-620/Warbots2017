@@ -11,6 +11,7 @@ import org.usfirst.frc620.Warbot2017.commands.DepositGear;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
+import org.usfirst.frc620.Warbot2017.commands.SwitchSides;
 import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
 import org.usfirst.frc620.Warbot2017.commands.Turn;
 
@@ -30,6 +31,7 @@ public class OI {
     private JoystickButton y;
     private JoystickButton lBumper;
     private JoystickButton rBumper;
+    public int gyro=0;
 
     public OI() {
         xbox = new XboxController(0);
@@ -38,7 +40,7 @@ public class OI {
         rBumper.whenPressed(new Climb());
         
         lBumper = new JoystickButton(xbox, 5);
-        lBumper.whenPressed(new ToggleRelay());
+        lBumper.whenPressed(new SwitchSides());
         
         y = new JoystickButton(xbox, 4);
         y.whenPressed(new RaiseGearArm());
@@ -70,6 +72,10 @@ public class OI {
     
     public boolean getLBumper() {
     	return xbox.getRawButton(5);
+    }
+    
+    public double getRightXAxis(){
+    	return xbox.getRawAxis(4);
     }
     
     public double getLTrigger() {
