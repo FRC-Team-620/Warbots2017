@@ -23,6 +23,7 @@ public class Climb extends Command
 	{
 		//requires(Robot.driveTrain);
 		setInterruptible(false);
+		Scheduler.getInstance().add(new LowerBallMech());
 	}
 
 	// Called just before this Command runs the first time
@@ -31,7 +32,7 @@ public class Climb extends Command
 		//TODO lower ball mech fully
 		buttonTimer = 0;
 		System.out.println("initialize");
-		Robot.cameras.switchToCamera(2);
+//		Robot.cameras.switchToCamera(2);
 		xbox = Robot.oi.getXbox();
 		madeContact = false;
 		exit = false;
@@ -82,14 +83,14 @@ public class Climb extends Command
 	{
 		System.out.println("END");
 		climber.kill();
-		Robot.cameras.switchToCamera(0);
+//		Robot.cameras.switchToCamera(0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted()
 	{
-		Robot.cameras.switchToCamera(0);
+//		Robot.cameras.switchToCamera(0);
 		climber.kill();
 		throw new Error("CLIMB COMMAND INTERRUPTED. THIS IS VERY DANGEROUS.");
 	}

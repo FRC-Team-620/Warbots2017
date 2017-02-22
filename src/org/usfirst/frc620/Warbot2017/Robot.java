@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -54,7 +55,7 @@ public class Robot extends IterativeRobot {
 		lidar = new Lidar();
 		navX = new NavX();
 		vision = new Vision();
-		cameras = new CameraHandler(0);
+		cameras = new CameraHandler(1);
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -79,6 +80,7 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
+		Scheduler.getInstance().add(new RaiseGearArm());
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -87,6 +89,8 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		System.out.println("Lidar: " + lidar.getDistance());
+		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
 		Scheduler.getInstance().run();
 	}
 
@@ -105,7 +109,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 //		a.update(oi.getXbox());
-//		if(a.pressed())
+//		if(a.pressed()) 
 //			cameras.nextCamera();
 	}
 
@@ -159,20 +163,21 @@ public class Robot extends IterativeRobot {
 			timer = System.currentTimeMillis();
 			switch (testPhase) {
 			case 0:
-				Robot.driveTrain.mecanumDrive(toggle ? .5 : -.5, 0, 0, 0);
+				Robot.driveTrain.mecanumDrive(toggle ? .25 : -.25, 0, 0, 0);
 				break;
 			case 1:
-				Robot.driveTrain.mecanumDrive(0, toggle ? .5 : -.5, 0, 0);
+				Robot.driveTrain.mecanumDrive(0, toggle ? .25 : -.25, 0, 0);
 				break;
 			case 2:
-				Robot.driveTrain.mecanumDrive(0, 0, toggle ? .5 : -.5, 0);
+				Robot.driveTrain.mecanumDrive(0, 0, toggle ? .25 : -.25, 0);
 				break;
 			case 3:
-				if(cameras.NUMBER_OF_CAMERAS > 0)
-					cameras.nextCamera();
+				RobotMap.driveTrainRobotDrive.stopMotor();
+//				if(cameras.NUMBER_OF_CAMERAS > 0)
+//					cameras.nextCamera();
 				break;
 			case 4:
-				System.out.println(lidar.getDistanceInches() + " inches");
+				System.out.println(lidar.getDistance() + " cm");
 				break;
 			default:
 				break;

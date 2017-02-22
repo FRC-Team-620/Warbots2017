@@ -21,32 +21,33 @@ public class CameraHandler
 	{
 		NUMBER_OF_CAMERAS = numberOfCameras;
 		server = CameraServer.getInstance();
-		if (NUMBER_OF_CAMERAS > 0)
-		{
-			cameras = new UsbCamera[NUMBER_OF_CAMERAS];
-//			cvs = new CvSink[NUMBER_OF_CAMERAS];
-			for (int i = 0; i < NUMBER_OF_CAMERAS; i++)
-			{
-				cameras[i] = new UsbCamera("USB Camera " + i, i);
-//				CameraServer.getInstance().removeServer("USB Camera " + i);
-//				CameraServer.getInstance().removeCamera("USB Camera " + i);
-				cameras[i].setResolution(360, 240);
-			}
-//			cameras[0].setResolution(360, 240);
-			outputStream = server.putVideo("Camera Stream", 320, 240);
-			frame = new Mat();
-			
-			switchToCamera(0);
-
-			new Thread(() ->
-			{
-				while (!Thread.interrupted())
-				{
-					cvs.grabFrame(frame);
-					outputStream.putFrame(frame);
-				}
-			}).start();
-		}
+		server.startAutomaticCapture();
+//		if (NUMBER_OF_CAMERAS > 0)
+//		{
+//			cameras = new UsbCamera[NUMBER_OF_CAMERAS];
+////			cvs = new CvSink[NUMBER_OF_CAMERAS];
+//			for (int i = 0; i < NUMBER_OF_CAMERAS; i++)
+//			{
+//				cameras[i] = new UsbCamera("USB Camera " + i, i);
+////				CameraServer.getInstance().removeServer("USB Camera " + i);
+////				CameraServer.getInstance().removeCamera("USB Camera " + i);
+//				cameras[i].setResolution(360, 240);
+//			}
+////			cameras[0].setResolution(360, 240);
+//			outputStream = server.putVideo("Camera Stream", 320, 240);
+//			frame = new Mat();
+//			
+//			switchToCamera(0);
+//
+//			new Thread(() ->
+//			{
+//				while (!Thread.interrupted())
+//				{
+//					cvs.grabFrame(frame);
+//					outputStream.putFrame(frame);
+//				}
+//			}).start();
+//		}
 	}
 
 	public int getCurrentCam()
@@ -56,7 +57,8 @@ public class CameraHandler
 
 	public void nextCamera()
 	{
-		switchToCamera((camera + 1) % NUMBER_OF_CAMERAS);
+		if(NUMBER_OF_CAMERAS > 0)
+			switchToCamera((camera + 1) % NUMBER_OF_CAMERAS);
 	}
 
 	public void lastCamera()

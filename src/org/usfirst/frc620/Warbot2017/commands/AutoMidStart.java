@@ -23,12 +23,17 @@ import org.usfirst.frc620.Warbot2017.subsystems.*;
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
     	//addSequential(new DriveDistance(150, .5));
+    	System.out.println("Driving until robot is 30 cm away");
     	addSequential(new DriveUntilDist(30, .3));
     	//addSequential(new AlignForGearPeg());
+    	System.out.println("Driving until robot is 29 cm away");
     	addSequential(new DriveUntilDist(29,.3));
+    	System.out.println("Driving until robot is 25 cm away");
     	addSequential(new DriveUntilDist(25,.3));
-    	System.out.println("DepositGear"+Robot.lidar.getDistance());
+    	System.out.println("Depositing gear, Lidar value = " + Robot.lidar.getDistance());
     	addSequential(new DepositGear());
+    	System.out.println("Driving 100 cm backwards");
     	addSequential(new DriveDistance(-100,.3));
+    	addSequential(new RaiseGearArm());
     } 
 }
