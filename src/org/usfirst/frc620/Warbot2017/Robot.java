@@ -1,6 +1,8 @@
 package org.usfirst.frc620.Warbot2017;
 
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
+import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
+import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
 import org.usfirst.frc620.Warbot2017.subsystems.ButtonReader;
 import org.usfirst.frc620.Warbot2017.subsystems.CameraHandler;
@@ -67,7 +69,8 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-
+		Scheduler.getInstance().add(new RaiseGearArm());
+		Scheduler.getInstance().add(new LowerBallMech());
 	}
 
 	public void disabledPeriodic() {
