@@ -1,4 +1,4 @@
-package org.usfirst.frc620.Warbot2017.commands;
+ package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.subsystems.Climber;
@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Climb extends Command
 {
 	private XboxController xbox;
-	private long buttonTimer = 0;
-	boolean madeContact = false;
-	boolean exit = false;
-	private int moveTime = 0;
+	private long buttonTimer;
+	boolean madeContact;
+	boolean exit;
+//	private int moveTime = 0;
 	Climber climber = Robot.climber;
 	
 	public Climb()
@@ -29,10 +29,12 @@ public class Climb extends Command
 	protected void initialize()
 	{
 		//TODO lower ball mech fully
-		buttonTimer=0;
+		buttonTimer = 0;
 		System.out.println("initialize");
 		Robot.cameras.switchToCamera(2);
 		xbox = Robot.oi.getXbox();
+		madeContact = false;
+		exit = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -72,7 +74,7 @@ public class Climb extends Command
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished()
 	{
-		return exit || (madeContact && System.currentTimeMillis() - buttonTimer >= 250);
+		return exit || (madeContact && System.currentTimeMillis() - buttonTimer >= 500);
 	}
 
 	// Called once after isFinished returns true
