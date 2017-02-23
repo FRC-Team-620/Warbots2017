@@ -35,7 +35,7 @@ public class CorrectStrafeDrift extends Command {
 //    	} else if(dTheta < 5) {
 //    		rotate = -0.5;
 //    	}
-//    	
+    	
 //    	Robot.driveTrain.mecanumDrive(rotate, 0, strafe, 0);
     	double strafe = Robot.oi.getRightXAxis();
     	strafe = (Math.abs(strafe) < 0.3) ? 0 : strafe * (1 - (Robot.oi.getRightXAxis() * .6));
@@ -49,7 +49,7 @@ public class CorrectStrafeDrift extends Command {
     		rotate = -0.5;
     	}
     	
-    	//Robot.driveTrain.mecanumDrive(rotate, 0, strafe, 0);
+    	Robot.driveTrain.mecanumDrive(rotate, 0, strafe, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

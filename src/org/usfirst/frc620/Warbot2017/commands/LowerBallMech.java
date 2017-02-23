@@ -2,45 +2,42 @@ package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ActuateBallMech extends Command {
-	private double m_power;
+public class LowerBallMech extends Command
+{
 
-	public ActuateBallMech() {
+	public LowerBallMech()
+	{
 		requires(Robot.ballMech);
 	}
 
 	// Called just before this Command runs the first time
-	protected void initialize() {
+	protected void initialize()
+	{
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
-		if(!RobotMap.ballDownLimit.get()){
-			m_power=.5;
-		}
-		else if (RobotMap.ballDownLimit.get()&&RobotMap.ballUpLimit.get()){
-			m_power=.75;
-		}
-		else{
-			m_power=0;
-		}
-		Robot.ballMech.actuate(m_power);
+	protected void execute()
+	{
+		Robot.ballMech.actuate(1);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() {
-		return Robot.oi.getLBumper();
+	protected boolean isFinished()
+	{
+		return timeSinceInitialized() >= 9;
 	}
 
 	// Called once after isFinished returns true
-	protected void end() {
+	protected void end()
+	{
+		Robot.ballMech.actuate(0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
-	protected void interrupted() {
+	protected void interrupted()
+	{
 	}
 }
