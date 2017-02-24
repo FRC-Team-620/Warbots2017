@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class NavX extends Subsystem {
-	private AHRS navX;
+	public AHRS navX;
 
 	public NavX() {
 		navX = new AHRS(SerialPort.Port.kUSB);
@@ -37,6 +37,7 @@ public class NavX extends Subsystem {
 	public void reset(){
 		navX.reset();
 	}
+	
 
 	public void initDefaultCommand() {}
 }
