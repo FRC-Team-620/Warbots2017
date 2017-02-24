@@ -23,7 +23,7 @@ public class DriveUntilDist extends Command {
 	private static final double DIST_F = 0.00;
 	private DummyPIDOutput distOutput;
 	private PIDController turnController;
-	private static final double TURN_TOLERANCE = 2;
+	private static final double TURN_TOLERANCE = 5;
 	private static final double TURN_P = 0.03;
 	private static final double TURN_I = 0.00;
 	private static final double TURN_D = 0.00;
