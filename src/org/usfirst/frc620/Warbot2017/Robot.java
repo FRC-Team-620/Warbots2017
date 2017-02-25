@@ -108,7 +108,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putString("Yaw", navX.getYaw() + "");
+//		System.out.println("NavX = " + navX.getYaw());
+		System.out.println("Lidar = " + lidar.getDistance());
 //		a.update(oi.getXbox());
 //		if(a.pressed()) 
 //			cameras.nextCamera();

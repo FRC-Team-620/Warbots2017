@@ -26,7 +26,7 @@ public class DriveTime extends Command implements PIDOutput {
 	private long startTime;
 	private long time;
 	private double speed;
-	private static final double TURN_TOLERANCE = 2;
+	private static final double TURN_TOLERANCE = 1;
 	private static final double P = 0.03;
 	private static final double I = 0.00;
 	private static final double D = 0.00;
@@ -52,13 +52,13 @@ public class DriveTime extends Command implements PIDOutput {
 		startAngle = Robot.navX.getYaw();
 		turnController = new PIDController(P, I, D, F, Robot.navX.navX, this);
 		turnController.setInputRange(-180.0, 180.0);
-		turnController.setOutputRange(-1.0, 1.0);
+		turnController.setOutputRange(-.5, .5);
 		turnController.setAbsoluteTolerance(TURN_TOLERANCE);
 		turnController.setContinuous(true);
 		turnController.setSetpoint(startAngle);
 		turnController.enable();
 	}
-
+ 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
@@ -67,7 +67,7 @@ public class DriveTime extends Command implements PIDOutput {
 
 	// Make this return true when this Command no longer needs to rune execute()
 	protected boolean isFinished() {
-		return System.currentTimeMillis() > startTime + time;
+		return timeSinceInitialized() >= time / 1000;
 	}
 
 	// Called once after isFinished returns true
@@ -78,11 +78,12 @@ public class DriveTime extends Command implements PIDOutput {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		turnController.disable();
 	}
 
 	@Override
 	public void pidWrite(double output) {
-		Robot.driveTrain.mecanumDrive(output, 0, 0, 0);
+		Robot.driveTrain.mecanumDrive(0, .3, output, 0);
 
 	}
 }

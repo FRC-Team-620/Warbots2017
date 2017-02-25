@@ -23,7 +23,7 @@ public class DriveWithXbox extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		float temp= Robot.navX.getYaw();
-		System.out.println(timeSinceInitialized()+"NavX "+temp);
+//		System.out.println(timeSinceInitialized()+"NavX "+temp);
 		XboxController xbox = Robot.oi.getXbox();
 		double lTrigger = Robot.oi.getLTrigger();
 		double z = -xbox.getRawAxis(0);

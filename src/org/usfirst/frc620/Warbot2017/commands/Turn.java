@@ -25,7 +25,7 @@ public class Turn extends Command implements PIDOutput {
 	private double m_angle;
 	private double startAngle;
 	private long lastOnTarget = -1;
-	private static final double TURN_TOLERANCE = 2;
+	private static final double TURN_TOLERANCE = 1;
 	private static final double P = 0.03;
 	private static final double I = 0.00;
 	private static final double D = 0.00;
@@ -52,7 +52,7 @@ public class Turn extends Command implements PIDOutput {
 		startAngle = Robot.navX.getYaw();
 		turnController = new PIDController(P, I, D, F, Robot.navX.navX, this);
 		turnController.setInputRange(-180.0, 180.0);
-		turnController.setOutputRange(-1.0, 1.0);
+		turnController.setOutputRange(-.3, .3);
 		turnController.setAbsoluteTolerance(TURN_TOLERANCE);
 		turnController.setContinuous(true);
 		double setpoint = startAngle + m_angle;
@@ -84,11 +84,12 @@ public class Turn extends Command implements PIDOutput {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		turnController.disable();
 	}
 
 	@Override
 	public void pidWrite(double output) {
-		Robot.driveTrain.mecanumDrive(output, 0, 0, 0);
+		Robot.driveTrain.mecanumDrive(0, 0, output, 0);
 
 	}
 }

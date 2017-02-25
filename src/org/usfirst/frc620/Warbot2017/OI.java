@@ -7,13 +7,16 @@ import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
+import org.usfirst.frc620.Warbot2017.commands.DriveDistance;
+import org.usfirst.frc620.Warbot2017.commands.DriveTime;
+import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
 import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.commands.StopsAllThings;
-import org.usfirst.frc620.Warbot2017.commands.SwitchSides;
+import org.usfirst.frc620.Warbot2017.commands.Turn;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -68,6 +71,10 @@ public class OI {
         SmartDashboard.putData("AutoRightStart", new AutoRightStart());
         SmartDashboard.putData("AutoMidStart", new AutoMidStart());
         SmartDashboard.putData("AlignForGearPeg", new AlignForGearPeg());
+        SmartDashboard.putData("Turn 180", new Turn(180));
+        SmartDashboard.putData("DriveDist 30", new DriveDistance(30, .5));
+        SmartDashboard.putData("DriveUntilDist", new DriveUntilDist(30, .5));
+        SmartDashboard.putData("DriveTime 9 feet", new DriveTime(5.125));
     }
 
     public XboxController getXbox() {

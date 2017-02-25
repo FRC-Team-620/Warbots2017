@@ -24,7 +24,7 @@ public class NavX extends Subsystem {
 	public AHRS navX;
 
 	public NavX() {
-		navX = new AHRS(SerialPort.Port.kUSB);
+		navX = new AHRS(Port.kMXP); // SerialPort.Port.kUSB
 	}
 
 	public float getYaw() {
