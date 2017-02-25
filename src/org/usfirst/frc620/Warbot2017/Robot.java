@@ -11,6 +11,7 @@ import org.usfirst.frc620.Warbot2017.subsystems.DriveTrain;
 import org.usfirst.frc620.Warbot2017.subsystems.GearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.Lidar;
 import org.usfirst.frc620.Warbot2017.subsystems.NavX;
+import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public static NavX navX;
 	public static Vision vision;
 	public static CameraHandler cameras;
+	public static Ultrasonic ultra;
 	
 	ButtonReader a = new ButtonReader(1);
 
@@ -56,6 +58,7 @@ public class Robot extends IterativeRobot {
 		navX = new NavX();
 		vision = new Vision();
 		cameras = new CameraHandler(1);
+		ultra = new Ultrasonic();
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -89,8 +92,8 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		System.out.println("Lidar: " + lidar.getDistance());
-		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
+//		System.out.println("Lidar: " + lidar.getDistance());
+//		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
 		Scheduler.getInstance().run();
 	}
 
@@ -109,7 +112,8 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 //		System.out.println("NavX = " + navX.getYaw());
-		System.out.println("Lidar = " + lidar.getDistance());
+//		System.out.println("Lidar = " + lidar.getDistance());
+		System.out.println("Ultrasonic value = " + ultra.getDist());
 //		a.update(oi.getXbox());
 //		if(a.pressed()) 
 //			cameras.nextCamera();

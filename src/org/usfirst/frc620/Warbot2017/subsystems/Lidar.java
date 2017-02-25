@@ -50,7 +50,12 @@ public class Lidar extends Subsystem implements PIDSource {
 		buffer = new byte[2];
 
 		i2c.write(0x00, 0x04);
-		Timer.delay(0.04);
+		byte[] temp = new byte[1];
+		do{
+			i2c.read(0x01, 1, temp);
+//			System.out.println("val- " + temp[0]);
+		} while((temp[0] & 0x01) == 1);
+//		Timer.delay(0.04);
 		i2c.read(0x8f, 2, buffer);
 
 		return (int) Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]);
