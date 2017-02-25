@@ -19,7 +19,7 @@ public class AutoLeftStart extends CommandGroup {
     	addSequential(new DriveDistance(160, .85));
     	addSequential(new Turn(45));
     	addSequential(new DriveUntilDist(20, .3));
-    	addSequential(new AlignForGearPeg());
+    	addSequential(new AlignForGearPeg(20, .3));
     	addSequential(new DepositGear());
     } 
 }

@@ -93,7 +93,6 @@ public class OI {
         SmartDashboard.putData("AutoLeftStart", new AutoLeftStart());
         SmartDashboard.putData("AutoRightStart", new AutoRightStart());
         SmartDashboard.putData("AutoMidStart", new AutoMidStart());
-        SmartDashboard.putData("AlignForGearPeg", new AlignForGearPeg());
     }
 
     public XboxController getXbox() {
