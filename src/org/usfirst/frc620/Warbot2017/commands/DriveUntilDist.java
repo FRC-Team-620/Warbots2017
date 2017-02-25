@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveUntilDist extends Command {
 	private int dist;
-	private double k;
+	private double k = -.5;
 	private PIDController distController;
 	private static final double DIST_TOLERANCE = 2;
 	private static final double DIST_P = 0.03;
@@ -51,7 +51,7 @@ public class DriveUntilDist extends Command {
 		
 		distOutput = new DummyPIDOutput();
 //		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.lidar, turnOutput);
-		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.ultra.getSensor(), turnOutput);
+		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.ultra, distOutput);
 		distController.setInputRange(0, 500);
 		distController.setOutputRange(-1.0, 1.0);
 		distController.setAbsoluteTolerance(DIST_TOLERANCE);
@@ -64,7 +64,7 @@ public class DriveUntilDist extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.mecanumDrive(turnOutput.getOutput(), distOutput.getOutput() * k, 0.0, 0.0);
+    	Robot.driveTrain.mecanumDrive(0.0, distOutput.getOutput() * k, turnOutput.getOutput(), 0.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

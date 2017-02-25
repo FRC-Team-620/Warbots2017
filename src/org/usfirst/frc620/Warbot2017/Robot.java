@@ -1,6 +1,8 @@
 package org.usfirst.frc620.Warbot2017;
 
-import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
+import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
+import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
+import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
@@ -13,11 +15,11 @@ import org.usfirst.frc620.Warbot2017.subsystems.Lidar;
 import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -42,6 +44,8 @@ public class Robot extends IterativeRobot {
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
 	
+	private SendableChooser<Command> autoModeSelector;
+	
 	ButtonReader a = new ButtonReader(1);
 
 	/**
@@ -64,8 +68,12 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-
-		autonomousCommand = new AutonomousCommand();
+		
+		autoModeSelector = new SendableChooser<Command>();
+		autoModeSelector.addDefault("Center Start", new AutoMidStart());
+		autoModeSelector.addObject("Left Start", new AutoLeftStart());
+		autoModeSelector.addObject("Right Start", new AutoRightStart());
+		SmartDashboard.putData("Starting Position", autoModeSelector);
 	}
 
 	/**
@@ -84,8 +92,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
 		Scheduler.getInstance().add(new RaiseGearArm());
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		if (autoModeSelector != null)
+			autoModeSelector.getSelected().start();
 	}
 
 	/**

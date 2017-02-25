@@ -1,107 +1,95 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
+import org.usfirst.frc620.Warbot2017.util.DummyPIDOutput;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.tables.ITable;
 
-public class AlignForGearPeg extends Command {
-	ITable dataTable;
-	
-    public AlignForGearPeg() {
-        requires(Robot.driveTrain);
+public class AlignForGearPeg extends Command
+{
+	private int dist;
+	private double k;
+	private PIDController distController;
+	private static final double DIST_TOLERANCE = 2;
+	private static final double DIST_P = 0.03;
+	private static final double DIST_I = 0.00;
+	private static final double DIST_D = 0.00;
+	private static final double DIST_F = 0.00;
+	private DummyPIDOutput distOutput;
+	private PIDController turnController;
+	private static final double TURN_TOLERANCE = 5;
+	private static final double TURN_P = 0.03;
+	private static final double TURN_I = 0.00;
+	private static final double TURN_D = 0.00;
+	private static final double TURN_F = 0.00;
+	private DummyPIDOutput turnOutput;
 
-        dataTable = NetworkTable.getTable("GRIP").getSubTable("myContoursReport");
-    }
+	public AlignForGearPeg(int distInCentimeters, double scaling)
+	{
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.driveTrain);
+		dist = distInCentimeters;
+		// if(scaling < .25) scaling = .25;
+		// k = scaling;
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() 
-    {
-    	Robot.cameras.switchToCamera(0);
-    }
+	// Called just before this Command runs the first time
+	protected void initialize()
+	{
+		turnOutput = new DummyPIDOutput();
+		turnController = new PIDController(TURN_P, TURN_I, TURN_D, TURN_F, Robot.navX.navX, turnOutput);
+		turnController.setInputRange(-180.0, 180.0);
+		turnController.setOutputRange(-1.0, 1.0);
+		turnController.setAbsoluteTolerance(TURN_TOLERANCE);
+		turnController.setContinuous(true);
+		turnController.setSetpoint(Robot.navX.getYaw());
 
-    int cnt = 0;
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() 
-    {
-//    	cnt++;
-//    	if(cnt % 3 != 0)
-//    		return;
-//    	System.out.println("exec");
-    	if(dataTable == null)
-    		return;
-    	
-    	Robot.cameras.darkenCamera(0);
-    	
-    	double[] centers = dataTable.getNumberArray("centerX", new double[]{});
-		double[] sizes = dataTable.getNumberArray("area", new double[]{});
-		double[] widths = dataTable.getNumberArray("width", new double[]{});
-		
-		double center;
-		double dist;
-		
-		//TODO Better contour filtering
-		
-		if(centers.length == 2) //Two detected segments of reflective tape
-		{
-			center = centers[0] / 2 + centers[1] / 2;
-			dist = Math.abs(centers[0] - centers[1]); //dist gets bigger as the bot gets closer
-		}
-		else if(centers.length == 3) //If the peg visually "cuts" one of the pieces of tape
-		{
-			if(sizes.length != 3) //This bit shouldn't ever happen but just in case
-			{
-				System.out.println("Wrong Number of Sizes");
-				return;
-			}
-			else
-			{
-				int big = 0;
-				for(int i = 0; i < sizes.length; i++) //Figure out which side is being "cut"
-					if(sizes[i] > sizes[big])
-						big = i;
-				
-//				System.out.println("zoomp " + Math.abs(centers[(big + 1) % centers.length] - centers[(big + 2) % centers.length])); //Double check that one "piece" is directly over the other
-				
-				double centerSmall = centers[(big + 1) % centers.length] / 2 + centers[(big + 2) % centers.length] / 2; //Average the x positions of the two segments of the cut piece, which should be almost the same.
-				if(centerSmall < centers[big]) //Print out which side is being cut
-					System.out.print("(left) ");
-				else
-					System.out.print("(right) ");
-				
-				center = centers[big] / 2 + centerSmall / 2;
-				dist = Math.abs(centers[big] - centerSmall);
-			}
-		}
-		else //Not detecting the right number of contours for it to be the tape
-		{
-			System.out.println("Wrong Number of Contours"); //The actual program will know to avoid relying on vision if this happens
-			return;
-		}
-		
-		double ang = center - 180;
-		
-		if(ang < -20)
-			Robot.driveTrain.mecanumDrive(.4, 0, 0, 0);
-		else if(ang > 20)
-			Robot.driveTrain.mecanumDrive(-.4, 0, 0, 0);
-		else
-			Robot.driveTrain.mecanumDrive(0, 0, 0, 0);
-		
-		System.out.println("ang:" + ang + " dist:" + dist);
-    }
+		distOutput = new DummyPIDOutput();
+//		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.lidar, turnOutput);
+		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.ultra, turnOutput);
+		distController.setInputRange(0, 500);
+		distController.setOutputRange(-1.0, 1.0);
+		distController.setAbsoluteTolerance(DIST_TOLERANCE);
+		distController.setContinuous(false);
+		distController.setSetpoint(dist);
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+		turnController.enable();
+		distController.enable();
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+		Robot.cameras.switchToCamera(0);
+		Robot.vision.enable();
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute()
+	{
+		double ang = Robot.vision.pidGet();
+		double straffe = 0;
+		if (ang == ang)
+			if (ang < -20)
+				straffe = .4;
+			else if (ang > 20)
+				straffe = -.4;
+		Robot.driveTrain.mecanumDrive(straffe, distOutput.getOutput() * k, turnOutput.getOutput(), 0.0);
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished()
+	{
+		return distController.onTarget();
+	}
+
+	// Called once after isFinished returns true
+	protected void end()
+	{
+		distController.disable();
+		turnController.disable();
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted()
+	{
+	}
 }

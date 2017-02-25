@@ -12,14 +12,15 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc620.Warbot2017.subsystems.*;
 
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
     	addSequential(new DriveTime(160, .85));
     	addSequential(new Turn(45));
 //    	addSequential(new DriveUntilDist(20, .3));
-    	addSequential(new AlignForGearPeg());
+    	addSequential(new AlignForGearPeg(20, .3));
+    	addSequential(new DriveUntilDist(20, .3));
+    	addSequential(new AlignForGearPeg(20, .3));
     	addSequential(new DepositGear());
     } 
 }

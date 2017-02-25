@@ -68,7 +68,7 @@ public class DriveDistance extends Command {
 
 		distOutput = new DummyPIDOutput();
 //		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.lidar, turnOutput);
-		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.ultra.getSensor(), turnOutput);
+		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.ultra, turnOutput);
 		distController.setInputRange(0, 500);
 		distController.setOutputRange(-1.0, 1.0);
 		distController.setAbsoluteTolerance(DIST_TOLERANCE);
@@ -84,7 +84,7 @@ public class DriveDistance extends Command {
 	protected void execute() {
 
 		System.out.println("Lidar:" + Robot.lidar.getDistance());
-		Robot.driveTrain.mecanumDrive(turnOutput.getOutput(), distOutput.getOutput() * m_scalar, 0.0, 0.0);
+		Robot.driveTrain.mecanumDrive(0.0, distOutput.getOutput() * m_scalar, turnOutput.getOutput(), 0.0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
