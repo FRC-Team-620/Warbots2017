@@ -3,6 +3,7 @@ package org.usfirst.frc620.Warbot2017;
 import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
+import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
 import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
@@ -73,6 +74,7 @@ public class Robot extends IterativeRobot {
 		autoModeSelector.addDefault("Center Start", new AutoMidStart());
 		autoModeSelector.addObject("Left Start", new AutoLeftStart());
 		autoModeSelector.addObject("Right Start", new AutoRightStart());
+		autoModeSelector.addObject("Back and Forth", new BackAndForth());
 		SmartDashboard.putData("Starting Position", autoModeSelector);
 	}
 

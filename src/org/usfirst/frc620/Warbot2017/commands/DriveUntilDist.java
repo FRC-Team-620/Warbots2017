@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveUntilDist extends Command {
 	private int dist;
-	private double k = -.5;
+	private double k = -.25;
 	private PIDController distController;
 	private static final double DIST_TOLERANCE = 2;
 	private static final double DIST_P = 0.03;

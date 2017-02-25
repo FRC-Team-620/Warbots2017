@@ -14,6 +14,8 @@ public class Ultrasonic extends Subsystem implements PIDSource {
 	
 	public Ultrasonic() {
 		sensor = new AnalogInput(1);
+		sensor.setAverageBits(2);
+		sensor.setOversampleBits(4);
 	}
 
     // Put methods for controlling this subsystem
@@ -23,7 +25,7 @@ public class Ultrasonic extends Subsystem implements PIDSource {
 	 * in inches
 	 */
 	public double getDist() {
-		return sensor.getVoltage() / .012446;
+		return sensor.getAverageVoltage() / .012446;
 	}
 	
 	public AnalogInput getSensor() {
