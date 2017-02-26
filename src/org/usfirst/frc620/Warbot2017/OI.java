@@ -1,5 +1,6 @@
 package org.usfirst.frc620.Warbot2017;
 
+import org.usfirst.frc620.Warbot2017.commands.AlignForGearPeg;
 import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
@@ -92,6 +93,7 @@ public class OI {
         SmartDashboard.putData("AutoRightStart", new AutoRightStart());
         SmartDashboard.putData("AutoMidStart", new AutoMidStart());
         SmartDashboard.putData("DriveUntilDist (20)", new DriveUntilDist(20, .5));
+        SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
     }
 
     public XboxController getXbox() {

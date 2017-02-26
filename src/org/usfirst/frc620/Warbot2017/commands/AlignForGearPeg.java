@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AlignForGearPeg extends Command
 {
 	private int dist;
-	private double k;
+	private double k = -.3;
 	private PIDController distController;
 	private static final double DIST_TOLERANCE = 2;
 	private static final double DIST_P = 0.03;
@@ -47,7 +47,7 @@ public class AlignForGearPeg extends Command
 
 		distOutput = new DummyPIDOutput();
 //		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.lidar, turnOutput);
-		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.ultra, turnOutput);
+		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.ultra, distOutput);
 		distController.setInputRange(0, 500);
 		distController.setOutputRange(-1.0, 1.0);
 		distController.setAbsoluteTolerance(DIST_TOLERANCE);
@@ -58,6 +58,7 @@ public class AlignForGearPeg extends Command
 		distController.enable();
 
 		Robot.cameras.switchToCamera(0);
+		Robot.cameras.darkenCamera(0);
 		Robot.vision.enable();
 	}
 
@@ -67,9 +68,9 @@ public class AlignForGearPeg extends Command
 		double ang = Robot.vision.pidGet();
 		double straffe = 0;
 		if (ang == ang)
-			if (ang < -20)
+			if (ang < -10)
 				straffe = .4;
-			else if (ang > 20)
+			else if (ang > 10)
 				straffe = -.4;
 		Robot.driveTrain.mecanumDrive(straffe, distOutput.getOutput() * k, turnOutput.getOutput(), 0.0);
 	}
@@ -83,6 +84,8 @@ public class AlignForGearPeg extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
+		Robot.cameras.brightenCamera(0);
+		
 		distController.disable();
 		turnController.disable();
 	}

@@ -11,7 +11,7 @@
         <value>BOX</value>
       </grip:Input>
       <grip:Input step="0" socket="2">
-        <value>1.8018018018018014</value>
+        <value>3.688594254631991</value>
       </grip:Input>
       <grip:Output step="0" socket="0" previewed="true"/>
     </grip:Step>
@@ -20,7 +20,7 @@
       <grip:Input step="1" socket="1">
         <value>
           <double>0.0</double>
-          <double>14.595959595959611</double>
+          <double>37.32323232323234</double>
         </value>
       </grip:Input>
       <grip:Input step="1" socket="2">
@@ -50,19 +50,19 @@
         <value>0.0</value>
       </grip:Input>
       <grip:Input step="3" socket="2">
-        <value>0</value>
+        <value>0.0</value>
       </grip:Input>
       <grip:Input step="3" socket="3">
-        <value>0</value>
+        <value>0.0</value>
       </grip:Input>
       <grip:Input step="3" socket="4">
-        <value>1000</value>
+        <value>1000.0</value>
       </grip:Input>
       <grip:Input step="3" socket="5">
-        <value>0</value>
+        <value>0.0</value>
       </grip:Input>
       <grip:Input step="3" socket="6">
-        <value>1000</value>
+        <value>1000.0</value>
       </grip:Input>
       <grip:Input step="3" socket="7">
         <value>
@@ -71,16 +71,16 @@
         </value>
       </grip:Input>
       <grip:Input step="3" socket="8">
-        <value>1000000</value>
+        <value>1000000.0</value>
       </grip:Input>
       <grip:Input step="3" socket="9">
-        <value>0</value>
+        <value>0.0</value>
       </grip:Input>
       <grip:Input step="3" socket="10">
-        <value>0</value>
+        <value>0.0</value>
       </grip:Input>
       <grip:Input step="3" socket="11">
-        <value>1000</value>
+        <value>1000.0</value>
       </grip:Input>
       <grip:Output step="3" socket="0" previewed="true"/>
     </grip:Step>
@@ -111,10 +111,6 @@
   </steps>
   <connections>
     <grip:Connection>
-      <grip:Output step="0" socket="0" previewed="true"/>
-      <grip:Input step="1" socket="0"/>
-    </grip:Connection>
-    <grip:Connection>
       <grip:Output step="2" socket="0" previewed="true"/>
       <grip:Input step="3" socket="0"/>
     </grip:Connection>
@@ -125,6 +121,10 @@
     <grip:Connection>
       <grip:Output step="3" socket="0" previewed="true"/>
       <grip:Input step="4" socket="0"/>
+    </grip:Connection>
+    <grip:Connection>
+      <grip:Output step="0" socket="0" previewed="true"/>
+      <grip:Input step="1" socket="0"/>
     </grip:Connection>
     <grip:Connection>
       <grip:Output source="0" socket="0" previewed="true"/>
@@ -144,7 +144,7 @@
     <language>Java</language>
     <className>GripPipeline</className>
     <implementWpilibPipeline>false</implementWpilibPipeline>
-    <saveDir>C:\Users\zacha\GRIP</saveDir>
+    <saveDir>C:\Users\teamk\GRIP</saveDir>
     <packageName></packageName>
     <moduleName>grip</moduleName>
   </codeGenerationSettings>

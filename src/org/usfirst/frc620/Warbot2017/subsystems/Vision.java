@@ -123,6 +123,7 @@ public class Vision extends Subsystem implements PIDSource {
 			return Double.NaN;
 		}
 		
+		System.out.println(center - 180);
 		return center - 180;
 	}
 }
