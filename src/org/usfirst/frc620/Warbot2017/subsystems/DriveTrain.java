@@ -56,7 +56,7 @@ public class DriveTrain extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public void mecanumDrive(double x,double y,double z, double gyro){
-    	if(Math.abs(y) < .25)
+    	if(Math.abs(y) < .25 && y != 0)
     		y = Math.signum(y) * .25;
     	robotDrive.mecanumDrive_Cartesian(x, y, z, gyro);
     }
