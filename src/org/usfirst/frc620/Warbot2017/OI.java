@@ -13,10 +13,10 @@ import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
+import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -63,25 +63,25 @@ public class OI {
         b = new JoystickButton(xbox, 2);
         b.whenPressed(raiseBallMech = new RaiseBallMech());
         
-        back = new JoystickButton(xbox, 10);
-        back.whenPressed(new Command()
-		{
-        	@Override
-        	protected void initialize()
-        	{
-        		climbDriving.cancel();
-        		raiseGearArm.cancel();
-        		lowerGearArm.cancel();
-        		lowerBallMech.cancel();
-        		raiseBallMech.cancel();
-        	}
-        	
-			@Override
-			protected boolean isFinished()
-			{
-				return true;
-			}
-		});
+//        back = new JoystickButton(xbox, 10);
+//        back.whenPressed(new Command()
+//		{
+//        	@Override
+//        	protected void initialize()
+//        	{
+//        		climbDriving.cancel();
+//        		raiseGearArm.cancel();
+//        		lowerGearArm.cancel();
+//        		lowerBallMech.cancel();
+//        		raiseBallMech.cancel();
+//        	}
+//        	
+//			@Override
+//			protected boolean isFinished()
+//			{
+//				return true;
+//			}
+//		});
        
         // SmartDashboard Buttons 
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
@@ -94,6 +94,8 @@ public class OI {
         SmartDashboard.putData("AutoMidStart", new AutoMidStart());
         SmartDashboard.putData("DriveUntilDist (20)", new DriveUntilDist(20, .5));
         SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
+        SmartDashboard.putData("AlignForGearPeg Bla", new AlignForGearPeg(0, 1.0));
+        SmartDashboard.putData("ToggleRelay", new ToggleRelay());
     }
 
     public XboxController getXbox() {

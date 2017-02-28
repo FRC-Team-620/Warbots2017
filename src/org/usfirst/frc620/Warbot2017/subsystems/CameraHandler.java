@@ -21,7 +21,10 @@ public class CameraHandler
 	{
 		NUMBER_OF_CAMERAS = numberOfCameras;
 		server = CameraServer.getInstance();
-		server.startAutomaticCapture();
+		
+		UsbCamera camera = server.startAutomaticCapture();
+		camera.setWhiteBalanceManual(0);
+		camera.setExposureManual(0);
 //		if (NUMBER_OF_CAMERAS > 0)
 //		{
 //			cameras = new UsbCamera[NUMBER_OF_CAMERAS];
@@ -69,21 +72,21 @@ public class CameraHandler
 	public void switchToCamera(int cam)
 	{
 //		cameras[cam].setResolution(1, 1);
-		cvs.setSource(cameras[cam]);
+//		cvs.setSource(cameras[cam]);
 //		cameras[cam].setResolution(360, 240);
 	}
 
 	public void darkenCamera(int cam)
 	{
-		UsbCamera camera = cameras[cam];
-		camera.setWhiteBalanceManual(0);
-		camera.setExposureManual(0);
+//		UsbCamera camera = cameras[cam];
+//		camera.setWhiteBalanceManual(0);
+//		camera.setExposureManual(0);
 	}
 
 	public void brightenCamera(int cam)
 	{
-		UsbCamera camera = cameras[cam];
-		camera.setWhiteBalanceAuto();
-		camera.setExposureAuto();
+//		UsbCamera camera = cameras[cam];
+//		camera.setWhiteBalanceAuto();
+//		camera.setExposureAuto();
 	}
 }

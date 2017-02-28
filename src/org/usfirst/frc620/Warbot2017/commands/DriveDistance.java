@@ -83,7 +83,7 @@ public class DriveDistance extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 
-		System.out.println("Lidar:" + Robot.lidar.getDistance());
+//		System.out.println("Lidar:" + Robot.lidar.getDistance());
 		Robot.driveTrain.mecanumDrive(0.0, distOutput.getOutput() * m_scalar, turnOutput.getOutput(), 0.0);
 	}
 

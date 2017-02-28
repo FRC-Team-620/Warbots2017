@@ -19,10 +19,11 @@ import org.usfirst.frc620.Warbot2017.subsystems.*;
  */
 public class AutoRightStart extends CommandGroup {
     public AutoRightStart() {
-    	addSequential(new DriveTime(160, .85));
-    	addSequential(new Turn(45));
-    	addSequential(new DriveUntilDist(20, .3));
-    	addSequential(new AlignForGearPeg(20, .3));
-    	addSequential(new DepositGear());
+    	addSequential(new DriveDistance(90, 1.0));
+    	addSequential(new Turn(-30));
+    	addSequential(new AlignForGearPeg(0, 1.0));
+    	addSequential(new DriveUntilDist(6, 1.0));
+    	addSequential(new AlignForGearPeg(0, 1.0));
+    	addSequential(new DriveUntilDist(6, 1.0));
     } 
 }

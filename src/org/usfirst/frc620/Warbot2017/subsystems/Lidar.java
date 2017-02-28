@@ -47,15 +47,45 @@ public class Lidar extends Subsystem implements PIDSource {
 	public int getDistance() {
 
 		byte[] buffer;
+		buffer = new byte[6];
+		
+//		i2c.writeBulk(new byte[]{0x0,0x04});
+		if(i2c.write(0x0, 0x04)){
+//			System.out.println("Write Failed.");
+		}
+		Timer.delay(.04);
+		byte[] write = {(byte) 0x8f,0x0};
+		
+		if(i2c.writeBulk(write)){
+//			System.out.println("Bulk write failed.");
+		}
+		buffer[0] = (byte) 0x8f;
+		if(i2c.readOnly(buffer, 6)){
+//			System.out.println("Read online Failed.");
+		}
+//		i2c.read(0x8f, 2, buffer);
+//		byte[] temp = new byte[1];
+//		do{
+//			i2c.read(0x01, 1, temp);
+////			System.out.println("val- " + temp[0]);
+//		} while((temp[0] & 0x01) == 1);
+////		Timer.delay(0.04);
+////		i2c.read(0x8f, 2, buffer);
+//		
+//		
+//		i2c.readOnly(write, 2);
+////		i2c.writeBulk(buffer);
+//		System.out.println(buffer[0] + "    " + buffer[1]);
+
+		return (int) Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]);
+	}
+	public int getDistanceOld() {
+
+		byte[] buffer;
 		buffer = new byte[2];
 
 		i2c.write(0x00, 0x04);
-		byte[] temp = new byte[1];
-		do{
-			i2c.read(0x01, 1, temp);
-//			System.out.println("val- " + temp[0]);
-		} while((temp[0] & 0x01) == 1);
-//		Timer.delay(0.04);
+		Timer.delay(0.04);
 		i2c.read(0x8f, 2, buffer);
 
 		return (int) Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]);

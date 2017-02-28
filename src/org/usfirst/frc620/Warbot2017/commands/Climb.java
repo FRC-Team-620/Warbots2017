@@ -31,7 +31,7 @@ public class Climb extends Command
 	{
 		//TODO lower ball mech fully
 		buttonTimer = 0;
-		System.out.println("initialize");
+//		System.out.println("initialize");
 //		Robot.cameras.switchToCamera(2);
 		xbox = Robot.oi.getXbox();
 		madeContact = false;

@@ -10,30 +10,24 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
 import org.usfirst.frc620.Warbot2017.Robot;
-import org.usfirst.frc620.Warbot2017.subsystems.*;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * 284.48 cm to baseline
  * robot is 81.28 cm
  * 203.2 cm from front of robot to baseline
+ * 
+ * 80 in from front of robot to baseline
  */
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
-    	//addSequential(new DriveDistance(150, .5));
-    	System.out.println("Driving until robot is 30 cm away");
-    	addSequential(new DriveUntilDist(30, .3));
-    	//addSequential(new AlignForGearPeg());
-    	System.out.println("Driving until robot is 29 cm away");
-    	addSequential(new DriveUntilDist(29,.3));
-    	System.out.println("Driving until robot is 25 cm away");
-    	addSequential(new DriveUntilDist(25,.3));
-//    	System.out.println("Depositing gear, Lidar value = " + Robot.lidar.getDistance());
-    	addSequential(new DepositGear());
-    	System.out.println("Driving 100 cm backwards");
-    	addSequential(new DriveDistance(-100,.3));
-    	addSequential(new RaiseGearArm());
+    	System.out.println("Navx = " + Robot.navX.getYaw());
+    	addSequential(new WaitCommand(10));
+    	addSequential(new DriveTime(7.5));
+    	addSequential(new WaitCommand(10));
+    	addSequential(new DriveUntilDist(11, 1.0));
     } 
 }
