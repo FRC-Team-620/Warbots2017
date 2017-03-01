@@ -54,6 +54,7 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		SmartDashboard.putString("DB/String 0", "0.767");
 		RobotMap.init();
 		driveTrain = new DriveTrain();
 		climber = new Climber();
@@ -69,6 +70,7 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
+		
 		
 		autoModeSelector = new SendableChooser<Command>();
 		autoModeSelector.addDefault("Center Start", new AutoMidStart());

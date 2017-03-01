@@ -10,8 +10,6 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
-import org.usfirst.frc620.Warbot2017.Robot;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -24,10 +22,19 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
-    	System.out.println("Navx = " + Robot.navX.getYaw());
-    	addSequential(new WaitCommand(10));
+    	addSequential(new WaitCommand(3));
     	addSequential(new DriveTime(7.5));
-    	addSequential(new WaitCommand(10));
+    	addSequential(new WaitCommand(3));
     	addSequential(new DriveUntilDist(11, 1.0));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new DepositGear());
+    	addSequential(new WaitCommand(3));
+    	addSequential(new Turn(-85));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new DriveTime(2.5));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new Turn(85));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new DriveTime(4));
     } 
 }
