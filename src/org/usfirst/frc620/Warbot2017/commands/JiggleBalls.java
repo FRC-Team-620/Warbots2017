@@ -8,7 +8,7 @@ public class JiggleBalls extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.driveTrain.mecanumDrive(.5 * Math.sin(2 * Math.PI * timeSinceInitialized() / 200), 0, 0, 0);
+		Robot.driveTrain.mecanumDrive(.5 * Math.sin(2 * Math.PI * timeSinceInitialized() / 100), 0, 0, 0);
 	}
 
 	@Override
