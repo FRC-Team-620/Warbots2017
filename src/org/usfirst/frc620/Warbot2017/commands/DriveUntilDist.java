@@ -44,16 +44,16 @@ public class DriveUntilDist extends Command {
     	turnOutput = new DummyPIDOutput();
     	turnController = new PIDController(TURN_P, TURN_I,TURN_D, TURN_F, Robot.navX.navX, turnOutput);
 		turnController.setInputRange(-180.0, 180.0);
-		turnController.setOutputRange(-1.0, 1.0);
+		turnController.setOutputRange(-.5, .5);
 		turnController.setAbsoluteTolerance(TURN_TOLERANCE);
 		turnController.setContinuous(true);
 		turnController.setSetpoint(Robot.navX.getYaw());
 		
 		distOutput = new DummyPIDOutput();
-//		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.lidar, turnOutput);
+//		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.lidar, distOutput);
 		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.ultra, distOutput);
 		distController.setInputRange(0, 500);
-		distController.setOutputRange(-1.0, 1.0);
+		distController.setOutputRange(-.5, .5);
 		distController.setAbsoluteTolerance(DIST_TOLERANCE);
 		distController.setContinuous(false);
 		distController.setSetpoint(dist);

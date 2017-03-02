@@ -26,7 +26,7 @@ public class Turn extends Command implements PIDOutput {
 	private double startAngle;
 	private long lastOnTarget = -1;
 	private static final double TURN_TOLERANCE = 1;
-	private static final double P = 0.015;
+	private static final double P = 0.03;
 	private static final double I = 0.0003;
 	private static final double D = 0.00;
 	private static final double F = 0.00;

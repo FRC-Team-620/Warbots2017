@@ -89,6 +89,7 @@ public class AlignForGearPeg extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double dX = Robot.vision.pidGet();
+		System.out.println(dX);
 		double straffe = 0;
 		final int deadzone = 10;
 		if(dX == Double.NaN)
@@ -99,9 +100,9 @@ public class AlignForGearPeg extends Command {
 			straffe = .35;
 		else
 			finished = true;
-		System.out.println(straffe);
-		// System.out.println(-strafeOutput.getOutput());
-		Robot.driveTrain.mecanumDrive(straffe, /* distOutput.getOutput() * k */ 0.0, turnOutput.getOutput(), 0.0);
+//		System.out.println(straffe);
+//		 System.out.println(-strafeOutput.getOutput());
+//		Robot.driveTrain.mecanumDrive(straffe, /* distOutput.getOutput() * k */ 0.0, turnOutput.getOutput(), 0.0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

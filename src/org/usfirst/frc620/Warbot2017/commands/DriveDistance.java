@@ -68,7 +68,7 @@ public class DriveDistance extends Command {
 
 		distOutput = new DummyPIDOutput();
 //		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.lidar, turnOutput);
-		distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F, Robot.ultra, turnOutput);
+		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.ultra, distOutput);
 		distController.setInputRange(0, 500);
 		distController.setOutputRange(-1.0, 1.0);
 		distController.setAbsoluteTolerance(DIST_TOLERANCE);

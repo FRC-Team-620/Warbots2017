@@ -22,19 +22,14 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
-    	addSequential(new WaitCommand(3));
-    	addSequential(new DriveTime(7.5));
-    	addSequential(new WaitCommand(3));
-    	addSequential(new DriveUntilDist(11, 1.0));
-    	addSequential(new WaitCommand(3));
+    	System.out.println("Starting DriveTme(58)");
+    	addSequential(new DriveTime(58));
+    	System.out.println("Starting DriveUntilDist(15, 1.0)");
+    	addSequential(new DriveUntilDist(15, 1.0));
     	addSequential(new DepositGear());
-    	addSequential(new WaitCommand(3));
     	addSequential(new Turn(-85));
-    	addSequential(new WaitCommand(3));
-    	addSequential(new DriveTime(2.5));
-    	addSequential(new WaitCommand(3));
+    	addSequential(new DriveTime(45));
     	addSequential(new Turn(85));
-    	addSequential(new WaitCommand(3));
-    	addSequential(new DriveTime(4));
+    	addSequential(new DriveTime(70));
     } 
 }

@@ -7,6 +7,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
+import org.usfirst.frc620.Warbot2017.commands.DriveTime;
 import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
 import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
@@ -96,6 +97,7 @@ public class OI {
         SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
         SmartDashboard.putData("AlignForGearPeg Bla", new AlignForGearPeg(0, 1.0));
         SmartDashboard.putData("ToggleRelay", new ToggleRelay());
+        SmartDashboard.putData("DriveTime 9", new DriveTime(9));
     }
 
     public XboxController getXbox() {

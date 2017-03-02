@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
 		ballMech = new BallMech();
 		lidar = new Lidar();
 		navX = new NavX();
+		LiveWindow.addSensor("NavX", "NavX", navX.navX);
 		vision = new Vision();
 		cameras = new CameraHandler(1);
 		ultra = new Ultrasonic();
@@ -106,6 +107,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 //		System.out.println("Lidar: " + lidar.getDistance());
 //		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
+		System.out.println("NavX = " + navX.getYaw() + "                 Ultra = " + ultra.getDist());
 		Scheduler.getInstance().run();
 	}
 
@@ -123,7 +125,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		System.out.println("NavX = " + navX.getYaw());
+		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
 //		System.out.println("Lidar = " + lidar.getDistanceOld());
 //		System.out.println("Lidar NRE = " + lidar.getDistance());
 //		System.out.println("Ultrasonic value = " + ultra.getDist());

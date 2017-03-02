@@ -12,18 +12,21 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc620.Warbot2017.subsystems.*;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
 public class AutoRightStart extends CommandGroup {
     public AutoRightStart() {
-    	addSequential(new DriveDistance(90, 1.0));
-    	addSequential(new Turn(-30));
-    	addSequential(new AlignForGearPeg(0, 1.0));
-    	addSequential(new DriveUntilDist(6, 1.0));
-    	addSequential(new AlignForGearPeg(0, 1.0));
-    	addSequential(new DriveUntilDist(6, 1.0));
+    	addSequential(new DriveTime(7.5));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new Turn(-60));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new AlignForGearPeg(0, .3));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new DriveUntilDist(12, .3));
+    	addSequential(new WaitCommand(3));
+    	addSequential(new DepositGear());
     } 
 }

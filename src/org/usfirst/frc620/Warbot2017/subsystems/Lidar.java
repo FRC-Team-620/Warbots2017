@@ -44,8 +44,25 @@ public class Lidar extends Subsystem implements PIDSource {
 		// intLidar();
 	}
 
-	public int getDistance() {
+	public int getdistance() {
+		byte[] buffer;
+		buffer = new byte[2];
 
+		i2c.write(0x00, 0x04);
+		Timer.delay(0.04);
+		i2c.read(0x8f, 2, buffer);
+
+		int d = (int) (Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]) / 2.54);
+		//if(d == 0) return 1;
+		return d;
+	}
+	public int getDistanceCheck(){
+		int x = getdistance();
+		
+		if(x==0)x=getdistance();
+		return x;
+	}
+	public int getDistance() {
 		byte[] buffer;
 		buffer = new byte[6];
 		
@@ -77,18 +94,7 @@ public class Lidar extends Subsystem implements PIDSource {
 ////		i2c.writeBulk(buffer);
 //		System.out.println(buffer[0] + "    " + buffer[1]);
 
-		return (int) Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]);
-	}
-	public int getDistanceOld() {
-
-		byte[] buffer;
-		buffer = new byte[2];
-
-		i2c.write(0x00, 0x04);
-		Timer.delay(0.04);
-		i2c.read(0x8f, 2, buffer);
-
-		return (int) Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]);
+		return (int) (Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]) / 2.54);
 	}
 
 	public double getDistanceInches() {
