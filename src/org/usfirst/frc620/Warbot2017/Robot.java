@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
 		navX = new NavX();
 		LiveWindow.addSensor("NavX", "NavX", navX.navX);
 		vision = new Vision();
-		cameras = new CameraHandler(1);
+		cameras = new CameraHandler(2);
 		ultra = new Ultrasonic();
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
