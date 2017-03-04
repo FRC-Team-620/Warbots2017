@@ -17,11 +17,14 @@ public class DriveWithXbox extends Command {
 	}
 
 	protected void initialize() {
-		//RobotMap.visionlightSpike.set(Relay.Value.kForward);
 	}
 
+	boolean thing = false;
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		
+		Robot.cameras.brightenCamera();
+		
 		float temp= Robot.navX.getYaw();
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
 		XboxController xbox = Robot.oi.getXbox();
@@ -38,6 +41,10 @@ public class DriveWithXbox extends Command {
 			y = (Math.abs(y) < 0.3) ? 0 : y * (1 - (lTrigger * .75)); // Y Dead Zone
 			z = (Math.abs(z) < 0.3) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
 		}
+		
+		if(!thing && (Robot.oi.getRTrigger() > .5))
+			Robot.cameras.nextCamera();
+		thing = Robot.oi.getRTrigger() > .5;
 
 		Robot.driveTrain.mecanumDrive(-x, -y, -z, Robot.oi.gyro);
 	}

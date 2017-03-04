@@ -82,12 +82,12 @@ public class AlignForGearPeg extends Command {
 
 		// Robot.cameras.switchToCamera(0);
 
-		Robot.cameras.darkenCamera(0);
 		Robot.vision.enable();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		Robot.cameras.darkenCamera();
 		double dX = Robot.vision.pidGet();
 		System.out.println(dX);
 		double straffe = 0;
@@ -114,7 +114,6 @@ public class AlignForGearPeg extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.cameras.brightenCamera(0);
 		RobotMap.visionlightSpike.set(Relay.Value.kOff);
 		// distController.disable();
 		turnController.disable();

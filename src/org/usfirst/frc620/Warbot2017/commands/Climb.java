@@ -43,11 +43,10 @@ public class Climb extends Command
 	{
 		if(climber.isDown())
 		{
-			System.out.println("Down");
 			//TODO: add drive controls
 			
 			climber.climb(0.3325);
-			if(xbox.getRawButton(2))
+			if(xbox.getRawButton(7))
 				exit = true;
 		}
 		else if(!climber.isUp())
