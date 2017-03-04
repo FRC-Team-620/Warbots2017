@@ -102,7 +102,7 @@ public class AlignForGearPeg extends Command {
 			finished = true;
 //		System.out.println(straffe);
 //		 System.out.println(-strafeOutput.getOutput());
-//		Robot.driveTrain.mecanumDrive(straffe, /* distOutput.getOutput() * k */ 0.0, turnOutput.getOutput(), 0.0);
+		Robot.driveTrain.mecanumDrive(straffe, /* distOutput.getOutput() * k */ 0.0, turnOutput.getOutput(), 0.0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

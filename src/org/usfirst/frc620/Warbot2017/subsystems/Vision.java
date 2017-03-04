@@ -128,7 +128,7 @@ public class Vision extends Subsystem implements PIDSource {
 		}
 		
 		System.out.println(center);
-		return center;
+		return center - 131.5;
 	}
 }
 
