@@ -12,7 +12,6 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
@@ -20,11 +19,12 @@ public class AutoLeftStart extends CommandGroup {
     	addSequential(new DriveTime(108));
     	System.out.println("Starting Turn(60)");
     	addSequential(new Turn(60));
-    	System.out.println("Starting AlignForGearPeg(0, .3)");
-    	addSequential(new AlignForGearPeg(0, .3));
+//    	System.out.println("Starting AlignForGearPeg(0, .3)");
+//    	addSequential(new AlignForGearPeg(0, .3));
     	System.out.println("Starting DriveUntilDist(12, .3");
     	addSequential(new DriveUntilDist(12, .3));
     	System.out.println("Starting DepositGear())");
     	addSequential(new DepositGear());
+    	addSequential(new RaiseGearArm());
     } 
 }

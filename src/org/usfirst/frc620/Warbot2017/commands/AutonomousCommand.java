@@ -3,8 +3,6 @@ package org.usfirst.frc620.Warbot2017.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import org.usfirst.frc620.Warbot2017.Robot;
-
 public class AutonomousCommand extends Command {
 
 	public AutonomousCommand() {

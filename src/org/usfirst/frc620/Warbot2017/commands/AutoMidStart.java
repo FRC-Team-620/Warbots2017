@@ -11,7 +11,6 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * 284.48 cm to baseline
@@ -26,7 +25,9 @@ public class AutoMidStart extends CommandGroup {
     	addSequential(new DriveTime(58));
     	System.out.println("Starting DriveUntilDist(15, 1.0)");
     	addSequential(new DriveUntilDist(15, 1.0));
+    	addSequential(new DriveOnTooMuchCaffine(12, 1.0));
     	addSequential(new DepositGear());
+    	addSequential(new RaiseGearArm());
     	addSequential(new Turn(-85));
     	addSequential(new DriveTime(45));
     	addSequential(new Turn(85));

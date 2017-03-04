@@ -10,8 +10,9 @@
 
 
 package org.usfirst.frc620.Warbot2017.commands;
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
@@ -45,7 +46,7 @@ public class LowerGearArm extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return timeSinceInitialized()>2.8;
+    	return timeSinceInitialized()>4;
     }
 
     // Called once after isFinished returns true
