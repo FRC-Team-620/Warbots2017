@@ -16,6 +16,8 @@ import org.usfirst.frc620.Warbot2017.subsystems.Lidar;
 import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
+import org.usfirst.frc620.Warbot2017.testing.CameraTest;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -107,7 +109,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 //		System.out.println("Lidar: " + lidar.getDistance());
 //		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
-		System.out.println("NavX = " + navX.getYaw() + "                 Ultra = " + ultra.getDist());
+//		System.out.println("NavX = " + navX.getYaw() + "                 Ultra = " + ultra.getDist());
 		Scheduler.getInstance().run();
 	}
 
@@ -125,7 +127,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
+//		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
 //		System.out.println("Lidar = " + lidar.getDistanceOld());
 //		System.out.println("Lidar NRE = " + lidar.getDistance());
 //		System.out.println("Ultrasonic value = " + ultra.getDist());
