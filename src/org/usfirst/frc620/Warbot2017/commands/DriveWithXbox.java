@@ -24,7 +24,7 @@ public class DriveWithXbox extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
-		Robot.cameras.brightenCamera();
+		Robot.cameras.brightenCamera(0);
 		
 		float temp= Robot.navX.getYaw();
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
