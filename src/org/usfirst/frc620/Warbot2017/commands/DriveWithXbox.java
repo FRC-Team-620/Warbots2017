@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class DriveWithXbox extends Command {
 	// UsbCamera test = new UsbCamera("test",0 ); Are we still using this?
-
+	XboxController xbox = Robot.oi.getXbox();
 	public DriveWithXbox() {
 		requires(Robot.driveTrain);
 	}
@@ -24,7 +24,7 @@ public class DriveWithXbox extends Command {
 	protected void execute() {
 		float temp= Robot.navX.getYaw();
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
-		XboxController xbox = Robot.oi.getXbox();
+		
 		double lTrigger = Robot.oi.getLTrigger();
 		double z = -xbox.getRawAxis(0);
 		double y = xbox.getRawAxis(1);
