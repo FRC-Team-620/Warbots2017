@@ -30,6 +30,6 @@ public class AutoMidStart extends CommandGroup {
     	addSequential(new Turn(-85));
     	addSequential(new DriveTime(45));
     	addSequential(new Turn(85));
-    	addSequential(new DriveTime(70));
+    	addSequential(new DriveTime(150));
     } 
 }

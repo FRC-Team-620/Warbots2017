@@ -14,10 +14,12 @@ import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
+import org.usfirst.frc620.Warbot2017.commands.StopsAllThings;
 import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -32,7 +34,7 @@ public class OI {
     private JoystickButton x;
     private JoystickButton y;
     private JoystickButton lBumper;
-    private JoystickButton rBumper;
+    public JoystickButton rBumper;
     private JoystickButton back;
     
     private ClimbDriving climbDriving;
@@ -64,26 +66,9 @@ public class OI {
         b = new JoystickButton(xbox, 2);
         b.whenPressed(raiseBallMech = new RaiseBallMech());
         
-//        back = new JoystickButton(xbox, 10);
-//        back.whenPressed(new Command()
-//		{
-//        	@Override
-//        	protected void initialize()
-//        	{
-//        		climbDriving.cancel();
-//        		raiseGearArm.cancel();
-//        		lowerGearArm.cancel();
-//        		lowerBallMech.cancel();
-//        		raiseBallMech.cancel();
-//        	}
-//        	
-//			@Override
-//			protected boolean isFinished()
-//			{
-//				return true;
-//			}
-//		});
-       
+        back = new JoystickButton(xbox, 7);
+        back.whenPressed(new StopsAllThings());
+
         // SmartDashboard Buttons 
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("DriveWithXbox", new DriveWithXbox());
@@ -98,6 +83,18 @@ public class OI {
         SmartDashboard.putData("AlignForGearPeg Bla", new AlignForGearPeg(0, 1.0));
         SmartDashboard.putData("ToggleRelay", new ToggleRelay());
         SmartDashboard.putData("DriveTime 9", new DriveTime(9));
+        SmartDashboard.putData("Darken Camera", new InstantCommand(){
+        	@Override
+        	protected void execute() {
+        		Robot.cameras.darkenCamera(0);
+        	}
+        });
+        SmartDashboard.putData("Lighten Camera", new InstantCommand(){
+        	@Override
+        	protected void execute() {
+        		Robot.cameras.brightenCamera(0);
+        	}
+        });
     }
 
     public XboxController getXbox() {

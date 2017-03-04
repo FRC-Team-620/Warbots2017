@@ -1,10 +1,13 @@
 package org.usfirst.frc620.Warbot2017.subsystems;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc620.Warbot2017.RobotMap;
+
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CameraHandler
@@ -22,9 +25,13 @@ public class CameraHandler
 		NUMBER_OF_CAMERAS = numberOfCameras;
 		server = CameraServer.getInstance();
 		
-		UsbCamera camera = server.startAutomaticCapture();
-		camera.setWhiteBalanceManual(0);
-		camera.setExposureManual(0);
+		cameras = new UsbCamera[2];
+		cameras[0] = server.startAutomaticCapture();
+		cameras[1] = server.startAutomaticCapture();
+		
+//		UsbCamera camera = server.startAutomaticCapture();
+//		camera.setWhiteBalanceManual(0);
+//		camera.setExposureManual(0);
 //		if (NUMBER_OF_CAMERAS > 0)
 //		{
 //			cameras = new UsbCamera[NUMBER_OF_CAMERAS];
@@ -78,15 +85,19 @@ public class CameraHandler
 
 	public void darkenCamera(int cam)
 	{
-//		UsbCamera camera = cameras[cam];
-//		camera.setWhiteBalanceManual(0);
-//		camera.setExposureManual(0);
+		System.out.println("dark");
+		RobotMap.visionlightSpike.set(Relay.Value.kForward);
+		UsbCamera camera = cameras[0];
+		camera.setWhiteBalanceManual(1);
+		camera.setExposureManual(1);
 	}
 
 	public void brightenCamera(int cam)
 	{
-//		UsbCamera camera = cameras[cam];
-//		camera.setWhiteBalanceAuto();
-//		camera.setExposureAuto();
+		System.out.println("light");
+		RobotMap.visionlightSpike.set(Relay.Value.kOff);
+		UsbCamera camera = cameras[0];
+		camera.setWhiteBalanceManual(50);
+		camera.setExposureManual(50);
 	}
 }

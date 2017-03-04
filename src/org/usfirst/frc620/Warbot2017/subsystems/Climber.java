@@ -53,7 +53,7 @@ public class Climber extends Subsystem {
     }
     public void kill(){
     	climbMotor.set(0);
-    	climbMotor.disable();
+//    	climbMotor.disable();
     }
     public boolean isUp()
     {

@@ -1,6 +1,7 @@
  package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
+import org.usfirst.frc620.Warbot2017.RobotMap;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,13 +21,19 @@ public class DriveWithXbox extends Command {
 		//RobotMap.visionlightSpike.set(Relay.Value.kForward);
 		xbox = Robot.oi.getXbox();
 		ramplvl = 0;
+		
+		Robot.cameras.brightenCamera(0);
 	}
 
 	boolean thing = false;
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
-//		Robot.cameras.brightenCamera(0);
+		System.out.println("Bottom: " + RobotMap.climberDownLimit.get());
+//		System.out.println("1: " + RobotMap.ballDownLimit.get());
+//		System.out.println("5: " + RobotMap.ballUpLimit.get());
+		System.out.println("Top: " + RobotMap.climberUpLimit.get());
+		System.out.println("Stop: " + RobotMap.climberContactLimit.get());
 		
 //		float temp= Robot.navX.getYaw();
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
