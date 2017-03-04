@@ -10,23 +10,31 @@
 
 package org.usfirst.frc620.Warbot2017.subsystems;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.I2C.Port;
-import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class NavX extends Subsystem {
-	public AHRS navX;
+public class NavX extends Subsystem implements PIDSource {
+	private AHRS navX;
+//	private AtomicLong value;
 
 	public NavX() {
 		navX = new AHRS(SerialPort.Port.kUSB); // SerialPort.Port.kUSB
 	}
 
+	public AHRS getNavX()
+	{
+		return navX;
+	}
+	
 	public float getYaw() {
 		return navX.getYaw();
 	}
@@ -40,4 +48,19 @@ public class NavX extends Subsystem {
 	
 
 	public void initDefaultCommand() {}
+
+	@Override
+	public void setPIDSourceType(PIDSourceType pidSource) {
+		navX.setPIDSourceType(pidSource);
+	}
+
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		return navX.getPIDSourceType();
+	}
+
+	@Override
+	public double pidGet() {
+		return getYaw();
+	}
 }

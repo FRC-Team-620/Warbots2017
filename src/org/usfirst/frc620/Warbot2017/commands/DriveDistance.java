@@ -59,7 +59,7 @@ public class DriveDistance extends Command {
 		lidarInitial = Robot.lidar.getDistance();
 
 		turnOutput = new DummyPIDOutput();
-		turnController = new PIDController(TURN_P, TURN_I, TURN_D, TURN_F, Robot.navX.navX, turnOutput);
+		turnController = new PIDController(TURN_P, TURN_I, TURN_D, TURN_F, Robot.navX, turnOutput);
 		turnController.setInputRange(-180.0, 180.0);
 		turnController.setOutputRange(-1.0, 1.0);
 		turnController.setAbsoluteTolerance(TURN_TOLERANCE);

@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 		ballMech = new BallMech();
 		lidar = new Lidar();
 		navX = new NavX();
-		LiveWindow.addSensor("NavX", "NavX", navX.navX);
+		LiveWindow.addSensor("NavX", "NavX", navX.getNavX());
 		vision = new Vision();
 		cameras = new CameraHandler(1);
 		ultra = new Ultrasonic();

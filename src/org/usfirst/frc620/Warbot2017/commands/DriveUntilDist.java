@@ -42,7 +42,7 @@ public class DriveUntilDist extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	turnOutput = new DummyPIDOutput();
-    	turnController = new PIDController(TURN_P, TURN_I,TURN_D, TURN_F, Robot.navX.navX, turnOutput);
+    	turnController = new PIDController(TURN_P, TURN_I,TURN_D, TURN_F, Robot.navX, turnOutput);
 		turnController.setInputRange(-180.0, 180.0);
 		turnController.setOutputRange(-.5, .5);
 		turnController.setAbsoluteTolerance(TURN_TOLERANCE);

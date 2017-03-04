@@ -50,7 +50,7 @@ public class AlignForGearPeg extends Command {
 		RobotMap.visionlightSpike.set(Relay.Value.kForward);
 		
 		turnOutput = new DummyPIDOutput();
-		turnController = new PIDController(TURN_P, TURN_I, TURN_D, TURN_F, Robot.navX.navX, turnOutput);
+		turnController = new PIDController(TURN_P, TURN_I, TURN_D, TURN_F, Robot.navX, turnOutput);
 		turnController.setInputRange(-180.0, 180.0);
 		turnController.setOutputRange(-.9, .9);
 		turnController.setAbsoluteTolerance(TURN_TOLERANCE);
