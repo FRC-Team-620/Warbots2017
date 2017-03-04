@@ -10,7 +10,7 @@ public class DriveWithXbox extends Command {
 	private static final double SECONDS_TO_RAMP = 0.5;
 	private static final double RAMP_RATE = 1.0 / (50 * SECONDS_TO_RAMP);
 	// UsbCamera test = new UsbCamera("test",0 ); Are we still using this?
-
+	XboxController xbox = Robot.oi.getXbox();
 	public DriveWithXbox() {
 		requires(Robot.driveTrain);
 	}
@@ -24,11 +24,11 @@ public class DriveWithXbox extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
-		Robot.cameras.brightenCamera(0);
+//		Robot.cameras.brightenCamera(0);
 		
-		float temp= Robot.navX.getYaw();
+//		float temp= Robot.navX.getYaw();
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
-		XboxController xbox = Robot.oi.getXbox();
+		
 		
 		double lTrigger = Robot.oi.getLTrigger();
 		double z = -xbox.getRawAxis(0);

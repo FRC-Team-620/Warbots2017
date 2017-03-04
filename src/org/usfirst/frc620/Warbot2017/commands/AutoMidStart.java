@@ -25,7 +25,7 @@ public class AutoMidStart extends CommandGroup {
     	System.out.println("Starting DriveTme(58)");
     	addSequential(new DriveTime(58));
     	System.out.println("Starting DriveUntilDist(15, 1.0)");
-    	addSequential(new DriveUntilDist(15, 1.0));
+    	addSequential(new DriveUntilDist(5, 1.0));
     	addSequential(new DepositGear());
     	addSequential(new Turn(-85));
     	addSequential(new DriveTime(45));

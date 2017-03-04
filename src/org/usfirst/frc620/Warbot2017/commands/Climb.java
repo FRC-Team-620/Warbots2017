@@ -75,7 +75,7 @@ public class Climb extends Command
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished()
 	{
-		return exit || (madeContact && System.currentTimeMillis() - buttonTimer >= 500);
+		return exit || (madeContact && System.currentTimeMillis() - buttonTimer >= 200);
 	}
 
 	// Called once after isFinished returns true
@@ -92,6 +92,6 @@ public class Climb extends Command
 	{
 //		Robot.cameras.switchToCamera(0);
 		climber.kill();
-		throw new Error("CLIMB COMMAND INTERRUPTED. THIS IS VERY DANGEROUS.");
+		//throw new Error("CLIMB COMMAND INTERRUPTED. THIS IS VERY DANGEROUS.");
 	}
 }
