@@ -10,8 +10,9 @@
 
 
 package org.usfirst.frc620.Warbot2017.commands;
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
@@ -36,6 +37,7 @@ public class LowerGearArm extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Starting LowerGearArm()");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,7 +47,7 @@ public class LowerGearArm extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return timeSinceInitialized()>3.3;
+    	return timeSinceInitialized()>4;
     }
 
     // Called once after isFinished returns true

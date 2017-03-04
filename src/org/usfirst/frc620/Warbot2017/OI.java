@@ -5,7 +5,9 @@ import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
+import org.usfirst.frc620.Warbot2017.commands.BrightenCam;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
+import org.usfirst.frc620.Warbot2017.commands.DarkenCam;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
 import org.usfirst.frc620.Warbot2017.commands.DriveTime;
 import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
@@ -14,6 +16,7 @@ import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
+import org.usfirst.frc620.Warbot2017.commands.StopsAllThings;
 import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -41,16 +44,13 @@ public class OI {
     private RaiseBallMech raiseBallMech;
     private LowerBallMech lowerBallMech;
     
-    public int gyro=0;
+    public int gyro = 0;
 
     public OI() {
         xbox = new XboxController(0);
         
         rBumper = new JoystickButton(xbox, 6);
         rBumper.whenPressed(climbDriving = new ClimbDriving());
-        
-        lBumper = new JoystickButton(xbox, 5);
-//        lBumper.whenPressed(new SwitchSides());
         
         y = new JoystickButton(xbox, 4);
         y.whenPressed(raiseGearArm = new RaiseGearArm());
@@ -59,30 +59,15 @@ public class OI {
         x.whenPressed(lowerGearArm = new LowerGearArm());
         
         a = new JoystickButton(xbox, 1);
-        a.whenPressed(lowerBallMech = new LowerBallMech());
+        a.whenPressed(raiseBallMech = new RaiseBallMech());
        
         b = new JoystickButton(xbox, 2);
-        b.whenPressed(raiseBallMech = new RaiseBallMech());
+        b.whenPressed(lowerBallMech = new LowerBallMech());
         
-//        back = new JoystickButton(xbox, 10);
-//        back.whenPressed(new Command()
-//		{
-//        	@Override
-//        	protected void initialize()
-//        	{
-//        		climbDriving.cancel();
-//        		raiseGearArm.cancel();
-//        		lowerGearArm.cancel();
-//        		lowerBallMech.cancel();
-//        		raiseBallMech.cancel();
-//        	}
-//        	
-//			@Override
-//			protected boolean isFinished()
-//			{
-//				return true;
-//			}
-//		});
+        back = new JoystickButton(xbox, 7);
+        back.whenPressed(new StopsAllThings());
+        
+        
        
         // SmartDashboard Buttons 
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
@@ -98,6 +83,8 @@ public class OI {
         SmartDashboard.putData("AlignForGearPeg Bla", new AlignForGearPeg(0, 1.0));
         SmartDashboard.putData("ToggleRelay", new ToggleRelay());
         SmartDashboard.putData("DriveTime 9", new DriveTime(9));
+        SmartDashboard.putData("BrightenCam", new BrightenCam());
+        SmartDashboard.putData("DarkenCam", new DarkenCam());
     }
 
     public XboxController getXbox() {

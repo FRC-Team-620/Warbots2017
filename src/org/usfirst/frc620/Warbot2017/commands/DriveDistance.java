@@ -10,10 +10,11 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.util.DummyPIDOutput;
+
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
@@ -56,6 +57,7 @@ public class DriveDistance extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting DriveDistance(" + m_distance + ", " + m_scalar + ")");
 		lidarInitial = Robot.lidar.getDistance();
 
 		turnOutput = new DummyPIDOutput();

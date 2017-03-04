@@ -3,7 +3,6 @@ package org.usfirst.frc620.Warbot2017.commands;
 import org.usfirst.frc620.Warbot2017.RobotMap;
 
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
@@ -13,6 +12,11 @@ public class ToggleRelay extends InstantCommand {
 
     public ToggleRelay() {
     }
+    
+    public void initialize() {
+    	System.out.println("Starting ToggleRelay(0");
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(RobotMap.visionlightSpike.get() == Relay.Value.kForward)

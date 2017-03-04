@@ -1,7 +1,5 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
-import java.lang.reflect.AnnotatedArrayType;
-
 import org.usfirst.frc620.Warbot2017.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +11,7 @@ public class BackAndForth extends Command
 	
 	@Override
 	protected void initialize() {
-		System.out.println("Starting back and forth test.");
+		System.out.println("Starting BackAndForth");
 		time = System.currentTimeMillis();
 	}
 	

@@ -3,6 +3,7 @@ package org.usfirst.frc620.Warbot2017.commands;
 import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.RobotMap;
 import org.usfirst.frc620.Warbot2017.util.DummyPIDOutput;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
@@ -46,6 +47,7 @@ public class AlignForGearPeg extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting ALignForGearPeg()");
 		finished = false;
 		RobotMap.visionlightSpike.set(Relay.Value.kForward);
 		

@@ -15,7 +15,6 @@ import org.usfirst.frc620.Warbot2017.Robot;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -55,6 +54,7 @@ public class DriveTime extends Command implements PIDOutput {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting DriveTime(" + time + ", " + speed + ")");
 		startTime = System.currentTimeMillis();
 		startAngle = Robot.navX.getYaw();
 		turnController = new PIDController(P, I, D, F, Robot.navX.navX, this);

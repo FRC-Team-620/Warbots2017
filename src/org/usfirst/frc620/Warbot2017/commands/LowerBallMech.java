@@ -1,7 +1,7 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
-import org.usfirst.frc620.Warbot2017.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LowerBallMech extends Command
@@ -15,6 +15,7 @@ public class LowerBallMech extends Command
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
+		System.out.println("Starting LowerBallMech()");
 	}
 
 	// Called repeatedly when this Command is scheduled to run

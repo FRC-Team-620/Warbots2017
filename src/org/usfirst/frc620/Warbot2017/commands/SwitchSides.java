@@ -10,10 +10,9 @@
 
 
 package org.usfirst.frc620.Warbot2017.commands;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.InstantCommand;
-
 import org.usfirst.frc620.Warbot2017.Robot;
+
+import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
  *
@@ -22,6 +21,11 @@ public class SwitchSides extends InstantCommand {
     public SwitchSides() {
         requires(Robot.driveTrain);
     }
+    
+    public void initialize() {
+    	System.out.println("Starting SwitchSides()");
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.oi.gyro=(Robot.oi.gyro+90)%270;

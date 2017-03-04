@@ -29,6 +29,7 @@ public class Climb extends Command
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
+		System.out.println("Starting Climb()");
 		//TODO lower ball mech fully
 		buttonTimer = 0;
 //		System.out.println("initialize");
