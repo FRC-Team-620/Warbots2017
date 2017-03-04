@@ -9,6 +9,7 @@ public class JiggleBalls extends Command
 	@Override
 	protected void execute()
 	{
+		System.out.println("Starting JiggleBalls");
 		Robot.driveTrain.mecanumDrive(.5 * Math.sin(2 * Math.PI * timeSinceInitialized() / .4), 0, 0, 0);
 	}
 

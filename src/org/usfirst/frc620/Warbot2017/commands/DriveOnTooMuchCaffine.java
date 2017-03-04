@@ -32,6 +32,7 @@ public class DriveOnTooMuchCaffine extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Starting DriveOnToMuchCaffine(" + dist + ")");
 		distOutput = new DummyPIDOutput();
 //		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.lidar, distOutput);
 		distController = new PIDController(DIST_P, DIST_I,DIST_D, DIST_F, Robot.ultra, distOutput);

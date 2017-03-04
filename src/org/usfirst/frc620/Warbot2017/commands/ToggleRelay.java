@@ -12,6 +12,11 @@ public class ToggleRelay extends InstantCommand {
 
     public ToggleRelay() {
     }
+    
+    public void initialize() {
+    	System.out.println("Starting ToggleRelay(0");
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(RobotMap.visionlightSpike.get() == Relay.Value.kForward)

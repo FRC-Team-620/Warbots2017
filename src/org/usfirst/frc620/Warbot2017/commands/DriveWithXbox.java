@@ -17,6 +17,7 @@ public class DriveWithXbox extends Command {
 
 	protected void initialize() {
 		//RobotMap.visionlightSpike.set(Relay.Value.kForward);
+		System.out.println("Starting DriveWithXbox()");
 		ramplvl = 0;
 	}
 

@@ -11,7 +11,7 @@ public class BackAndForth extends Command
 	
 	@Override
 	protected void initialize() {
-		System.out.println("Starting back and forth test.");
+		System.out.println("Starting BackAndForth");
 		time = System.currentTimeMillis();
 	}
 	

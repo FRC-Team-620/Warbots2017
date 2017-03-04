@@ -50,6 +50,7 @@ public class Turn extends Command implements PIDOutput {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting Turn(" + m_angle + ")");
 		System.out.println("Navx init value = " + Robot.navX.getYaw());
 		startAngle = Robot.navX.getYaw();
 		turnController = new PIDController(P, I, D, F, Robot.navX.navX, this);

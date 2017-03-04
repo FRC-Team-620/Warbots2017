@@ -54,6 +54,7 @@ public class DriveTime extends Command implements PIDOutput {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting DriveTime(" + time + ", " + speed + ")");
 		startTime = System.currentTimeMillis();
 		startAngle = Robot.navX.getYaw();
 		turnController = new PIDController(P, I, D, F, Robot.navX.navX, this);
