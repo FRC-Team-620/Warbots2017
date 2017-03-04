@@ -9,14 +9,16 @@ public class DriveWithXbox extends Command {
 	private int ramplvl;
 	private static final double SECONDS_TO_RAMP = 0.5;
 	private static final double RAMP_RATE = 1.0 / (50 * SECONDS_TO_RAMP);
+	private XboxController xbox;
 	// UsbCamera test = new UsbCamera("test",0 ); Are we still using this?
-	XboxController xbox = Robot.oi.getXbox();
+	
 	public DriveWithXbox() {
 		requires(Robot.driveTrain);
 	}
 
 	protected void initialize() {
 		//RobotMap.visionlightSpike.set(Relay.Value.kForward);
+		xbox = Robot.oi.getXbox();
 		ramplvl = 0;
 	}
 
