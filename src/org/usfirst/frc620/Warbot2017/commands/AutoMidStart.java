@@ -23,7 +23,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoMidStart extends CommandGroup {
     public AutoMidStart() {
     	addSequential(new DriveTime(58));
-    	addSequential(new DriveUntilDist(11, 1.0));
+//    	addSequential(new DriveUntilDist(20, 1.0));
+    	addSequential(new DriveUntilDist(11, .5));
     	addSequential(new DriveTime(7));
     	addSequential(new LowerGearArm());
 		addParallel(new DriveTime(1, -.5));

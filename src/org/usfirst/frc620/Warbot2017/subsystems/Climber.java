@@ -52,7 +52,7 @@ public class Climber extends Subsystem {
     	//Robot.driveTrain.mecanumDrive(0, 0, x/10, 0);
     }
     public void kill(){
-    	climbMotor.set(0);
+    	climbMotor.stopMotor();
 //    	climbMotor.disable();
     }
     public boolean isUp()

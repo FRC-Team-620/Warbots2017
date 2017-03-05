@@ -19,6 +19,7 @@ import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
 import org.usfirst.frc620.Warbot2017.commands.Turn;
 import org.usfirst.frc620.Warbot2017.commands.TurnTime;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.InstantCommand;
@@ -38,7 +39,6 @@ public class OI {
     private JoystickButton lBumper;
     public JoystickButton rBumper;
     private JoystickButton back;
-    private JoystickButton rTrigger;
     
     private ClimbDriving climbDriving;
     private RaiseGearArm raiseGearArm;
