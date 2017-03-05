@@ -45,10 +45,6 @@ public class DriveTime extends Command implements PIDOutput {
 		this(dist * DIST_SCALAR, 0.3);
 	}
 	
-	public DriveTime(double dist, double speed, boolean doesntDoAnything) {
-		this(dist * DIST_SCALAR, speed);
-	}
-	
 	public DriveTime(double time, double speed) {
 		this.speed = speed;
 		this.time = (long) (time * 1000);
@@ -56,6 +52,9 @@ public class DriveTime extends Command implements PIDOutput {
 		requires(Robot.driveTrain);
 	}
 	
+	public DriveTime(double dist, double speed, boolean doesntDoAnything) {
+		this(dist * DIST_SCALAR * .3 / speed, speed);
+	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
