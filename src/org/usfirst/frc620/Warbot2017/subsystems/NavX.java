@@ -46,7 +46,6 @@ public class NavX extends Subsystem implements PIDSource {
 		navX.reset();
 	}
 	
-
 	public void initDefaultCommand() {}
 
 	@Override
@@ -61,6 +60,8 @@ public class NavX extends Subsystem implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return getYaw();
+		double temp = getYaw();
+//		System.out.println(temp);
+		return temp;
 	}
 }

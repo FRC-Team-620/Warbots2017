@@ -46,14 +46,14 @@ public class Climb extends Command {
 				if (xbox.getRawButton(2))
 					exit = true;
 			} else if (!climber.isUp()) {
-				climber.climb(0.5);
+				climber.climb(0.75);
 				// TODO: fix this
 				// if(++moveTime < 3)
 				// Robot.driveTrain.mecanumDrive(0, 0, .4, 0);
 				// else
 				// Robot.driveTrain.mecanumDrive(0, 0, 0.2, 0);
 			} else if (!climber.isInContact())
-				climber.climb(0.8);
+				climber.climb(1);
 			else {
 				if (!madeContact) {
 					buttonTimer = System.currentTimeMillis();

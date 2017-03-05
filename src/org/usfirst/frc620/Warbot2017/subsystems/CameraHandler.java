@@ -29,6 +29,9 @@ public class CameraHandler
 		cameras[0] = server.startAutomaticCapture();
 		cameras[1] = server.startAutomaticCapture();
 		
+		cameras[1].setWhiteBalanceManual(100);
+		cameras[1].setExposureManual(90);
+		
 //		UsbCamera camera = server.startAutomaticCapture();
 //		camera.setWhiteBalanceManual(0);
 //		camera.setExposureManual(0);
@@ -97,7 +100,7 @@ public class CameraHandler
 		System.out.println("light");
 		RobotMap.visionlightSpike.set(Relay.Value.kOff);
 		UsbCamera camera = cameras[0];
-		camera.setWhiteBalanceManual(50);
-		camera.setExposureManual(50);
+		camera.setWhiteBalanceManual(100);
+		camera.setExposureManual(90);
 	}
 }

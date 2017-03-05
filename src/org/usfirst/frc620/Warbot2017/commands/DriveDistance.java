@@ -56,6 +56,7 @@ public class DriveDistance extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting DriveDistance");
 		lidarInitial = Robot.lidar.getDistance();
 
 		turnOutput = new DummyPIDOutput();

@@ -16,15 +16,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
-    	System.out.println("Starting DriveTme(108)");
     	addSequential(new DriveTime(108));
-    	System.out.println("Starting Turn(60)");
     	addSequential(new Turn(60));
-    	System.out.println("Starting AlignForGearPeg(0, .3)");
     	addSequential(new AlignForGearPeg(0, .3));
-    	System.out.println("Starting DriveUntilDist(12, .3");
-    	addSequential(new DriveUntilDist(12, .3));
-    	System.out.println("Starting DepositGear())");
-    	addSequential(new DepositGear());
+    	addSequential(new DriveUntilDist(11, 1.0));
+    	addSequential(new DriveTime(7));
+    	addSequential(new LowerGearArm());
+		addParallel(new DriveTime(1, -.5));
+		addSequential(new RaiseGearArm());
     } 
 }

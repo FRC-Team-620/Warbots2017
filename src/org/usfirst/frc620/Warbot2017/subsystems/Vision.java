@@ -99,8 +99,7 @@ public class Vision extends Subsystem implements PIDSource {
 			if(sizes.length != 3) //This bit shouldn't ever happen but just in case
 			{
 				System.err.println("Wrong Number of Sizes");
-				return 54;
-//				return Double.NaN;
+				return Double.NaN;
 			}
 			else
 			{
@@ -124,7 +123,7 @@ public class Vision extends Subsystem implements PIDSource {
 		{
 			System.err.println("Wrong Number of Contours"); //The actual program will know to avoid relying on vision if this happens
 //			return Double.NaN;
-			return 54;
+			return Double.NaN;
 		}
 		
 		System.out.println(center);

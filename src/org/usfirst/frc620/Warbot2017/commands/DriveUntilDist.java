@@ -41,6 +41,7 @@ public class DriveUntilDist extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Starting DriveUntilDist");
     	turnOutput = new DummyPIDOutput();
     	turnController = new PIDController(TURN_P, TURN_I,TURN_D, TURN_F, Robot.navX, turnOutput);
 		turnController.setInputRange(-180.0, 180.0);
@@ -74,6 +75,7 @@ public class DriveUntilDist extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("DriveUntilDist finished");
     	distController.disable();
     	turnController.disable();
     }

@@ -25,13 +25,13 @@ public class AlignForGearPeg extends Command {
 	private static final double TURN_F = 0.00;
 	private DummyPIDOutput turnOutput;
 
-	private PIDController strafeController;
-	private static final double STRAFE_TOLERANCE = 5;
-	private static final double STRAFE_P = 0.0315;
-	private static final double STRAFE_I = 0.00;
-	private static final double STRAFE_D = 0.00;
-	private static final double STRAFE_F = 0.00;
-	private DummyPIDOutput strafeOutput;
+//	private PIDController strafeController;
+//	private static final double STRAFE_TOLERANCE = 5;
+//	private static final double STRAFE_P = 0.0315;
+//	private static final double STRAFE_I = 0.00;
+//	private static final double STRAFE_D = 0.00;
+//	private static final double STRAFE_F = 0.00;
+//	private DummyPIDOutput strafeOutput;
 	
 	private boolean finished = false;
 
@@ -46,8 +46,8 @@ public class AlignForGearPeg extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Starting AlignForGearPeg");
 		finished = false;
-		RobotMap.visionlightSpike.set(Relay.Value.kForward);
 		
 		turnOutput = new DummyPIDOutput();
 		turnController = new PIDController(TURN_P, TURN_I, TURN_D, TURN_F, Robot.navX, turnOutput);
@@ -57,13 +57,13 @@ public class AlignForGearPeg extends Command {
 		turnController.setContinuous(true);
 		turnController.setSetpoint(Robot.navX.getYaw());
 
-		strafeOutput = new DummyPIDOutput();
-		strafeController = new PIDController(STRAFE_P, STRAFE_I, STRAFE_D, STRAFE_F, Robot.vision, strafeOutput);
-		strafeController.setInputRange(0, 320);
-		strafeController.setOutputRange(-1, 1);
-		strafeController.setAbsoluteTolerance(STRAFE_TOLERANCE);
-		strafeController.setContinuous(false);
-		strafeController.setSetpoint(54.0);
+//		strafeOutput = new DummyPIDOutput();
+//		strafeController = new PIDController(STRAFE_P, STRAFE_I, STRAFE_D, STRAFE_F, Robot.vision, strafeOutput);
+//		strafeController.setInputRange(0, 320);
+//		strafeController.setOutputRange(-1, 1);
+//		strafeController.setAbsoluteTolerance(STRAFE_TOLERANCE);
+//		strafeController.setContinuous(false);
+//		strafeController.setSetpoint(54.0);
 
 		// distOutput = new DummyPIDOutput();
 		// distController = new PIDController(DIST_P, DIST_I, DIST_D, DIST_F,
@@ -77,7 +77,7 @@ public class AlignForGearPeg extends Command {
 		// distController.setSetpoint(dist);
 
 		turnController.enable();
-		strafeController.enable();
+//		strafeController.enable();
 		// distController.enable();
 
 		// Robot.cameras.switchToCamera(0);
@@ -119,7 +119,7 @@ public class AlignForGearPeg extends Command {
 //		RobotMap.visionlightSpike.set(Relay.Value.kOff);
 		// distController.disable();
 		turnController.disable();
-		strafeController.disable();
+//		strafeController.disable();
 	}
 
 	// Called when another command which requires one or more of the same
