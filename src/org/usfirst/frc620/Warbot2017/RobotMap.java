@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
@@ -38,6 +39,7 @@ public class RobotMap {
     public static SpeedController driveTrainfrontLeft;
     public static SpeedController driveTrainbackLeft;
     public static RobotDrive driveTrainRobotDrive;
+    public static Servo ropeServo;
     public static PowerDistributionPanel driveTrainpdp;
     public static SpeedController climberclimbMotor;
     public static SpeedController gearArmarmMotor;
@@ -103,6 +105,7 @@ public class RobotMap {
         visionlightSpike.set(Relay.Value.kOff);
         LiveWindow.addActuator("Vision", "lightSpike", visionlightSpike);
         
+        ropeServo = new Servo(7);
 
 		driveTrainRobotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		//driveTrainRobotDrive.setInvertedMotor(MotorType.kFrontLeft, true);//If Test Bot
