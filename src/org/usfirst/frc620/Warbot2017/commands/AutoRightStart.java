@@ -22,7 +22,7 @@ public class AutoRightStart extends CommandGroup {
     	addSequential(new DriveTime(108));
     	addSequential(new Turn(-60));
     	addSequential(new AlignForGearPeg(0, .3));
-    	addSequential(new DriveUntilDist(11, 1.0));
+    	addSequential(new DriveUntilDist(11, .5));
     	addSequential(new DriveTime(7));
     	addSequential(new LowerGearArm());
 		addParallel(new DriveTime(1, -.5));

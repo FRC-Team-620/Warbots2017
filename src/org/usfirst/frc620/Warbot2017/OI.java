@@ -16,10 +16,10 @@ import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.commands.StopsAllThings;
 import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
+import org.usfirst.frc620.Warbot2017.commands.ToggleServo;
 import org.usfirst.frc620.Warbot2017.commands.Turn;
 import org.usfirst.frc620.Warbot2017.commands.TurnTime;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.InstantCommand;
@@ -39,6 +39,7 @@ public class OI {
     private JoystickButton lBumper;
     public JoystickButton rBumper;
     private JoystickButton back;
+    private JoystickButton start;
     
     private ClimbDriving climbDriving;
     private RaiseGearArm raiseGearArm;
@@ -71,6 +72,9 @@ public class OI {
         
         back = new JoystickButton(xbox, 7);
         back.whenPressed(new StopsAllThings());
+        
+        start = new JoystickButton(xbox, 8);
+        start.whenPressed(new ToggleServo());
 
         // SmartDashboard Buttons 
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
@@ -86,6 +90,7 @@ public class OI {
         SmartDashboard.putData("AlignForGearPeg Bla", new AlignForGearPeg(0, 1.0));
         SmartDashboard.putData("ToggleRelay", new ToggleRelay());
         SmartDashboard.putData("DriveTime 9", new DriveTime(-24));
+        SmartDashboard.putData("Lower .5", new LowerGearArm(.5));
         SmartDashboard.putData("Darken Camera", new InstantCommand(){
         	@Override
         	protected void execute() {
@@ -101,6 +106,7 @@ public class OI {
         SmartDashboard.putData("Turn(90)", new Turn(90));
         SmartDashboard.putData("Turn(-90)", new Turn(-90));
         SmartDashboard.putData("", new TurnTime(3, .3));
+        SmartDashboard.putData("Toggle", new ToggleServo());
     }
 
     public XboxController getXbox() {

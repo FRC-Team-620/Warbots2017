@@ -47,6 +47,7 @@ public class Robot extends IterativeRobot {
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
+	private boolean driverClimbing = false;
 	
 	private SendableChooser<Command> autoModeSelector;
 	
@@ -73,6 +74,7 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
+//		new CameraTest();
 		
 		
 		autoModeSelector = new SendableChooser<Command>();
@@ -127,8 +129,14 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		if(oi.getRTrigger() > .3)
+		if(oi.getRTrigger() > .3) {
 			climber.climb(.9 * oi.getRTrigger());
+			driverClimbing = true;
+		} else if(driverClimbing) {
+			climber.kill();
+			driverClimbing = false;
+		}
+		
 //		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
 //		System.out.println("Lidar = " + lidar.getDistanceOld());
 //		System.out.println("Lidar NRE = " + lidar.getDistance());

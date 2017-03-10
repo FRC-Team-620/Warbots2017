@@ -90,7 +90,7 @@ public class AlignForGearPeg extends Command {
 	protected void execute() {
 		
 		double dX = Robot.vision.pidGet();
-		System.out.println(dX);
+//		System.out.println(dX);
 		double straffe = 0;
 		final int deadzone = 10;
 		if(dX == Double.NaN)
@@ -108,7 +108,7 @@ public class AlignForGearPeg extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return timeSinceInitialized() > 3 || finished;
+		return timeSinceInitialized() > 10 || finished;
 		// return strafeController.onTarget();
 		// return distController.onTarget();
 	}

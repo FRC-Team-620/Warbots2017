@@ -85,6 +85,9 @@ public class Vision extends Subsystem implements PIDSource {
 		double[] centers = dataTable.getNumberArray("centerX", new double[]{});
 		double[] sizes = dataTable.getNumberArray("area", new double[]{});
 		double[] widths = dataTable.getNumberArray("width", new double[]{});
+//		System.out.println(centers.length);
+//		System.out.println(sizes.length);
+//		System.out.println(widths.length);
 		
 		double center;
 		
@@ -108,7 +111,7 @@ public class Vision extends Subsystem implements PIDSource {
 					if(sizes[i] > sizes[big])
 						big = i;
 				
-				System.out.println("zoomp " + Math.abs(centers[(big + 1) % centers.length] - centers[(big + 2) % centers.length])); //Double check that one "piece" is directly over the other
+//				System.out.println("zoomp " + Math.abs(centers[(big + 1) % centers.length] - centers[(big + 2) % centers.length])); //Double check that one "piece" is directly over the other
 				
 				double centerSmall = centers[(big + 1) % centers.length] / 2 + centers[(big + 2) % centers.length] / 2; //Average the x positions of the two segments of the cut piece, which should be almost the same.
 				if(centerSmall < centers[big]) //Print out which side is being cut
@@ -127,7 +130,7 @@ public class Vision extends Subsystem implements PIDSource {
 		}
 		
 		System.out.println(center);
-		return center - 131.5;
+		return center;
 	}
 }
 

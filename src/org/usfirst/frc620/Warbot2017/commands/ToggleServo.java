@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleServo extends Command {
 	@Override
 	protected void initialize() {
+		System.out.println("ToggleServo starting");
 		if(RobotMap.ropeServo.get() > .5){
 			RobotMap.ropeServo.set(0);
 		}else{
@@ -20,5 +21,14 @@ public class ToggleServo extends Command {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	@Override
+	public void end() {
+		System.out.println("ToggleServo finished");
+	}
 
+	@Override
+	public void interrupted() {
+		end();
+	}
 }

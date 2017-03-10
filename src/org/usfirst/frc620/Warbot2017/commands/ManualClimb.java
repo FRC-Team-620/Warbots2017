@@ -20,6 +20,7 @@ public class ManualClimb extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Starting ManualClimb");
     	xcon = new XboxController(0);
     }
 
@@ -36,10 +37,12 @@ public class ManualClimb extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("ManualClimb ended");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
