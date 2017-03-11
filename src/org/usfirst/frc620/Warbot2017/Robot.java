@@ -4,8 +4,8 @@ import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
-import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
+import org.usfirst.frc620.Warbot2017.subsystems.AnalGyro;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
 import org.usfirst.frc620.Warbot2017.subsystems.ButtonReader;
 import org.usfirst.frc620.Warbot2017.subsystems.CameraHandler;
@@ -16,7 +16,6 @@ import org.usfirst.frc620.Warbot2017.subsystems.Lidar;
 import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
-import org.usfirst.frc620.Warbot2017.testing.CameraTest;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,6 +33,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
+	private static boolean switchToGyro = false;
 
 	Command autonomousCommand;
 
@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static BallMech ballMech;
 	public static Lidar lidar;
 	public static NavX navX;
+	public static AnalGyro gyro;
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
@@ -66,6 +67,7 @@ public class Robot extends IterativeRobot {
 		ballMech = new BallMech();
 		lidar = new Lidar();
 		navX = new NavX();
+		gyro = new AnalGyro();
 		vision = new Vision();
 		cameras = new CameraHandler(1);
 		ultra = new Ultrasonic();
@@ -144,6 +146,15 @@ public class Robot extends IterativeRobot {
 //		a.update(oi.getXbox());
 //		if(a.pressed()) 
 //			cameras.nextCamera();
+	}
+	
+	public static double getAngle() {
+		if(!navX.isConnected())
+			switchToGyro = true;
+		if(!switchToGyro)
+			return gyro.get();
+		else
+			return navX.getYaw();
 	}
 
 	//-----------TEST MODE STUFF------------//

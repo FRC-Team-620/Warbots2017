@@ -10,7 +10,7 @@
 
 package org.usfirst.frc620.Warbot2017.subsystems;
 
-import java.util.concurrent.atomic.AtomicLong;
+import org.usfirst.frc620.Warbot2017.Robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -60,8 +60,6 @@ public class NavX extends Subsystem implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		double temp = getYaw();
-//		System.out.println(temp);
-		return temp;
+		return Robot.getAngle();
 	}
 }

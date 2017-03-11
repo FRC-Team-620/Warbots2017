@@ -21,12 +21,12 @@ public class Climb extends Command {
 	public Climb() {
 		// requires(Robot.driveTrain);
 		setInterruptible(false);
-		Scheduler.getInstance().add(new LowerBallMech());
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		// TODO lower ball mech fully
+		Scheduler.getInstance().add(new LowerBallMech());
 		buttonTimer = 0;
 		// System.out.println("initialize");
 		// Robot.cameras.switchToCamera(2);

@@ -5,6 +5,7 @@ import org.usfirst.frc620.Warbot2017.RobotMap;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Relay;
@@ -31,7 +32,6 @@ public class CameraHandler
 		
 		cameras[1].setWhiteBalanceManual(100);
 		cameras[1].setExposureManual(90);
-		
 //		UsbCamera camera = server.startAutomaticCapture();
 //		camera.setWhiteBalanceManual(0);
 //		camera.setExposureManual(0);
