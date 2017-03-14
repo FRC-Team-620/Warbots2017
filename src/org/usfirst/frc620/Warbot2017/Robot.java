@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
 		ballMech = new BallMech();
 		lidar = new Lidar();
 		navX = new NavX();
-		gyro = new AnalGyro();
+		gyro = new AnalGyro(8);
 		vision = new Vision();
 		cameras = new CameraHandler(1);
 		ultra = new Ultrasonic();

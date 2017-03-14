@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class AnalGyro extends Subsystem implements PIDSource {
 	private AnalogGyro g;
 
-	public AnalGyro() {
-		g = new AnalogGyro(0);
-	}
+//	public AnalGyro() {
+//		g = new AnalogGyro(0);
+//	}
 	
 	public AnalGyro(int portNum) {
-		g = new AnalogGyro(portNum);
+//		g = new AnalogGyro(portNum);
 	}
 
 	// Put methods for controlling this subsystem
