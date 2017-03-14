@@ -14,18 +14,18 @@ public class AnalGyro extends Subsystem implements PIDSource {
 	private AnalogGyro g;
 
 	public AnalGyro() {
-		g = new AnalogGyro(0);
+//		g = new AnalogGyro(0);
 	}
 	
 	public AnalGyro(int portNum) {
-		g = new AnalogGyro(portNum);
+//		g = new AnalogGyro(portNum);
 	}
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public double get() {
 		double a = g.getAngle();
-		while(a > 360.0) a -= 360.0;
+		a = a - (360.0 * (a % 360.0));
 		if(a <= 180.0) return a;
 		else return -(a - 180.0);
 	}

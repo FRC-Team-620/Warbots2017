@@ -6,6 +6,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
+import org.usfirst.frc620.Warbot2017.commands.ConfirmNavx;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
 import org.usfirst.frc620.Warbot2017.commands.DriveTime;
 import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
@@ -91,13 +92,13 @@ public class OI {
         SmartDashboard.putData("ToggleRelay", new ToggleRelay());
         SmartDashboard.putData("DriveTime 9", new DriveTime(-24));
         SmartDashboard.putData("Lower .5", new LowerGearArm(.5));
-        SmartDashboard.putData("Darken Camera", new InstantCommand(){
+        SmartDashboard.putData("Darken Camera", new InstantCommand() {
         	@Override
         	protected void execute() {
         		Robot.cameras.darkenCamera(0);
         	}
         });
-        SmartDashboard.putData("Lighten Camera", new InstantCommand(){
+        SmartDashboard.putData("Lighten Camera", new InstantCommand() {
         	@Override
         	protected void execute() {
         		Robot.cameras.brightenCamera(0);
@@ -105,8 +106,8 @@ public class OI {
         });
         SmartDashboard.putData("Turn(90)", new Turn(90));
         SmartDashboard.putData("Turn(-90)", new Turn(-90));
-        SmartDashboard.putData("", new TurnTime(3, .3));
         SmartDashboard.putData("Toggle", new ToggleServo());
+        SmartDashboard.putData("Is the NavX working???", new ConfirmNavx());
     }
 
     public XboxController getXbox() {

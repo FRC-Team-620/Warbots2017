@@ -1,6 +1,7 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
 import org.usfirst.frc620.Warbot2017.Robot;
+import org.usfirst.frc620.Warbot2017.RobotMap;
 import org.usfirst.frc620.Warbot2017.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -41,8 +42,14 @@ public class Climb extends Command {
 			if (climber.isDown()) {
 				System.out.println("Down");
 				// TODO: add drive controls
-
 				climber.climb(0.3325);
+				
+				 // ensure servo is locked and in the upright position
+				if(RobotMap.ropeServo.get() != 1.0) {
+					RobotMap.ropeServo.set(1.0);
+					System.out.println("Closing servo");
+				}
+				
 				if (xbox.getRawButton(2))
 					exit = true;
 			} else if (!climber.isUp()) {

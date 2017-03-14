@@ -19,13 +19,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoRightStart extends CommandGroup {
     public AutoRightStart() {
-    	addSequential(new DriveTime(108));
+    	addSequential(new DriveTime(106));
     	addSequential(new Turn(-60));
-    	addSequential(new AlignForGearPeg(0, .3));
+//    	addSequential(new AlignForGearPeg(0, .3));
     	addSequential(new DriveUntilDist(11, .5));
     	addSequential(new DriveTime(7));
     	addSequential(new LowerGearArm());
-		addParallel(new DriveTime(1, -.5));
+		addParallel(new DriveTime(.5, -.5));
 		addSequential(new RaiseGearArm());
     } 
 }

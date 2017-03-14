@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
 		navX = new NavX();
 		gyro = new AnalGyro();
 		vision = new Vision();
-		cameras = new CameraHandler(1);
+		cameras = new CameraHandler(2);
 		ultra = new Ultrasonic();
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
@@ -143,15 +143,16 @@ public class Robot extends IterativeRobot {
 //		System.out.println("Lidar = " + lidar.getDistanceOld());
 //		System.out.println("Lidar NRE = " + lidar.getDistance());
 //		System.out.println("Ultrasonic value = " + ultra.getDist());
+//		System.out.println("Gyro = " + gyro.get());
 //		a.update(oi.getXbox());
 //		if(a.pressed()) 
 //			cameras.nextCamera();
 	}
 	
 	public static double getAngle() {
-		if(!navX.isConnected())
+		if(!switchToGyro && !navX.isConnected())
 			switchToGyro = true;
-		if(!switchToGyro)
+		if(switchToGyro)
 			return gyro.get();
 		else
 			return navX.getYaw();

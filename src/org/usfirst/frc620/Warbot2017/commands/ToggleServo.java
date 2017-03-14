@@ -12,7 +12,6 @@ public class ToggleServo extends Command {
 			RobotMap.ropeServo.set(0);
 		}else{
 			RobotMap.ropeServo.set(1);
-			
 		}
 	}
 

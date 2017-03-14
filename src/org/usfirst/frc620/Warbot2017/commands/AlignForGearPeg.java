@@ -96,9 +96,11 @@ public class AlignForGearPeg extends Command {
 		if(dX == Double.NaN)
 			finished = true;
 		else if (dX < -100 - deadzone)
-			straffe = -.35;
+//			straffe = -.35;
+			System.out.println("Negative strafing");
 		else if (dX > -100 + deadzone)
-			straffe = .35;
+//			straffe = .35;
+			System.out.println("Positive strafing");
 		else
 			finished = true;
 //		System.out.println(straffe);

@@ -61,16 +61,16 @@ public class DriveTrain extends Subsystem {
     	robotDrive.mecanumDrive_Cartesian(x, y, z, gyro);
     }
     
-    private static double linearize(double inValue)
-    {
-    	 int top = (int)Math.ceil(vals.length * Math.abs(inValue));
-    	 int bot = (int)Math.floor(vals.length * Math.abs(inValue));
-    	 
-    	 double val = Math.signum(inValue) * ((Math.abs(inValue) - vals[bot]) * (vals[top] - vals[bot]) + vals[bot]);
-    	 if(val < .25)
-    		 return 0;
-    	 else
-    		 return val;
-    }
+//    private static double linearize(double inValue)
+//    {
+//    	 int top = (int)Math.ceil(vals.length * Math.abs(inValue));
+//    	 int bot = (int)Math.floor(vals.length * Math.abs(inValue));
+//    	 
+//    	 double val = Math.signum(inValue) * ((Math.abs(inValue) - vals[bot]) * (vals[top] - vals[bot]) + vals[bot]);
+//    	 if(val < .25)
+//    		 return 0;
+//    	 else
+//    		 return val;
+//    }
 }
 
