@@ -15,7 +15,6 @@ import org.usfirst.frc620.Warbot2017.subsystems.DriveTrain;
 import org.usfirst.frc620.Warbot2017.subsystems.GearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.LIDARIO;
 import org.usfirst.frc620.Warbot2017.subsystems.LIDARIO.Hardware;
-import org.usfirst.frc620.Warbot2017.subsystems.Lidar;
 import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
@@ -48,7 +47,6 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static GearArm gearArm;
 	public static BallMech ballMech;
-	public static Lidar lidar;
 	public static LIDARIO betterLidar;
 	public static NavX navX;
 	public static BackupGyro gyro;
@@ -234,7 +232,7 @@ public class Robot extends IterativeRobot {
 //					cameras.nextCamera();
 				break;
 			case 4:
-				System.out.println(lidar.getDistance() + " cm");
+				System.out.println(betterLidar.getLatestData().getDistance());
 				break;
 			default:
 				break;
