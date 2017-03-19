@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
-    	addSequential(new DriveTime(106 * 12.36 / DriverStation.getInstance().getBatteryVoltage()));
+    	addSequential(new DriveTime(103 * 12.36 / DriverStation.getInstance().getBatteryVoltage(), .6, false));
 //    	addSequential(new DriveDistLidar(106, 1.0));
     	addSequential(new Turn(60));
 //    	addSequential(new AlignForGearPeg(0, .3));

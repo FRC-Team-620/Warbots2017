@@ -52,7 +52,7 @@ public class DriveTime extends Command implements PIDOutput {
 		requires(Robot.driveTrain);
 	}
 	
-	public DriveTime(double dist, double speed, boolean doesntDoAnything) {
+	public DriveTime(double dist, double speed, boolean doesntDoAnything/*We just needed a 3 arg constructor*/) {
 		this(dist * DIST_SCALAR * .3 / speed, speed);
 	}
 
