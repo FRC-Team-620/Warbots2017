@@ -65,10 +65,10 @@ public class OI {
         x.whenPressed(lowerGearArm = new LowerGearArm());
         
         a = new JoystickButton(xbox, 1);
-//        a.whenPressed(lowerBallMech = new LowerBallMech());
+        a.whenPressed(lowerBallMech = new LowerBallMech());
        
         b = new JoystickButton(xbox, 2);
-//        b.whenPressed(raiseBallMech = new RaiseBallMech());
+        b.whenPressed(raiseBallMech = new RaiseBallMech());
         
         back = new JoystickButton(xbox, 7);
         back.whenPressed(new StopsAllThings());

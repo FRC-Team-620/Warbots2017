@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoRightStart extends CommandGroup {
     public AutoRightStart() {
-    	addSequential(new DriveTime(103 * 12.36 / DriverStation.getInstance().getBatteryVoltage(), .6, true));
+    	addSequential(new DriveTime(102.75 * 12.36 / DriverStation.getInstance().getBatteryVoltage()));
 //    	addSequential(new DriveDistLidar(106, 1.0));
     	addSequential(new Turn(-60));
 //    	addSequential(new AlignForGearPeg(0, .3));

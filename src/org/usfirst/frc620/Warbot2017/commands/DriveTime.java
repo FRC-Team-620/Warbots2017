@@ -52,7 +52,7 @@ public class DriveTime extends Command implements PIDOutput {
 	}
 	
 	public DriveTime(double dist, double speed, boolean doesntDoAnything/*We just needed a 3 arg constructor*/) {
-		this(dist * DIST_SCALAR * .3 / speed, speed);
+		this(dist * DIST_SCALAR * .3 / Math.pow(speed, 2.0), speed);
 	}
 
 	// Called just before this Command runs the first time
