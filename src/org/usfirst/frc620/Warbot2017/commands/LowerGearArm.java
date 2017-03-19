@@ -17,6 +17,7 @@ import org.usfirst.frc620.Warbot2017.Robot;
  *
  */
 public class LowerGearArm extends Command {
+	public static boolean raised = false;
 	private double PerTime;
 	private double speed;
 	
@@ -46,7 +47,7 @@ public class LowerGearArm extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.gearArm.move(-speed);
+    		Robot.gearArm.move(-speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -57,7 +58,9 @@ public class LowerGearArm extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		System.out.println("LowerGearArm finished");
-		Robot.gearArm.stop();
+		RaiseGearArm.lowered = true;
+		raised = false;
+		Robot.gearArm.move(0);
 	}
 
 	// Called when another command which requires one or more of the same

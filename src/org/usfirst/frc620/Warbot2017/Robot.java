@@ -3,6 +3,7 @@ package org.usfirst.frc620.Warbot2017;
 import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
+import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.AnalGyro;
@@ -12,11 +13,14 @@ import org.usfirst.frc620.Warbot2017.subsystems.CameraHandler;
 import org.usfirst.frc620.Warbot2017.subsystems.Climber;
 import org.usfirst.frc620.Warbot2017.subsystems.DriveTrain;
 import org.usfirst.frc620.Warbot2017.subsystems.GearArm;
+import org.usfirst.frc620.Warbot2017.subsystems.LIDARIO;
+import org.usfirst.frc620.Warbot2017.subsystems.LIDARIO.Hardware;
 import org.usfirst.frc620.Warbot2017.subsystems.Lidar;
 import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
 
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -35,7 +39,7 @@ public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
 	private static boolean switchToGyro = false;
 
-	Command autonomousCommand;
+	AutonomousCommand autonomousCommand;
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
@@ -43,6 +47,7 @@ public class Robot extends IterativeRobot {
 	public static GearArm gearArm;
 	public static BallMech ballMech;
 	public static Lidar lidar;
+	public static LIDARIO betterLidar;
 	public static NavX navX;
 	public static AnalGyro gyro;
 	public static Vision vision;
@@ -65,7 +70,9 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		gearArm = new GearArm();
 		ballMech = new BallMech();
-		lidar = new Lidar();
+//		lidar = new Lidar();
+		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
+		betterLidar.start();
 		navX = new NavX();
 		gyro = new AnalGyro(8);
 		vision = new Vision();
@@ -105,6 +112,8 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().add(new RaiseGearArm());
 		if (autoModeSelector != null)
 			autoModeSelector.getSelected().start();
+//		if (autonomousCommand != null)
+//			autonomousCommand.start();
 	}
 
 	/**
@@ -138,6 +147,7 @@ public class Robot extends IterativeRobot {
 			climber.kill();
 			driverClimbing = false;
 		}
+//		System.out.println("betterLidar: " + betterLidar.getLatestData().getDistance());
 		
 //		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
 //		System.out.println("Lidar = " + lidar.getDistanceOld());

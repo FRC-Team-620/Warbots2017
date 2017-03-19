@@ -11,15 +11,14 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-/**
- *
- */
 public class AutoRightStart extends CommandGroup {
     public AutoRightStart() {
-    	addSequential(new DriveTime(106));
+    	addSequential(new DriveTime(106 * 12.36 / DriverStation.getInstance().getBatteryVoltage()));
+//    	addSequential(new DriveDistLidar(106, 1.0));
     	addSequential(new Turn(-60));
 //    	addSequential(new AlignForGearPeg(0, .3));
     	addSequential(new DriveUntilDist(11, .5));

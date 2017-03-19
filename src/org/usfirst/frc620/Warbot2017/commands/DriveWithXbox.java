@@ -60,14 +60,14 @@ public class DriveWithXbox extends Command {
 		} else {
 			x = (Math.abs(x) < 0.3) ? 0 : x; // X Dead Zone
 			y = (Math.abs(y) < 0.3) ? 0 : y; // Y Dead Zone
-			z = (Math.abs(z) < 0.3) ? 0 : z;
+			z = (Math.abs(z) < 0.3) ? 0 : z * .5;
 		}
 		
 		if(!thing && (Robot.oi.getRTrigger() > .5))
 			Robot.cameras.nextCamera();
 		thing = Robot.oi.getRTrigger() > .5;
 
-		if(y == 0) 
+		if(y == 0)
 			ramplvl = 0;
 		else if(ramplvl < 1.0 / RAMP_RATE)
 			ramplvl++;

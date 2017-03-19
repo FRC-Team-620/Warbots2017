@@ -45,10 +45,10 @@ public class Climb extends Command {
 				climber.climb(0.3325);
 				
 				 // ensure servo is locked and in the upright position
-				if(RobotMap.ropeServo.get() != 1.0) {
-					RobotMap.ropeServo.set(1.0);
-					System.out.println("Closing servo");
-				}
+				//if(RobotMap.ropeServo.get() != 1.0) {
+					//RobotMap.ropeServo.set(1.0);
+					//System.out.println("Closing servo");
+				//}
 				
 				if (xbox.getRawButton(2))
 					exit = true;

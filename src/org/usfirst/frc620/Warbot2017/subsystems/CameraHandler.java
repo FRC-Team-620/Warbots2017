@@ -18,7 +18,7 @@ public class CameraHandler
 	private CvSink cvs;
 	private CvSource outputStream;
 	private Mat frame;
-	private int camera = 0;
+	public int camera = 0;
 	private final CameraServer server;
 
 	public CameraHandler(int numberOfCameras)
@@ -30,8 +30,10 @@ public class CameraHandler
 		cameras[0] = server.startAutomaticCapture();
 		cameras[1] = server.startAutomaticCapture();
 		
-		cameras[1].setWhiteBalanceManual(100);
-		cameras[1].setExposureManual(90);
+//		cameras[1].setWhiteBalanceManual(100);
+//		cameras[1].setExposureManual(90);
+		
+//		server.getServer().setSource(cameras[0]);
 //		UsbCamera camera = server.startAutomaticCapture();
 //		camera.setWhiteBalanceManual(0);
 //		camera.setExposureManual(0);
@@ -70,37 +72,39 @@ public class CameraHandler
 
 	public void nextCamera()
 	{
-		if(NUMBER_OF_CAMERAS > 0)
-			switchToCamera((camera + 1) % NUMBER_OF_CAMERAS);
+//		if(NUMBER_OF_CAMERAS > 0)
+//			switchToCamera((camera + 1) % NUMBER_OF_CAMERAS);
 	}
 
 	public void lastCamera()
 	{
-		switchToCamera((camera + NUMBER_OF_CAMERAS - 1) % NUMBER_OF_CAMERAS);
+//		switchToCamera((camera + NUMBER_OF_CAMERAS - 1) % NUMBER_OF_CAMERAS);
 	}
 
-	public void switchToCamera(int cam)
+	public void switchToCamera(int id)
 	{
-//		cameras[cam].setResolution(1, 1);
-//		cvs.setSource(cameras[cam]);
-//		cameras[cam].setResolution(360, 240);
+//		server.getServer().setSource(cameras[id]);
+//		camera = id;
+////		cameras[cam].setResolution(1, 1);
+////		cvs.setSource(cameras[cam]);
+////		cameras[cam].setResolution(360, 240);
 	}
 
 	public void darkenCamera(int cam)
 	{
-		System.out.println("dark");
-		RobotMap.visionlightSpike.set(Relay.Value.kForward);
-		UsbCamera camera = cameras[0];
-		camera.setWhiteBalanceManual(1);
-		camera.setExposureManual(1);
+//		System.out.println("dark");
+//		RobotMap.visionlightSpike.set(Relay.Value.kForward);
+//		UsbCamera camera = cameras[0];
+//		camera.setWhiteBalanceManual(1);
+//		camera.setExposureManual(1);
 	}
 
 	public void brightenCamera(int cam)
 	{
-		System.out.println("light");
-		RobotMap.visionlightSpike.set(Relay.Value.kOff);
-		UsbCamera camera = cameras[0];
-		camera.setWhiteBalanceManual(100);
-		camera.setExposureManual(90);
+//		System.out.println("light");
+//		RobotMap.visionlightSpike.set(Relay.Value.kOff);
+//		UsbCamera camera = cameras[0];
+//		camera.setWhiteBalanceManual(100);
+//		camera.setExposureManual(90);
 	}
 }

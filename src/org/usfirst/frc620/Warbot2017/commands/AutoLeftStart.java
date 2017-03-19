@@ -11,12 +11,14 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
-    	addSequential(new DriveTime(106));
+    	addSequential(new DriveTime(106 * 12.36 / DriverStation.getInstance().getBatteryVoltage()));
+//    	addSequential(new DriveDistLidar(106, 1.0));
     	addSequential(new Turn(60));
 //    	addSequential(new AlignForGearPeg(0, .3));
     	addSequential(new DriveUntilDist(11, .5));
@@ -24,6 +26,5 @@ public class AutoLeftStart extends CommandGroup {
     	addSequential(new LowerGearArm());
 		addParallel(new DriveTime(.5, -.5));
 		addSequential(new RaiseGearArm());
-		Thread.getAllStackTraces();
     } 
 }
