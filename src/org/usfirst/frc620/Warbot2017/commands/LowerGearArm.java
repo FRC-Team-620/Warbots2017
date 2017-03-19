@@ -13,12 +13,8 @@ package org.usfirst.frc620.Warbot2017.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
 
-/**
- *
- */
 public class LowerGearArm extends Command {
-	public static boolean raised = false;
-	private double PerTime;
+	private double perTime;
 	private double speed;
 	
 	public LowerGearArm() {
@@ -36,7 +32,7 @@ public class LowerGearArm extends Command {
 	public LowerGearArm(double percentTime, double speed) {
 		requires(Robot.gearArm);
 		
-		this.PerTime = percentTime;
+		this.perTime = percentTime;
 		this.speed = speed;
 	}
 
@@ -47,20 +43,22 @@ public class LowerGearArm extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-    		Robot.gearArm.move(-speed);
+		if(System.currentTimeMillis() < Robot.armLastTriggered + Robot.DELAY * 1000)
+			Robot.gearArm.move(0.0);
+		else
+			Robot.gearArm.move(-speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return timeSinceInitialized() > (2.5 * PerTime);
+		return timeSinceInitialized() > (2.5 * perTime);
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
 		System.out.println("LowerGearArm finished");
-		RaiseGearArm.lowered = true;
-		raised = false;
 		Robot.gearArm.move(0);
+		Robot.armLastTriggered = System.currentTimeMillis();
 	}
 
 	// Called when another command which requires one or more of the same

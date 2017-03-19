@@ -38,6 +38,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
 	private static boolean switchToGyro = false;
+	public static long armLastTriggered = 0L;
+	public final static double DELAY = 5.0;
 
 	AutonomousCommand autonomousCommand;
 

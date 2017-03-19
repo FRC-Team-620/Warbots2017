@@ -13,11 +13,7 @@ package org.usfirst.frc620.Warbot2017.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
 
-/**
- *
- */
 public class RaiseGearArm extends Command {
-	public static boolean lowered = false;
 	private double speed;
     
     public RaiseGearArm() {
@@ -37,20 +33,22 @@ public class RaiseGearArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(System.currentTimeMillis() < Robot.armLastTriggered + Robot.DELAY * 1000)
+			Robot.gearArm.move(0.0);
+		else
     		Robot.gearArm.move(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return timeSinceInitialized()>4;
+    	return timeSinceInitialized() > 2.5;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	System.out.println("RaiseGearArm finished");
 		Robot.gearArm.move(0);
-		lowered = false;
-		LowerGearArm.raised = true;
+		Robot.armLastTriggered = System.currentTimeMillis();
     }
 
     // Called when another command which requires one or more of the same
