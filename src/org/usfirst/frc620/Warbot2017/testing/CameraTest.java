@@ -1,15 +1,9 @@
 package org.usfirst.frc620.Warbot2017.testing;
 
-import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
-import org.opencv.videoio.Videoio;
-import org.usfirst.frc620.Warbot2017.Robot;
 
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.XboxController;
 
 public class CameraTest {
 	private VideoCapture[] cams;

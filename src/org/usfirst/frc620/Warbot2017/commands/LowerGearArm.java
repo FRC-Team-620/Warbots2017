@@ -10,8 +10,9 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class LowerGearArm extends Command {
 	private double perTime;
