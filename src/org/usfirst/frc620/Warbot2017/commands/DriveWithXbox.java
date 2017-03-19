@@ -24,7 +24,7 @@ public class DriveWithXbox extends Command {
 		Robot.cameras.brightenCamera(0);
 	}
 
-	boolean thing = false;
+//	boolean thing = false;
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
@@ -37,7 +37,6 @@ public class DriveWithXbox extends Command {
 //		float temp= Robot.navX.getYaw();
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
 		
-		
 		double lTrigger = Robot.oi.getLTrigger();
 		double z = -xbox.getRawAxis(0);
 		double y = xbox.getRawAxis(1);
@@ -46,11 +45,11 @@ public class DriveWithXbox extends Command {
 		if (Robot.oi.getLBumper()) {
 			x = (Math.abs(x) < 0.3) ? 0 : x * .5; // X Dead Zone and scaling
 			y = (Math.abs(y) < 0.3) ? 0 : y * .5; // Y Dead Zone and scaling
-			z = (Math.abs(z) < 0.3) ? 0 : z * .5; // Z Dead Zone and scaling
+			z = (Math.abs(z) < 0.3) ? 0 : z * (0.6 - y); // Z Dead Zone and scaling
 		} else if(Robot.oi.getLTrigger() > .3) {
 			x = (Math.abs(x) < 0.3) ? 0 : x * (1 - (lTrigger * .6)); // X Dead Zone
 			y = (Math.abs(y) < 0.3) ? 0 : y * (1 - (lTrigger * .75)); // Y Dead Zone
-			z = (Math.abs(z) < 0.3) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
+			z = (Math.abs(z) < 0.3) ? 0 : z * lTrigger; // Z Dead Zone
 			
 			/* Something new we are trying */
 //			x = (Math.abs(x) < 0.3) ? 0 : x * .8; // X Dead Zone
@@ -59,12 +58,12 @@ public class DriveWithXbox extends Command {
 		} else {
 			x = (Math.abs(x) < 0.3) ? 0 : x; // X Dead Zone
 			y = (Math.abs(y) < 0.3) ? 0 : y; // Y Dead Zone
-			z = (Math.abs(z) < 0.3) ? 0 : z * .5;
+			z = (Math.abs(z) < 0.3) ? 0 : z * (1.1 - y);
 		}
 		
-		if(!thing && (Robot.oi.getRTrigger() > .5))
-			Robot.cameras.nextCamera();
-		thing = Robot.oi.getRTrigger() > .5;
+//		if(!thing && (Robot.oi.getRTrigger() > .5))
+//			Robot.cameras.nextCamera();
+//		thing = Robot.oi.getRTrigger() > .5;
 
 		if(y == 0)
 			ramplvl = 0;
