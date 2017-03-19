@@ -10,10 +10,11 @@
 
 package org.usfirst.frc620.Warbot2017.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.util.DummyPIDOutput;
+
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

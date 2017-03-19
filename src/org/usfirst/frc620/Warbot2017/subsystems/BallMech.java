@@ -12,10 +12,8 @@
 package org.usfirst.frc620.Warbot2017.subsystems;
 
 import org.usfirst.frc620.Warbot2017.RobotMap;
-import org.usfirst.frc620.Warbot2017.commands.*;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 

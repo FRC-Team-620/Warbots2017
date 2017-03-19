@@ -3,7 +3,6 @@ package org.usfirst.frc620.Warbot2017.commands;
 import org.usfirst.frc620.Warbot2017.RobotMap;
 
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
