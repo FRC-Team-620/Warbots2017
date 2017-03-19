@@ -6,7 +6,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
-import org.usfirst.frc620.Warbot2017.subsystems.AnalGyro;
+import org.usfirst.frc620.Warbot2017.subsystems.BackupGyro;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
 import org.usfirst.frc620.Warbot2017.subsystems.ButtonReader;
 import org.usfirst.frc620.Warbot2017.subsystems.CameraHandler;
@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 	public static Lidar lidar;
 	public static LIDARIO betterLidar;
 	public static NavX navX;
-	public static AnalGyro gyro;
+	public static BackupGyro gyro;
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
 		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
 		betterLidar.start();
 		navX = new NavX();
-		gyro = new AnalGyro(8);
+		gyro = new BackupGyro(8);
 		vision = new Vision();
 		cameras = new CameraHandler(2);
 		ultra = new Ultrasonic();

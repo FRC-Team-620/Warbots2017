@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class AnalGyro extends Subsystem implements PIDSource {
+public class BackupGyro extends Subsystem implements PIDSource {
 	private AnalogGyro g;
 
-	public AnalGyro() {
+	public BackupGyro() {
 //		g = new AnalogGyro(0);
 	}
 	
-	public AnalGyro(int portNum) {
+	public BackupGyro(int portNum) {
 //		g = new AnalogGyro(portNum);
 	}
 
