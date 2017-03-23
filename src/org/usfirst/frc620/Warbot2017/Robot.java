@@ -54,9 +54,9 @@ public class Robot extends IterativeRobot {
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
 	private boolean driverClimbing = false;
-	
+
 	private SendableChooser<Command> autoModeSelector;
-	
+
 	ButtonReader a = new ButtonReader(1);
 
 	/**
@@ -66,26 +66,28 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		SmartDashboard.putString("DB/String 0", "0.767");
 		RobotMap.init();
+
+		//Start Sensors
+		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
+		betterLidar.start();
+		ultra = new Ultrasonic();
+		navX = new NavX();
+		gyro = new BackupGyro(8);
+		cameras = new CameraHandler(2);
+		vision = new Vision();
+		
+		//Start Mech
 		driveTrain = new DriveTrain();
 		climber = new Climber();
 		gearArm = new GearArm();
 		ballMech = new BallMech();
-//		lidar = new Lidar();
-		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
-		betterLidar.start();
-		navX = new NavX();
-		gyro = new BackupGyro(8);
-		vision = new Vision();
-		cameras = new CameraHandler(2);
-		ultra = new Ultrasonic();
+
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-//		new CameraTest();
-		
-		
+
 		autoModeSelector = new SendableChooser<Command>();
 		autoModeSelector.addDefault("Center Start", new AutoMidStart());
 		autoModeSelector.addObject("Left Start", new AutoLeftStart());
@@ -99,8 +101,7 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-//		Scheduler.getInstance().add(new RaiseGearArm());
-//		Scheduler.getInstance().add(new LowerBallMech());
+
 	}
 
 	public void disabledPeriodic() {
@@ -112,17 +113,14 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().add(new RaiseGearArm());
 		if (autoModeSelector != null)
 			autoModeSelector.getSelected().start();
-//		if (autonomousCommand != null)
-//			autonomousCommand.start();
+		//		if (autonomousCommand != null)
+		//			autonomousCommand.start();
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-//		System.out.println("Lidar: " + lidar.getDistance());
-//		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
-//		System.out.println("NavX = " + navX.getYaw() + "                 Ultra = " + ultra.getDist());
 		Scheduler.getInstance().run();
 	}
 
@@ -140,41 +138,31 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		if(oi.getRTrigger() > .3) {
+		if (oi.getRTrigger() > .3) {
 			climber.climb(.9 * oi.getRTrigger());
 			driverClimbing = true;
-		} else if(driverClimbing) {
+		} else if (driverClimbing) {
 			climber.kill();
 			driverClimbing = false;
 		}
-//		System.out.println("betterLidar: " + betterLidar.getLatestData().getDistance());
-		
-//		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
-//		System.out.println("Lidar = " + lidar.getDistanceOld());
-//		System.out.println("Lidar NRE = " + lidar.getDistance());
-//		System.out.println("Ultrasonic value = " + ultra.getDist());
-//		System.out.println("Gyro = " + gyro.get());
-//		a.update(oi.getXbox());
-//		if(a.pressed()) 
-//			cameras.nextCamera();
 	}
-	
+
 	public static double getAngle() {
-		if(!switchToGyro && !navX.isConnected())
+		if (!switchToGyro && !navX.isConnected())
 			switchToGyro = true;
-		if(switchToGyro)
+		if (switchToGyro)
 			return gyro.get();
 		else
 			return navX.getYaw();
 	}
 
 	//-----------TEST MODE STUFF------------//
-	
+
 	private int testPhase = -1;
 	private long timer = 0;
 	private boolean toggle = false;
 	private ButtonReader test;
-	
+
 	@Override
 	public void testInit() {
 		test = new ButtonReader(1);
@@ -201,7 +189,7 @@ public class Robot extends IterativeRobot {
 				System.out.println("This is the straffe test. The robot should be straffing left and right.");
 				break;
 			case 3:
-				if(cameras.NUMBER_OF_CAMERAS > 0)
+				if (cameras.NUMBER_OF_CAMERAS > 0)
 					System.out.println("There are no connected cameras to test, press A to skip this phase.");
 				else
 					System.out.println("This is the camera test. The drive station should be cycling through available cameras.");
@@ -213,7 +201,7 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 		}
-		if ( System.currentTimeMillis() - timer >= 500) {
+		if (System.currentTimeMillis() - timer >= 500) {
 			toggle = !toggle;
 			timer = System.currentTimeMillis();
 			switch (testPhase) {
@@ -228,8 +216,8 @@ public class Robot extends IterativeRobot {
 				break;
 			case 3:
 				RobotMap.driveTrainRobotDrive.stopMotor();
-//				if(cameras.NUMBER_OF_CAMERAS > 0)
-//					cameras.nextCamera();
+				//				if(cameras.NUMBER_OF_CAMERAS > 0)
+				//					cameras.nextCamera();
 				break;
 			case 4:
 				System.out.println(betterLidar.getLatestData().getDistance());
