@@ -145,6 +145,8 @@ public class Robot extends IterativeRobot {
 			climber.kill();
 			driverClimbing = false;
 		}
+		
+		System.out.println("Navx (yaw) = " + navX.getYaw());
 	}
 
 	public static double getAngle() {

@@ -27,7 +27,7 @@ public class NavX extends Subsystem implements PIDSource {
 //	private AtomicLong value;
 
 	public NavX() {
-		navX = new AHRS(SerialPort.Port.kUSB); // SerialPort.Port.kUSB
+		navX = new AHRS(SerialPort.Port.kMXP); // SerialPort.Port.kUSB
 	}
 
 	public AHRS getNavX()

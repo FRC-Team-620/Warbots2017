@@ -12,17 +12,25 @@ import edu.wpi.first.wpilibj.PIDOutput;
  */
 public class DummyPIDOutput implements PIDOutput {
 	double output;
+	boolean isUpdated = false;
 
 	public DummyPIDOutput() {
 		output = 0;
 	}
 
 	public void pidWrite(double output) {
+		this.isUpdated = true;
 		this.output = output;
 	}
 
 	public double getOutput() {
 		return output;
+	}
+	public boolean isUpdated() {
+		return isUpdated;
+	}
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
 	}
 
 }
