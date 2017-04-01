@@ -43,13 +43,13 @@ public class DriveWithXbox extends Command {
 		double x = -xbox.getRawAxis(4);
 		
 		if (Robot.oi.getLBumper()) {
-			x = (Math.abs(x) < 0.3) ? 0 : x * .5; // X Dead Zone and scaling
-			y = (Math.abs(y) < 0.3) ? 0 : y * .5; // Y Dead Zone and scaling
-			z = (Math.abs(z) < 0.3) ? 0 : z * (0.6 - Math.abs(y)); // Z Dead Zone and scaling
+			x = (Math.abs(x) < 0.2) ? 0 : x * .5; // X Dead Zone and scaling
+			y = (Math.abs(y) < 0.2) ? 0 : y * .5; // Y Dead Zone and scaling
+			z = (Math.abs(z) < 0.25) ? 0 : z * (0.6 - Math.abs(y)); // Z Dead Zone and scaling
 		} else if(Robot.oi.getLTrigger() > .3) {
-			x = (Math.abs(x) < 0.3) ? 0 : x * (1 - (lTrigger * .6)); // X Dead Zone
-			y = (Math.abs(y) < 0.3) ? 0 : y * (1 - (lTrigger * .75)); // Y Dead Zone
-			z = (Math.abs(z) < 0.3) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
+			x = (Math.abs(x) < 0.25) ? 0 : x * (1 - (lTrigger * .6)); // X Dead Zone
+			y = (Math.abs(y) < 0.25) ? 0 : y * (1 - (lTrigger * .75)); // Y Dead Zone
+			z = (Math.abs(z) < 0.25) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
 			 /* z *= (y == 0.0) ? 1.0 : 1 / (Math.abs(y) + 1);
 			 *  if(z < .25) z = .25;
 			 */
@@ -59,9 +59,9 @@ public class DriveWithXbox extends Command {
 //			y = (Math.abs(y) < 0.3) ? 0 : y * .8; // Y Dead Zone
 //			z = (Math.abs(z) < 0.3) ? 0 : z * .8;
 		} else {
-			x = (Math.abs(x) < 0.3) ? 0 : x; // X Dead Zone
-			y = (Math.abs(y) < 0.3) ? 0 : y; // Y Dead Zone
-			z = (Math.abs(z) < 0.3) ? 0 : z * (1.1 - Math.abs(y));
+			x = (Math.abs(x) < 0.25) ? 0 : x; // X Dead Zone
+			y = (Math.abs(y) < 0.25) ? 0 : y; // Y Dead Zone
+			z = (Math.abs(z) < 0.25) ? 0 : z * (1.1 - Math.abs(y));
 		}//if(y>.8)z=0;x=0;
 		
 //		if(!thing && (Robot.oi.getRTrigger() > .5))

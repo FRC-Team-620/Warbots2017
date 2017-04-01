@@ -76,7 +76,7 @@ public class DriveTrain extends Subsystem {
 		// if (Math.abs(turn) < .25 && turn != 0)
 		// turn = Math.signum(turn) * .25;
 
-		if (turn == 0 && strafe == 0 && drive != 0) {
+		if ((turn == 0 && strafe == 0 && drive != 0) || (turn == 0 && strafe != 0 && drive == 0)) {
 			// TODO turn correction
 			if (isTurnCorrecting) {
 				// TODO PID OUTPUT
