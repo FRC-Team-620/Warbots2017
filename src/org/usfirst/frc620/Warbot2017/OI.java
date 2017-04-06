@@ -98,7 +98,7 @@ public class OI {
 				Robot.cameras.brightenCamera(0);
 			}
 		});
-		SmartDashboard.putData("DriveDistance (3 feet)", new DriveDistance(3 * 12));
+		SmartDashboard.putData("DriveDistance (104)", new DriveDistance(104));
 	}
 
 	public XboxController getXbox() {
