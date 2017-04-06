@@ -86,7 +86,7 @@ public class LIDARIO implements PIDSource  {
         }
 
         public double getDistance(Unit unit) {
-            return Math.abs( nativeUnit * unit.multiplier);
+            return  nativeUnit * unit.multiplier;
         }
 
         public double getDistance() {

@@ -8,6 +8,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
 import org.usfirst.frc620.Warbot2017.commands.ConfirmNavx;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
+import org.usfirst.frc620.Warbot2017.commands.DriveDistance;
 import org.usfirst.frc620.Warbot2017.commands.DriveTime;
 import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
@@ -30,104 +31,97 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
-    private XboxController xbox;
-    private JoystickButton a;
-    private JoystickButton b;
-    private JoystickButton x;
-    private JoystickButton y;
-    private JoystickButton lBumper;
-    public JoystickButton rBumper;
-    private JoystickButton back;
-    private JoystickButton start;
-    
-    private ClimbDriving climbDriving;
-    private RaiseGearArm raiseGearArm;
-    private LowerGearArm lowerGearArm;
-    private RaiseBallMech raiseBallMech;
-    private LowerBallMech lowerBallMech;
-    
-    public int gyro=0;
 
-    public OI() {
-        xbox = new XboxController(0);
-        
-        rBumper = new JoystickButton(xbox, 6);
-        rBumper.whenPressed(climbDriving = new ClimbDriving());
-        
-        lBumper = new JoystickButton(xbox, 5);
-//        lBumper.whenPressed(new SwitchSides());
-        
-        y = new JoystickButton(xbox, 4);
-        y.whenPressed(raiseGearArm = new RaiseGearArm());
-       
-        x = new JoystickButton(xbox, 3);
-        x.whenPressed(lowerGearArm = new LowerGearArm());
-        
-        a = new JoystickButton(xbox, 1);
-        a.whenPressed(lowerBallMech = new LowerBallMech());
-       
-        b = new JoystickButton(xbox, 2);
-        b.whenPressed(raiseBallMech = new RaiseBallMech());
-        
-        back = new JoystickButton(xbox, 7);
-        back.whenPressed(new StopsAllThings());
-        
-        start = new JoystickButton(xbox, 8);
-        start.whenPressed(new ToggleServo());
+	private XboxController xbox;
+	public JoystickButton a;
+	public JoystickButton b;
+	public JoystickButton x;
+	public JoystickButton y;
+	public JoystickButton rBumper;
+	public JoystickButton back;
+	public JoystickButton start;
 
-        // SmartDashboard Buttons 
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("DriveWithXbox", new DriveWithXbox());
-        SmartDashboard.putData("RaiseGearArm", new RaiseGearArm());
-        SmartDashboard.putData("LowerGearArm", new LowerGearArm());
-        SmartDashboard.putData("DepositGear", new DepositGear());
-        SmartDashboard.putData("AutoLeftStart", new AutoLeftStart());
-        SmartDashboard.putData("AutoRightStart", new AutoRightStart());
-        SmartDashboard.putData("AutoMidStart", new AutoMidStart());
-        SmartDashboard.putData("DriveUntilDist (20)", new DriveUntilDist(20, .5));
-        SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
-        SmartDashboard.putData("AlignForGearPeg Bla", new AlignForGearPeg(0, 1.0));
-        SmartDashboard.putData("ToggleRelay", new ToggleRelay());
-        SmartDashboard.putData("DriveTime 9", new DriveTime(-24));
-        SmartDashboard.putData("Lower .5", new LowerGearArm(.5));
-        SmartDashboard.putData("Darken Camera", new InstantCommand() {
-        	@Override
-        	protected void execute() {
-        		Robot.cameras.darkenCamera(0);
-        	}
-        });
-        SmartDashboard.putData("Lighten Camera", new InstantCommand() {
-        	@Override
-        	protected void execute() {
-        		Robot.cameras.brightenCamera(0);
-        	}
-        });
-        SmartDashboard.putData("Turn(90)", new Turn(90));
-        SmartDashboard.putData("Turn(-90)", new Turn(-90));
-        SmartDashboard.putData("Toggle", new ToggleServo());
-        SmartDashboard.putData("Is the NavX working???", new ConfirmNavx());
-    }
+	public int gyro = 0;
 
-    public XboxController getXbox() {
-        return xbox;
-    }
-    
-    public boolean getLBumper() {
-    	return xbox.getRawButton(5);
-    }
-    
-    public boolean getRBumper() { return xbox.getRawButton(6); }
-    
-    public double getRightXAxis(){
-    	return xbox.getRawAxis(4);
-    }
-    
-    public double getLTrigger() {
-    	return xbox.getRawAxis(2);
-    }
-    
-    public double getRTrigger() {
-    	return xbox.getRawAxis(3);
-    }
+	public OI() {
+		xbox = new XboxController(0);
+
+		rBumper = new JoystickButton(xbox, 6);
+		rBumper.whenPressed(new ClimbDriving());
+
+		y = new JoystickButton(xbox, 4);
+		y.whenPressed(new RaiseGearArm());
+
+		x = new JoystickButton(xbox, 3);
+		x.whenPressed(new LowerGearArm());
+
+		a = new JoystickButton(xbox, 1);
+		a.whenPressed(new LowerBallMech());
+
+		b = new JoystickButton(xbox, 2);
+		b.whenPressed(new RaiseBallMech());
+
+		back = new JoystickButton(xbox, 7);
+		back.whenPressed(new StopsAllThings());
+
+		start = new JoystickButton(xbox, 8);
+		start.whenPressed(new ToggleServo());
+
+		// SmartDashboard Buttons 
+		SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+		SmartDashboard.putData("DriveWithXbox", new DriveWithXbox());
+		SmartDashboard.putData("RaiseGearArm", new RaiseGearArm());
+		SmartDashboard.putData("LowerGearArm", new LowerGearArm());
+		SmartDashboard.putData("DepositGear", new DepositGear());
+		SmartDashboard.putData("AutoLeftStart", new AutoLeftStart());
+		SmartDashboard.putData("AutoRightStart", new AutoRightStart());
+		SmartDashboard.putData("AutoMidStart", new AutoMidStart());
+		SmartDashboard.putData("DriveUntilDist (20)", new DriveUntilDist(20, .5));
+		SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
+		SmartDashboard.putData("AlignForGearPeg ", new AlignForGearPeg(0, 1.0));
+		SmartDashboard.putData("ToggleRelay", new ToggleRelay());
+		SmartDashboard.putData("DriveTime 9", new DriveTime(-24));
+		SmartDashboard.putData("Lower .5", new LowerGearArm(.5));
+		SmartDashboard.putData("Turn(90)", new Turn(90));
+		SmartDashboard.putData("Turn(-90)", new Turn(-90));
+		SmartDashboard.putData("Toggle Servo", new ToggleServo());
+		SmartDashboard.putData("Is the NavX working???", new ConfirmNavx());
+		SmartDashboard.putData("Darken Camera", new InstantCommand() {
+			@Override
+			protected void execute() {
+				Robot.cameras.darkenCamera(0);
+			}
+		});
+		SmartDashboard.putData("Lighten Camera", new InstantCommand() {
+			@Override
+			protected void execute() {
+				Robot.cameras.brightenCamera(0);
+			}
+		});
+		SmartDashboard.putData("DriveDistance (3 feet)", new DriveDistance(3 * 12));
+	}
+
+	public XboxController getXbox() {
+		return xbox;
+	}
+
+	public boolean getLBumper() {
+		return xbox.getRawButton(5);
+	}
+
+	public boolean getRBumper() {
+		return xbox.getRawButton(6);
+	}
+
+	public double getRightXAxis() {
+		return xbox.getRawAxis(4);
+	}
+
+	public double getLTrigger() {
+		return xbox.getRawAxis(2);
+	}
+
+	public double getRTrigger() {
+		return xbox.getRawAxis(3);
+	}
 }

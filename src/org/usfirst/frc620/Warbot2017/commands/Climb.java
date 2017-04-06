@@ -12,14 +12,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 */
 public class Climb extends Command {
 	private XboxController xbox;
-	private long buttonTimer;
 	boolean madeContact;
 	boolean exit;
-	// private int moveTime = 0;
 	Climber climber = Robot.climber;
 
 	public Climb() {
-		// requires(Robot.driveTrain);
+		requires(Robot.climber);
 		setInterruptible(false);
 	}
 
@@ -27,9 +25,6 @@ public class Climb extends Command {
 	protected void initialize() {
 		// TODO lower ball mech fully
 		Scheduler.getInstance().add(new LowerBallMech());
-		buttonTimer = 0;
-		// System.out.println("initialize");
-		// Robot.cameras.switchToCamera(2);
 		xbox = Robot.oi.getXbox();
 		madeContact = false;
 		exit = false;
@@ -37,9 +32,8 @@ public class Climb extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		/*if (!Robot.autoClimbEnded)*/ {
+		System.out.println("Up limit "+climber.isUp());
 			if (climber.isDown()) {
-				System.out.println("Down");
 				// TODO: add drive controls
 				climber.climb(0.3325);
 				
@@ -62,12 +56,10 @@ public class Climb extends Command {
 				climber.climb(1);
 			else {
 				if (!madeContact) {
-					buttonTimer = System.currentTimeMillis();
 					madeContact = true;
 				}
 				climber.climb(0.3);
 			}
-		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -79,17 +71,13 @@ public class Climb extends Command {
 	protected void end() {
 		Robot.autoClimbEnded = true;
 		Robot.oi.rBumper.whenPressed(new ManualClimb());
-		System.out.println("END");
+		System.out.println("Climb Finished");
 		climber.kill();
-		// Robot.cameras.switchToCamera(0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		// Robot.cameras.switchToCamera(0);
 		end();
-		// throw new Error("CLIMB COMMAND INTERRUPTED. THIS IS VERY
-		// DANGEROUS.");
 	}
 }

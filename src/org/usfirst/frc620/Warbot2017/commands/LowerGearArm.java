@@ -44,9 +44,9 @@ public class LowerGearArm extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(System.currentTimeMillis() < Robot.armLastTriggered + Robot.DELAY * 1000)
-			Robot.gearArm.move(0.0);
-		else
+//		if(System.currentTimeMillis() < Robot.armLastTriggered + Robot.DELAY * 1000)
+//			Robot.gearArm.move(0.0);
+//		else
 			Robot.gearArm.move(-speed);
 	}
 

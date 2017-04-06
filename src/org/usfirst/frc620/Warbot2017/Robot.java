@@ -7,6 +7,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.BackupGyro;
+import org.usfirst.frc620.Warbot2017.subsystems.BackupNavX;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
 import org.usfirst.frc620.Warbot2017.subsystems.ButtonReader;
 import org.usfirst.frc620.Warbot2017.subsystems.CameraHandler;
@@ -19,8 +20,10 @@ import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -38,7 +41,7 @@ public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
 	private static boolean switchToGyro = false;
 	public static long armLastTriggered = 0L;
-	public final static double DELAY = 0;
+//	public final static double DELAY = 5.0;
 
 	AutonomousCommand autonomousCommand;
 
@@ -49,14 +52,16 @@ public class Robot extends IterativeRobot {
 	public static BallMech ballMech;
 	public static LIDARIO betterLidar;
 	public static NavX navX;
-//	public static BackupGyro gyro;
+	public static BackupGyro gyro;
+	public static BackupNavX backupNavX;
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
 	private boolean driverClimbing = false;
-	
+	public static Encoder dragWheel;
+
 	private SendableChooser<Command> autoModeSelector;
-	
+
 	ButtonReader a = new ButtonReader(1);
 
 	/**
@@ -66,26 +71,34 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		SmartDashboard.putString("DB/String 0", "0.767");
 		RobotMap.init();
+
+		//Start Sensors
+		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
+		betterLidar.start();
+		ultra = new Ultrasonic();
+		navX = new NavX();
+		backupNavX = new BackupNavX();
+		gyro = new BackupGyro(8);
+		dragWheel = new Encoder(10, 11, false, Encoder.EncodingType.k4X);
+		dragWheel.setMaxPeriod(.1);
+		dragWheel.setMinRate(10);
+		dragWheel.setDistancePerPulse(.0349);
+		dragWheel.reset();
+		cameras = new CameraHandler(2);
+		vision = new Vision();
+		
+		//Start Mech
 		driveTrain = new DriveTrain();
 		climber = new Climber();
 		gearArm = new GearArm();
 		ballMech = new BallMech();
-//		lidar = new Lidar();
-		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
-		betterLidar.start();
-		navX = new NavX();
-//		gyro = new BackupGyro(0);
-		vision = new Vision();
-		cameras = new CameraHandler(2);
-		ultra = new Ultrasonic();
+
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-//		new CameraTest();
-		
-		
+
 		autoModeSelector = new SendableChooser<Command>();
 		autoModeSelector.addDefault("Center Start", new AutoMidStart());
 		autoModeSelector.addObject("Left Start", new AutoLeftStart());
@@ -99,8 +112,7 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-//		Scheduler.getInstance().add(new RaiseGearArm());
-//		Scheduler.getInstance().add(new LowerBallMech());
+
 	}
 
 	public void disabledPeriodic() {
@@ -112,17 +124,14 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().add(new RaiseGearArm());
 		if (autoModeSelector != null)
 			autoModeSelector.getSelected().start();
-//		if (autonomousCommand != null)
-//			autonomousCommand.start();
+		//		if (autonomousCommand != null)
+		//			autonomousCommand.start();
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-//		System.out.println("Lidar: " + lidar.getDistance());
-//		SmartDashboard.putString("Lidar", "" + lidar.getDistance());
-//		System.out.println("NavX = " + navX.getYaw() + "                 Ultra = " + ultra.getDist());
 		Scheduler.getInstance().run();
 	}
 
@@ -139,33 +148,32 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
+//		System.out.println("Dist " + dragWheel.getDistance() + "  " + "Rate : " + dragWheel.getRate());
+//		System.out.println("Stoped : " + dragWheel.getStopped());
 		Scheduler.getInstance().run();
-		if(oi.getRTrigger() > .3) {
+		if (oi.getRTrigger() > .3) {
 			climber.climb(.9 * oi.getRTrigger());
 			driverClimbing = true;
-		} else if(driverClimbing) {
+		} else if (driverClimbing) {
 			climber.kill();
 			driverClimbing = false;
 		}
-//		System.out.println("betterLidar: " + betterLidar.getLatestData().getDistance());
 		
-//		System.out.println("NavX = " + navX.getYaw() + "                Ultra = " + ultra.getDist());
-//		System.out.println("Lidar = " + lidar.getDistanceOld());
-//		System.out.println("Lidar NRE = " + lidar.getDistance());
-//		System.out.println("Ultrasonic value = " + ultra.getDist());
-//		System.out.println("Gyro = " + gyro.get());
-//		a.update(oi.getXbox());
-//		if(a.pressed()) 
-//			cameras.nextCamera();
-//		System.out.print("Backup gyro = " + gyro.get());
+		System.out.println("Navx (yaw) = " + navX.getYaw());
+//		System.out.println("Navx connected = " + navX.isConnected());
+		System.out.println("Backup NavX (yaw) = " + backupNavX.getYaw());
+//		System.out.println("Backup NavX (roll) = " + backupNavX.getNavX().getRoll());
+//		System.out.println("Backup NavX (yaw) = " + backupNavX.getNavX().getYaw());
+//		System.out.println("Backup NavX connected = " + backupNavX.isConnected());
+//		System.out.println("switch to secondary navx = " + switchToGyro);
 	}
-	
+
 	public static double getAngle() {
-//		if(!switchToGyro && !navX.isConnected())
-//			switchToGyro = true;
-//		if(switchToGyro)
-//			return gyro.get();
-//		else
+		if (!switchToGyro && !navX.isConnected())
+			switchToGyro = true;
+		if (switchToGyro)
+			return backupNavX.getYaw();
+		else
 			return navX.getYaw();
 	}
 
@@ -229,8 +237,8 @@ public class Robot extends IterativeRobot {
 				break;
 			case 3:
 				RobotMap.driveTrainRobotDrive.stopMotor();
-//				if(cameras.NUMBER_OF_CAMERAS > 0)
-//					cameras.nextCamera();
+				//				if(cameras.NUMBER_OF_CAMERAS > 0)
+				//					cameras.nextCamera();
 				break;
 			case 4:
 				System.out.println(betterLidar.getLatestData().getDistance());
