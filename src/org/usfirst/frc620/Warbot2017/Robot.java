@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
 	private static boolean switchToGyro = false;
 	public static long armLastTriggered = 0L;
-	public final static double DELAY = 5.0;
+	public final static double DELAY = 0;
 
 	AutonomousCommand autonomousCommand;
 
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 	public static BallMech ballMech;
 	public static LIDARIO betterLidar;
 	public static NavX navX;
-	public static BackupGyro gyro;
+//	public static BackupGyro gyro;
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
 		betterLidar = new LIDARIO(Port.kMXP, Hardware.LIDARLITE_V3);
 		betterLidar.start();
 		navX = new NavX();
-		gyro = new BackupGyro(8);
+//		gyro = new BackupGyro(0);
 		vision = new Vision();
 		cameras = new CameraHandler(2);
 		ultra = new Ultrasonic();
@@ -157,14 +157,15 @@ public class Robot extends IterativeRobot {
 //		a.update(oi.getXbox());
 //		if(a.pressed()) 
 //			cameras.nextCamera();
+//		System.out.print("Backup gyro = " + gyro.get());
 	}
 	
 	public static double getAngle() {
-		if(!switchToGyro && !navX.isConnected())
-			switchToGyro = true;
-		if(switchToGyro)
-			return gyro.get();
-		else
+//		if(!switchToGyro && !navX.isConnected())
+//			switchToGyro = true;
+//		if(switchToGyro)
+//			return gyro.get();
+//		else
 			return navX.getYaw();
 	}
 

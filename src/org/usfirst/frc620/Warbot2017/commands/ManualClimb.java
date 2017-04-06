@@ -1,5 +1,6 @@
 package org.usfirst.frc620.Warbot2017.commands;
 
+import org.usfirst.frc620.Warbot2017.Robot;
 import org.usfirst.frc620.Warbot2017.RobotMap;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -26,7 +27,7 @@ public class ManualClimb extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(xcon.getBumper(Hand.kRight))
-    		RobotMap.climberclimbMotor.set(.35); 
+    		RobotMap.climberclimbMotor.set(Robot.oi.getRTrigger()); 
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -13,7 +13,7 @@ public class Ultrasonic extends Subsystem implements PIDSource {
 	private AnalogInput sensor;
 	
 	public Ultrasonic() {
-		sensor = new AnalogInput(1);
+		sensor = new AnalogInput(3);
 		sensor.setAverageBits(2);
 		sensor.setOversampleBits(4);
 	}
