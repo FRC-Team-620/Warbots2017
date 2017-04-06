@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveDistance extends Command {
 	private double dist;
+	private int time;
 	private PIDController distController;
 	private DummyPIDOutput distOutput;
 
@@ -23,6 +24,18 @@ public class DriveDistance extends Command {
     	distController.setOutputRange(-0.3, 0.3);
     	distController.setAbsoluteTolerance(0.5);
     	this.dist = dist;
+    	time=15;
+    }
+    public DriveDistance(double dist, int time) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.driveTrain);
+    	distOutput = new DummyPIDOutput();
+    	distController = new PIDController(0.03, 0.01, 0.0, Robot.dragWheel, distOutput);
+    	distController.setOutputRange(-0.3, 0.3);
+    	distController.setAbsoluteTolerance(0.5);
+    	this.dist = dist;
+    	this.time = time;
     }
 
     // Called just before this Command runs the first time
@@ -39,11 +52,12 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return distController.onTarget();
+        return (distController.onTarget()||(time<timeSinceInitialized()));
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("DRIVE DIST END");
     	distController.disable();
     }
 

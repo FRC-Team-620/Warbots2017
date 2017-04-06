@@ -16,14 +16,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoLeftStart extends CommandGroup {
     public AutoLeftStart() {
-    	addSequential(new DriveTime(103 * 12.36 / DriverStation.getInstance().getBatteryVoltage(), .6, false));
-//    	addSequential(new DriveDistLidar(106, 1.0));
+//    	addSequential(new DriveTime(103 * 12.36 / DriverStation.getInstance().getBatteryVoltage(), .6, false));
+////    	addSequential(new DriveDistLidar(106, 1.0));
+//    	addSequential(new Turn(60));
+////    	addSequential(new AlignForGearPeg(0, .3));
+//    	addSequential(new DriveUntilDist(11, .5));
+//    	addSequential(new DriveTime(7));
+//    	addSequential(new LowerGearArm());
+//		addParallel(new DriveTime(.5, -.5));
+//		addSequential(new RaiseGearArm());
+    	
+    	// New PID loopy code
+    	addSequential(new DriveDistance(124));
     	addSequential(new Turn(60));
-//    	addSequential(new AlignForGearPeg(0, .3));
-    	addSequential(new DriveUntilDist(11, .5));
-    	addSequential(new DriveTime(7));
-    	addSequential(new LowerGearArm());
-		addParallel(new DriveTime(.5, -.5));
-		addSequential(new RaiseGearArm());
+    	addSequential(new DriveUntilDist(11, 0.5));
+    	addSequential(new DriveDistance(7));
+    	addSequential(new LowerGearArm(.5));
+    	addSequential(new DriveDistance(-7));
+    	addSequential(new RaiseGearArm());
     } 
 }

@@ -20,6 +20,8 @@ import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
 
+import com.kauailabs.navx.frc.AHRS.BoardAxis;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -82,7 +84,7 @@ public class Robot extends IterativeRobot {
 		dragWheel = new Encoder(10, 11, false, Encoder.EncodingType.k4X);
 		dragWheel.setMaxPeriod(.1);
 		dragWheel.setMinRate(10);
-		dragWheel.setDistancePerPulse(.0349);
+		dragWheel.setDistancePerPulse(.0349); // .0349
 		dragWheel.reset();
 		cameras = new CameraHandler(2);
 		vision = new Vision();
@@ -148,7 +150,8 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-//		System.out.println("Dist " + dragWheel.getDistance() + "  " + "Rate : " + dragWheel.getRate());
+		SmartDashboard.putBoolean("Navx", Robot.navX.isConnected());
+		System.out.println("Dist " + dragWheel.getDistance() + "  " + "Rate : " + dragWheel.getRate() + " pulse  " + dragWheel.getFPGAIndex());
 //		System.out.println("Stoped : " + dragWheel.getStopped());
 		Scheduler.getInstance().run();
 		if (oi.getRTrigger() > .3) {
@@ -159,22 +162,23 @@ public class Robot extends IterativeRobot {
 			driverClimbing = false;
 		}
 		
-		System.out.println("Navx (yaw) = " + navX.getYaw());
+//		System.out.println("Navx (yaw) = " + navX.getYaw());
 //		System.out.println("Navx connected = " + navX.isConnected());
-		System.out.println("Backup NavX (yaw) = " + backupNavX.getYaw());
-//		System.out.println("Backup NavX (roll) = " + backupNavX.getNavX().getRoll());
-//		System.out.println("Backup NavX (yaw) = " + backupNavX.getNavX().getYaw());
+//		System.out.println("Backup NavX (pitch) = " + backupNavX.getNavX().getRawGyroX());
+//		System.out.println("Backup NavX (roll) = " + backupNavX.getNavX().getRawGyroX());
+//		System.out.println("Backup NavX (yaw) = " + backupNavX.getNavX().getRawGyroZ());
 //		System.out.println("Backup NavX connected = " + backupNavX.isConnected());
 //		System.out.println("switch to secondary navx = " + switchToGyro);
 	}
 
 	public static double getAngle() {
-		if (!switchToGyro && !navX.isConnected())
-			switchToGyro = true;
-		if (switchToGyro)
-			return backupNavX.getYaw();
-		else
-			return navX.getYaw();
+//		if (!switchToGyro && !navX.isConnected())
+//			switchToGyro = true;
+//		if (switchToGyro)
+//			return backupNavX.getYaw();
+//		else
+//			return navX.getYaw();
+		return navX.getYaw();
 	}
 
 	//-----------TEST MODE STUFF------------//

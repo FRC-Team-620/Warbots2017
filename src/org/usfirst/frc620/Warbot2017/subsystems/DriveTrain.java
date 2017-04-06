@@ -99,7 +99,7 @@ public class DriveTrain extends Subsystem {
 
 			} else {
 				// TODO INIT
-				turnConroller.setSetpoint(Robot.navX.getYaw());
+				turnConroller.setSetpoint(Robot.navX.pidGet());
 				isTurnCorrecting = true;
 				turnOutput.setUpdated(false);
 			}
