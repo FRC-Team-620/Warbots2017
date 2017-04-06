@@ -32,6 +32,7 @@ public class Climb extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		System.out.println("Up limit "+climber.isUp());
 			if (climber.isDown()) {
 				// TODO: add drive controls
 				climber.climb(0.3325);

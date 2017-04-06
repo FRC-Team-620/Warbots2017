@@ -25,8 +25,9 @@ public class BackupNavX extends Subsystem implements PIDSource {
 	}
 	
 	public float getYaw() {
-		return navX.getRoll();
+		return navX.getYaw();
 	}
+	
 	public boolean isConnected(){
 		return navX.isConnected();
 	}

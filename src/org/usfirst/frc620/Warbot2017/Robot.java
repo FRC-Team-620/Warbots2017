@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
 	private static boolean switchToGyro = false;
 	public static long armLastTriggered = 0L;
-	public final static double DELAY = 5.0;
+//	public final static double DELAY = 5.0;
 
 	AutonomousCommand autonomousCommand;
 
@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
 		navX = new NavX();
 		backupNavX = new BackupNavX();
 		gyro = new BackupGyro(8);
-		dragWheel = new Encoder(10, 11,true, Encoder.EncodingType.k4X);
+		dragWheel = new Encoder(10, 11, false, Encoder.EncodingType.k4X);
 		dragWheel.setMaxPeriod(.1);
 		dragWheel.setMinRate(10);
 		dragWheel.setDistancePerPulse(.0349);
@@ -160,6 +160,12 @@ public class Robot extends IterativeRobot {
 		}
 		
 		System.out.println("Navx (yaw) = " + navX.getYaw());
+//		System.out.println("Navx connected = " + navX.isConnected());
+		System.out.println("Backup NavX (yaw) = " + backupNavX.getYaw());
+//		System.out.println("Backup NavX (roll) = " + backupNavX.getNavX().getRoll());
+//		System.out.println("Backup NavX (yaw) = " + backupNavX.getNavX().getYaw());
+//		System.out.println("Backup NavX connected = " + backupNavX.isConnected());
+//		System.out.println("switch to secondary navx = " + switchToGyro);
 	}
 
 	public static double getAngle() {

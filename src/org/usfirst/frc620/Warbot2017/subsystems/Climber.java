@@ -28,6 +28,7 @@ public class Climber extends Subsystem {
     public void initDefaultCommand() {
     }
     public void climb(double x){
+    	System.out.println("Climb power"+x);
     	climbMotor.set(x);
     }
     public void kill(){

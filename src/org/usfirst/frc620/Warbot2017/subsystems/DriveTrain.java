@@ -95,7 +95,7 @@ public class DriveTrain extends Subsystem {
 				if (turnOutput.isUpdated()) {
 					turn = turnOutput.getOutput();
 				}
-				System.out.println("Turnout updated :" + turnOutput.isUpdated());
+//				System.out.println("Turnout updated :" + turnOutput.isUpdated());
 
 			} else {
 				// TODO INIT
@@ -108,8 +108,8 @@ public class DriveTrain extends Subsystem {
 		}
 		
 //		System.out.println("Turn");
-		System.out.println("sdfsdf " + strafe + " drive  " + drive + " turn " + turn);
-		System.out.println("StrafeC: " + isStrafeCorrecting + " Turnc: " + isTurnCorrecting);
+//		System.out.println("sdfsdf " + strafe + " drive  " + drive + " turn " + turn);
+//		System.out.println("StrafeC: " + isStrafeCorrecting + " Turnc: " + isTurnCorrecting);
 		robotDrive.mecanumDrive_Cartesian(strafe, drive, turn, gyro);
 	}
 

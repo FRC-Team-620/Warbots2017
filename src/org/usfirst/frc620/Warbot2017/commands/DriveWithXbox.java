@@ -68,12 +68,12 @@ public class DriveWithXbox extends Command {
 //			Robot.cameras.nextCamera();
 //		thing = Robot.oi.getRTrigger() > .5;
 
-		if(y == 0)
-			ramplvl = 0;
-		else if(ramplvl < 1.0 / RAMP_RATE)
-			ramplvl++;
+//		if(y == 0)
+//			ramplvl = 0;
+//		else if(ramplvl < 1.0 / RAMP_RATE)
+//			ramplvl++;
 		
-		Robot.driveTrain.mecanumDrive(-x, -y * ramplvl * RAMP_RATE, -z, Robot.oi.gyro);
+		Robot.driveTrain.mecanumDrive(-x, -y /** ramplvl * RAMP_RATE*/, -z, Robot.oi.gyro);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
