@@ -14,11 +14,11 @@ public class BackupGyro extends Subsystem implements PIDSource {
 	private AnalogGyro g;
 
 	public BackupGyro() {
-//		g = new AnalogGyro(0);
+		g = new AnalogGyro(1);
 	}
 	
 	public BackupGyro(int portNum) {
-//		g = new AnalogGyro(portNum);
+		g = new AnalogGyro(1);//portNum);
 	}
 
 	// Put methods for controlling this subsystem

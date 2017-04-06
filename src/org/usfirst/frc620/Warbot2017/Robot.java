@@ -52,8 +52,8 @@ public class Robot extends IterativeRobot {
 	public static BallMech ballMech;
 	public static LIDARIO betterLidar;
 	public static NavX navX;
-	public static BackupNavX backupNavX;
 	public static BackupGyro gyro;
+	public static BackupNavX backupNavX;
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
@@ -178,12 +178,12 @@ public class Robot extends IterativeRobot {
 	}
 
 	//-----------TEST MODE STUFF------------//
-
+	
 	private int testPhase = -1;
 	private long timer = 0;
 	private boolean toggle = false;
 	private ButtonReader test;
-
+	
 	@Override
 	public void testInit() {
 		test = new ButtonReader(1);
@@ -210,7 +210,7 @@ public class Robot extends IterativeRobot {
 				System.out.println("This is the straffe test. The robot should be straffing left and right.");
 				break;
 			case 3:
-				if (cameras.NUMBER_OF_CAMERAS > 0)
+				if(cameras.NUMBER_OF_CAMERAS > 0)
 					System.out.println("There are no connected cameras to test, press A to skip this phase.");
 				else
 					System.out.println("This is the camera test. The drive station should be cycling through available cameras.");
@@ -222,7 +222,7 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 		}
-		if (System.currentTimeMillis() - timer >= 500) {
+		if ( System.currentTimeMillis() - timer >= 500) {
 			toggle = !toggle;
 			timer = System.currentTimeMillis();
 			switch (testPhase) {
