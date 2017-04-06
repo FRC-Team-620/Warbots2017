@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
 	DummyPIDOutput turnOutput = new DummyPIDOutput();
 	PIDController turnConroller = new PIDController(.01, 0, 0, Robot.navX, turnOutput);
 	DummyPIDOutput strafeOutput = new DummyPIDOutput();
-	PIDController strafeConroller = new PIDController(.3, 0, 0, Robot.navX, strafeOutput); // TODO
+	PIDController strafeConroller = new PIDController(.03, 0, 0, Robot.dragWheel, strafeOutput); // TODO
 																							// SWITCH
 																							// TO
 																							// ENCODER
@@ -52,10 +52,10 @@ public class DriveTrain extends Subsystem {
 		turnConroller.setContinuous(true);
 		turnConroller.setInputRange(-180, 180);
 		turnConroller.setOutputRange(-1, 1);
-		strafeConroller.setAbsoluteTolerance(4);
-		strafeConroller.setInputRange(-1000, 1000);
-		turnConroller.setOutputRange(-.5, .5);
 		turnConroller.enable();
+		strafeConroller.setAbsoluteTolerance(.5);
+		strafeConroller.setOutputRange(-.5, .5);
+		strafeConroller.enable();
 	}
 
 	public void initDefaultCommand() {
@@ -75,28 +75,41 @@ public class DriveTrain extends Subsystem {
 	public void mecanumDrive(double strafe, double drive, double turn, double gyro) {
 		// if (Math.abs(turn) < .25 && turn != 0)
 		// turn = Math.signum(turn) * .25;
-
-		if ((turn == 0 && strafe == 0 && drive != 0) || (turn == 0 && strafe != 0 && drive == 0)) {
+		if (turn == 0 && drive == 0 && strafe != 0) {
+			if(isStrafeCorrecting){
+				if(strafeOutput.isUpdated()){
+					drive = strafeOutput.getOutput();
+				}
+			}else{
+				strafeConroller.setSetpoint(Robot.dragWheel.getDistance());
+				isStrafeCorrecting = true;
+				strafeOutput.setUpdated(false);
+			}
+		}else{
+			isStrafeCorrecting= false;
+		}
+		if ((turn == 0 && strafe == 0 && drive != 0) || isStrafeCorrecting) {
 			// TODO turn correction
-			if (isTurnCorrecting) {
+			if (isTurnCorrecting) { 
 				// TODO PID OUTPUT
-//				if (turnOutput.isUpdated()) {
+				if (turnOutput.isUpdated()) {
 					turn = turnOutput.getOutput();
-//				}
+				}
+				System.out.println("Turnout updated :" + turnOutput.isUpdated());
 
 			} else {
 				// TODO INIT
 				turnConroller.setSetpoint(Robot.navX.getYaw());
 				isTurnCorrecting = true;
-//				turnOutput.setUpdated(false);
+				turnOutput.setUpdated(false);
 			}
 		} else {
 			isTurnCorrecting = false;
 		}
-		if (turn == 0 && drive == 0 && strafe != 0) {
-			// TODO: encoder correction for strafe
-		}
+		
+//		System.out.println("Turn");
 		System.out.println("sdfsdf " + strafe + " drive  " + drive + " turn " + turn);
+		System.out.println("StrafeC: " + isStrafeCorrecting + " Turnc: " + isTurnCorrecting);
 		robotDrive.mecanumDrive_Cartesian(strafe, drive, turn, gyro);
 	}
 

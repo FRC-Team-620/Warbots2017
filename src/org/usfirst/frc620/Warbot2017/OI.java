@@ -8,6 +8,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
 import org.usfirst.frc620.Warbot2017.commands.ConfirmNavx;
 import org.usfirst.frc620.Warbot2017.commands.DepositGear;
+import org.usfirst.frc620.Warbot2017.commands.DriveDistance;
 import org.usfirst.frc620.Warbot2017.commands.DriveTime;
 import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
 import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
@@ -97,6 +98,7 @@ public class OI {
 				Robot.cameras.brightenCamera(0);
 			}
 		});
+		SmartDashboard.putData("DriveDistance (3 feet)", new DriveDistance(3 * 12));
 	}
 
 	public XboxController getXbox() {

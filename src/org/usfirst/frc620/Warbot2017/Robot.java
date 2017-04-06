@@ -7,6 +7,7 @@ import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.subsystems.BackupGyro;
+import org.usfirst.frc620.Warbot2017.subsystems.BackupNavX;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
 import org.usfirst.frc620.Warbot2017.subsystems.ButtonReader;
 import org.usfirst.frc620.Warbot2017.subsystems.CameraHandler;
@@ -19,8 +20,10 @@ import org.usfirst.frc620.Warbot2017.subsystems.NavX;
 import org.usfirst.frc620.Warbot2017.subsystems.Ultrasonic;
 import org.usfirst.frc620.Warbot2017.subsystems.Vision;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -49,11 +52,13 @@ public class Robot extends IterativeRobot {
 	public static BallMech ballMech;
 	public static LIDARIO betterLidar;
 	public static NavX navX;
+	public static BackupNavX backupNavX;
 	public static BackupGyro gyro;
 	public static Vision vision;
 	public static CameraHandler cameras;
 	public static Ultrasonic ultra;
 	private boolean driverClimbing = false;
+	public static Encoder dragWheel;
 
 	private SendableChooser<Command> autoModeSelector;
 
@@ -72,7 +77,13 @@ public class Robot extends IterativeRobot {
 		betterLidar.start();
 		ultra = new Ultrasonic();
 		navX = new NavX();
+		backupNavX = new BackupNavX();
 		gyro = new BackupGyro(8);
+		dragWheel = new Encoder(10, 11,true, Encoder.EncodingType.k4X);
+		dragWheel.setMaxPeriod(.1);
+		dragWheel.setMinRate(10);
+		dragWheel.setDistancePerPulse(.0349);
+		dragWheel.reset();
 		cameras = new CameraHandler(2);
 		vision = new Vision();
 		
@@ -137,6 +148,8 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
+//		System.out.println("Dist " + dragWheel.getDistance() + "  " + "Rate : " + dragWheel.getRate());
+//		System.out.println("Stoped : " + dragWheel.getStopped());
 		Scheduler.getInstance().run();
 		if (oi.getRTrigger() > .3) {
 			climber.climb(.9 * oi.getRTrigger());
@@ -153,7 +166,7 @@ public class Robot extends IterativeRobot {
 		if (!switchToGyro && !navX.isConnected())
 			switchToGyro = true;
 		if (switchToGyro)
-			return gyro.get();
+			return backupNavX.getYaw();
 		else
 			return navX.getYaw();
 	}
