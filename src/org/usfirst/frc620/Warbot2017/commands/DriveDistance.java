@@ -36,6 +36,17 @@ public class DriveDistance extends Command {
     	this.dist = dist;
     	this.time = time;
     }
+    public DriveDistance(double dist, int time, double speed) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.driveTrain);
+    	distOutput = new DummyPIDOutput();
+    	distController = new PIDController(0.03, 0.01, 0.0, Robot.dragWheel, distOutput);
+    	distController.setOutputRange(-speed, speed);
+    	distController.setAbsoluteTolerance(0.5);
+    	this.dist = dist;
+    	this.time = time;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
