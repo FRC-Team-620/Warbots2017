@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossBaseline extends CommandGroup {
 
     public CrossBaseline() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+		addParallel(new RaiseBallMech(2.5));
+        addSequential(new DriveDistance(96));
     }
 }

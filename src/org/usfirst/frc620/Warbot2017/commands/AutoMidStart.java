@@ -41,9 +41,12 @@ public class AutoMidStart extends CommandGroup {
 		// addSequential(new DriveDistance(7));
 		
 		// New PID loopy code
-		addSequential(new DriveDistance(104,7));
+
+		addParallel(new RaiseBallMech(2.5));
+		addSequential(new DriveDistance(83,7));
 		addSequential(new LowerGearArm(.5));
-		addParallel(new DriveDistance(-7));
+		addParallel(new DriveDistance(-7,3));
 		addSequential(new RaiseGearArm());
+		
 	}
 }

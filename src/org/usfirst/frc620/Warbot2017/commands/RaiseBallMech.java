@@ -5,9 +5,14 @@ import org.usfirst.frc620.Warbot2017.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RaiseBallMech extends Command {
-
+private double time;
 	public RaiseBallMech() {
 		requires(Robot.ballMech);
+		this.time=9;
+	}
+	public RaiseBallMech(double time) {
+		requires(Robot.ballMech);
+		this.time=time;
 	}
 
 	// Called just before this Command runs the first time
@@ -21,7 +26,7 @@ public class RaiseBallMech extends Command {
 	    
 	    // Make this return true when this Command no longer needs to run execute()
 	    protected boolean isFinished() {
-	    	return timeSinceInitialized()>=9;
+	    	return timeSinceInitialized()>=time;
 	    }
 
 	    // Called once after isFinished returns true

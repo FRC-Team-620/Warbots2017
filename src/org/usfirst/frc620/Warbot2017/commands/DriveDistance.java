@@ -14,14 +14,13 @@ public class DriveDistance extends Command {
 	private int time;
 	private PIDController distController;
 	private DummyPIDOutput distOutput;
-
     public DriveDistance(double dist) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
     	distOutput = new DummyPIDOutput();
     	distController = new PIDController(0.03, 0.01, 0.0, Robot.dragWheel, distOutput);
-    	distController.setOutputRange(-0.3, 0.3);
+    	distController.setOutputRange(-0.45, 0.45);
     	distController.setAbsoluteTolerance(0.5);
     	this.dist = dist;
     	time=15;
@@ -32,7 +31,7 @@ public class DriveDistance extends Command {
     	requires(Robot.driveTrain);
     	distOutput = new DummyPIDOutput();
     	distController = new PIDController(0.03, 0.01, 0.0, Robot.dragWheel, distOutput);
-    	distController.setOutputRange(-0.3, 0.3);
+    	distController.setOutputRange(-0.45, 0.45);
     	distController.setAbsoluteTolerance(0.5);
     	this.dist = dist;
     	this.time = time;
@@ -40,7 +39,7 @@ public class DriveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	distController.setSetpoint(Robot.dragWheel.getDistance() + dist);
+    	distController.setSetpoint(Robot.dragWheel.getDistance() + dist );
     	distController.enable();
     	// #tear
     }

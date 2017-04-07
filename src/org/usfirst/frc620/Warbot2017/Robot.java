@@ -5,7 +5,13 @@ import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
 import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
 import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.BackAndForth;
+import org.usfirst.frc620.Warbot2017.commands.BlueLeft;
+import org.usfirst.frc620.Warbot2017.commands.BlueRight;
+import org.usfirst.frc620.Warbot2017.commands.CrossBaseline;
+import org.usfirst.frc620.Warbot2017.commands.DoNothing;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
+import org.usfirst.frc620.Warbot2017.commands.RedLeft;
+import org.usfirst.frc620.Warbot2017.commands.RedRight;
 import org.usfirst.frc620.Warbot2017.subsystems.BackupGyro;
 import org.usfirst.frc620.Warbot2017.subsystems.BackupNavX;
 import org.usfirst.frc620.Warbot2017.subsystems.BallMech;
@@ -45,7 +51,7 @@ public class Robot extends IterativeRobot {
 	public static long armLastTriggered = 0L;
 //	public final static double DELAY = 5.0;
 
-	AutonomousCommand autonomousCommand;
+	CrossBaseline autonomousCommand;
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
@@ -84,7 +90,7 @@ public class Robot extends IterativeRobot {
 		dragWheel = new Encoder(10, 11, false, Encoder.EncodingType.k4X);
 		dragWheel.setMaxPeriod(.1);
 		dragWheel.setMinRate(10);
-		dragWheel.setDistancePerPulse(.0349); // .0349
+		dragWheel.setDistancePerPulse(.0349);//*1.021450459652707); // .0349
 		dragWheel.reset();
 		cameras = new CameraHandler(2);
 		vision = new Vision();
@@ -103,10 +109,15 @@ public class Robot extends IterativeRobot {
 
 		autoModeSelector = new SendableChooser<Command>();
 		autoModeSelector.addDefault("Center Start", new AutoMidStart());
-		autoModeSelector.addObject("Left Start", new AutoLeftStart());
-		autoModeSelector.addObject("Right Start", new AutoRightStart());
-		autoModeSelector.addObject("Back and Forth", new BackAndForth());
-		SmartDashboard.putData("Starting Position", autoModeSelector);
+//		autoModeSelector.addObject("Left Start", new AutoLeftStart());
+//		autoModeSelector.addObject("Right Start", new AutoRightStart());
+		autoModeSelector.addObject("Blue Right", new BlueRight());
+		autoModeSelector.addObject("Blue Left", new BlueLeft());
+		autoModeSelector.addObject("Red Right", new RedRight());
+		autoModeSelector.addObject("Red Left", new RedLeft());
+		autoModeSelector.addObject("Cross Baseline", new CrossBaseline());
+		autoModeSelector.addObject("Do Nothing", new DoNothing());
+	SmartDashboard.putData("Starting Position", autoModeSelector);
 	}
 
 	/**
@@ -123,9 +134,17 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		Scheduler.getInstance().add(new RaiseGearArm());
-		if (autoModeSelector != null)
+//		Scheduler.getInstance().add(new RaiseGearArm());
+		try{
+		if (autoModeSelector.getSelected() != null)
 			autoModeSelector.getSelected().start();
+		}
+		catch(Exception e){
+			autonomousCommand = new CrossBaseline();
+			autonomousCommand.start();
+		}
+//		autonomousCommand = new AutoMidStart();
+//		autonomousCommand.start();
 		//		if (autonomousCommand != null)
 		//			autonomousCommand.start();
 	}
