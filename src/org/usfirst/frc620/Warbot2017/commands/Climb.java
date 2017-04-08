@@ -72,7 +72,7 @@ public class Climb extends Command {
 		Robot.autoClimbEnded = true;
 		Robot.oi.rBumper.whenPressed(new ManualClimb());
 		System.out.println("Climb Finished");
-		climber.kill();
+		climber.climb(0);
 	}
 
 	// Called when another command which requires one or more of the same

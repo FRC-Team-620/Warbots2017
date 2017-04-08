@@ -177,7 +177,7 @@ public class Robot extends IterativeRobot {
 			climber.climb(.9 * oi.getRTrigger());
 			driverClimbing = true;
 		} else if (driverClimbing) {
-			climber.kill();
+			climber.climb(0);
 			driverClimbing = false;
 		}
 		
