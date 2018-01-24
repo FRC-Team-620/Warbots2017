@@ -49,6 +49,9 @@ public class Robot extends IterativeRobot {
 	public static boolean autoClimbEnded = false;
 	private static boolean switchToGyro = false;
 	public static long armLastTriggered = 0L;
+	public static final double WIDTHHHALF = 30/2;
+//	public static final double LENGTHHALF = 27/2;
+	public static final double LENGTHHALF = 14.5;
 //	public final static double DELAY = 5.0;
 
 	CrossBaseline autonomousCommand;
@@ -87,7 +90,7 @@ public class Robot extends IterativeRobot {
 		navX = new NavX();
 		backupNavX = new BackupNavX();
 		gyro = new BackupGyro(8);
-		dragWheel = new Encoder(10, 11, false, Encoder.EncodingType.k4X);
+		dragWheel = new Encoder(10,11, false, Encoder.EncodingType.k4X);
 		dragWheel.setMaxPeriod(.1);
 		dragWheel.setMinRate(10);
 		dragWheel.setDistancePerPulse(.0349);//*1.021450459652707); // .0349
@@ -117,7 +120,7 @@ public class Robot extends IterativeRobot {
 		autoModeSelector.addObject("Red Left", new RedLeft());
 		autoModeSelector.addObject("Cross Baseline", new CrossBaseline());
 		autoModeSelector.addObject("Do Nothing", new DoNothing());
-	SmartDashboard.putData("Starting Position", autoModeSelector);
+		SmartDashboard.putData("Starting Position", autoModeSelector);
 	}
 
 	/**
@@ -169,6 +172,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
+//		System.out.println(Robot.navX.pidGet());
 		SmartDashboard.putBoolean("Navx", Robot.navX.isConnected());
 		System.out.println("Dist " + dragWheel.getDistance() + "  " + "Rate : " + dragWheel.getRate() + " pulse  " + dragWheel.getFPGAIndex());
 //		System.out.println("Stoped : " + dragWheel.getStopped());
@@ -182,7 +186,7 @@ public class Robot extends IterativeRobot {
 		}
 		
 //		System.out.println("Navx (yaw) = " + navX.getYaw());
-//		System.out.println("Navx connected = " + navX.isConnected());
+		System.out.println("Navx connected = " + navX.isConnected());
 //		System.out.println("Backup NavX (pitch) = " + backupNavX.getNavX().getRawGyroX());
 //		System.out.println("Backup NavX (roll) = " + backupNavX.getNavX().getRawGyroX());
 //		System.out.println("Backup NavX (yaw) = " + backupNavX.getNavX().getRawGyroZ());

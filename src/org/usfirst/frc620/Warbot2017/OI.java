@@ -1,29 +1,17 @@
 package org.usfirst.frc620.Warbot2017;
 
-import org.usfirst.frc620.Warbot2017.commands.AlignForGearPeg;
-import org.usfirst.frc620.Warbot2017.commands.AutoLeftStart;
-import org.usfirst.frc620.Warbot2017.commands.AutoMidStart;
-import org.usfirst.frc620.Warbot2017.commands.AutoRightStart;
-import org.usfirst.frc620.Warbot2017.commands.AutonomousCommand;
 import org.usfirst.frc620.Warbot2017.commands.ClimbDriving;
-import org.usfirst.frc620.Warbot2017.commands.ConfirmNavx;
-import org.usfirst.frc620.Warbot2017.commands.DepositGear;
 import org.usfirst.frc620.Warbot2017.commands.DriveDistance;
-import org.usfirst.frc620.Warbot2017.commands.DriveTime;
-import org.usfirst.frc620.Warbot2017.commands.DriveUntilDist;
-import org.usfirst.frc620.Warbot2017.commands.DriveWithXbox;
 import org.usfirst.frc620.Warbot2017.commands.LowerBallMech;
 import org.usfirst.frc620.Warbot2017.commands.LowerGearArm;
 import org.usfirst.frc620.Warbot2017.commands.RaiseBallMech;
 import org.usfirst.frc620.Warbot2017.commands.RaiseGearArm;
 import org.usfirst.frc620.Warbot2017.commands.StopsAllThings;
-import org.usfirst.frc620.Warbot2017.commands.ToggleRelay;
 import org.usfirst.frc620.Warbot2017.commands.ToggleServo;
-import org.usfirst.frc620.Warbot2017.commands.Turn;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -68,37 +56,42 @@ public class OI {
 		start.whenPressed(new ToggleServo());
 
 		// SmartDashboard Buttons 
-		SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-		SmartDashboard.putData("DriveWithXbox", new DriveWithXbox());
-		SmartDashboard.putData("RaiseGearArm", new RaiseGearArm());
-		SmartDashboard.putData("LowerGearArm", new LowerGearArm());
-		SmartDashboard.putData("DepositGear", new DepositGear());
-		SmartDashboard.putData("AutoLeftStart", new AutoLeftStart());
-		SmartDashboard.putData("AutoRightStart", new AutoRightStart());
-		SmartDashboard.putData("AutoMidStart", new AutoMidStart());
-		SmartDashboard.putData("DriveUntilDist (20)", new DriveUntilDist(20, .5));
-		SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
-		SmartDashboard.putData("AlignForGearPeg ", new AlignForGearPeg(0, 1.0));
-		SmartDashboard.putData("ToggleRelay", new ToggleRelay());
-		SmartDashboard.putData("DriveTime 9", new DriveTime(-24));
-		SmartDashboard.putData("Lower .5", new LowerGearArm(.5));
-		SmartDashboard.putData("Turn(90)", new Turn(90));
-		SmartDashboard.putData("Turn(-90)", new Turn(-90));
-		SmartDashboard.putData("Toggle Servo", new ToggleServo());
-		SmartDashboard.putData("Is the NavX working???", new ConfirmNavx());
-		SmartDashboard.putData("Darken Camera", new InstantCommand() {
-			@Override
-			protected void execute() {
-				Robot.cameras.darkenCamera(0);
-			}
-		});
-		SmartDashboard.putData("Lighten Camera", new InstantCommand() {
-			@Override
-			protected void execute() {
-				Robot.cameras.brightenCamera(0);
-			}
-		});
+//		SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+//		SmartDashboard.putData("DriveWithXbox", new DriveWithXbox());
+//		SmartDashboard.putData("RaiseGearArm", new RaiseGearArm());
+//		SmartDashboard.putData("LowerGearArm", new LowerGearArm());
+//		SmartDashboard.putData("DepositGear", new DepositGear());
+//		SmartDashboard.putData("AutoLeftStart", new AutoLeftStart());
+//		SmartDashboard.putData("AutoRightStart", new AutoRightStart());
+//		SmartDashboard.putData("AutoMidStart", new AutoMidStart());
+//		SmartDashboard.putData("DriveUntilDist (20)", new DriveUntilDist(20, .5));
+//		SmartDashboard.putData("Drive With Vision (30)", new AlignForGearPeg(30, .3));
+//		SmartDashboard.putData("AlignForGearPeg ", new AlignForGearPeg(0, 1.0));
+//		SmartDashboard.putData("ToggleRelay", new ToggleRelay());
+//		SmartDashboard.putData("DriveTime 9", new DriveTime(-24));
+//		SmartDashboard.putData("Lower .5", new LowerGearArm(.5));
+//		SmartDashboard.putData("Turn(90)", new Turn(90));
+//		SmartDashboard.putData("Turn(-90)", new Turn(-90));
+//		SmartDashboard.putData("Toggle Servo", new ToggleServo());
+//		SmartDashboard.putData("Is the NavX working???", new ConfirmNavx());
+//		SmartDashboard.putData("Darken Camera", new InstantCommand() {
+//			@Override
+//			protected void execute() {
+//				Robot.cameras.darkenCamera(0);
+//			}
+//		});
+//		SmartDashboard.putData("Lighten Camera", new InstantCommand() {
+//			@Override
+//			protected void execute() {
+//				Robot.cameras.brightenCamera(0);
+//			}
+//		});
 		SmartDashboard.putData("DriveDistance (83)", new DriveDistance(83)); // 10 - 60 - 110
+//		SmartDashboard.putData("DriveDistance (83)", new DriveDistance(83)); // 10 - 60 - 110
+//		SmartDashboard.putData("DriveDistance (83)", new DriveDistance(83)); // 10 - 60 - 110
+//		SmartDashboard.putData("DriveDistance (83)", new DriveDistance(83)); // 10 - 60 - 110
+//		SmartDashboard.putData("DriveDistance (83)", new DriveDistance(83)); // 10 - 60 - 110
+//		SmartDashboard.putData("DriveDistance (83)", new DriveDistance(83)); // 10 - 60 - 110
 	}
 
 	public XboxController getXbox() {

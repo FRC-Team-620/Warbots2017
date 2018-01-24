@@ -1,7 +1,5 @@
  package org.usfirst.frc620.Warbot2017.commands;
 
-import java.util.ArrayList;
-
 import org.usfirst.frc620.Warbot2017.Robot;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -44,19 +42,27 @@ public class DriveWithXbox extends Command {
 //		System.out.println(timeSinceInitialized()+"NavX "+temp);
 		
 		double lTrigger = Robot.oi.getLTrigger();
-		double z = -xbox.getRawAxis(0);
 		double y = xbox.getRawAxis(1);
-		double x = -xbox.getRawAxis(4);
+		double x = -xbox.getRawAxis(0);
+		
+		int pov = xbox.getPOV();
+		int z = 0;
+		if(pov > 15)
+			if(pov < 165)
+				z = 1;
+			else if(pov > 195)
+				if(pov < 345)
+					z = -1;
 
 		
 		if (Robot.oi.getLBumper()) {
 			x = (Math.abs(x) < 0.2) ? 0 : x * .5; // X Dead Zone and scaling
 			y = (Math.abs(y) < 0.2) ? 0 : y * .5; // Y Dead Zone and scaling
-			z = (Math.abs(z) < 0.25) ? 0 : z * (0.6 - Math.abs(y)); // Z Dead Zone and scaling
+//			z = (Math.abs(z) < 0.25) ? 0 : z * (0.6 - Math.abs(y)); // Z Dead Zone and scaling
 		} else if(Robot.oi.getLTrigger() > .3) {
 			x = (Math.abs(x) < 0.25) ? 0 : x * (1 - (lTrigger * .6)); // X Dead Zone
 			y = (Math.abs(y) < 0.25) ? 0 : y * (1 - (lTrigger * .75)); // Y Dead Zone
-			z = (Math.abs(z) < 0.25) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
+//			z = (Math.abs(z) < 0.25) ? 0 : z * (1 - (lTrigger * .75)); // Z Dead Zone
 			 /* z *= (y == 0.0) ? 1.0 : 1 / (Math.abs(y) + 1);
 			 *  if(z < .25) z = .25;
 			 */
@@ -68,7 +74,7 @@ public class DriveWithXbox extends Command {
 		} else {
 			x = (Math.abs(x) < 0.25) ? 0 : x; // X Dead Zone
 			y = (Math.abs(y) < 0.25) ? 0 : y; // Y Dead Zone
-			z = (Math.abs(z) < 0.25) ? 0 : z * (1.1 - Math.abs(y));
+//			z = (Math.abs(z) < 0.25) ? 0 : z * (1.1 - Math.abs(y));
 		}//if(y>.8)z=0;x=0;
 //		yVals.add(y);
 		//Size minus 1 is the newly added value
